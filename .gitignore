@@ -6,6 +6,10 @@ __pycache__/
 db.sqlite3
 .vscode/
 .claude/
-CLAUDE.md
-dados/
-docs/
+
+# Dados fora do git, exceto o manifesto de procedência (CLAUDE.md, regra 2)
+dados/*
+!dados/MANIFEST.csv
+
+# Artefato pesado e regenerável por `python -m src.relatorio_catalogo`
+docs/catalogo_variaveis.html
