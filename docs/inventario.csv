@@ -1,0 +1,11 @@
+ano,tabela,arquivo,tamanho_mb,encoding,evidencia_encoding,separador,n_colunas,n_linhas,n_linhas_rr
+2019,escola,microdados_ed_basica_2019.csv,217.1,cp1252,utf-8 falha na posição 6923 (byte 0xf4 = 'ô' em cp1252),;,370,228521,915
+2020,escola,microdados_ed_basica_2020.CSV,213.2,cp1252,utf-8 falha na posição 6923 (byte 0xf4 = 'ô' em cp1252),;,370,224229,919
+2021,escola,microdados_ed_basica_2021.csv,210.6,cp1252,utf-8 falha na posição 6923 (byte 0xf4 = 'ô' em cp1252),;,370,221140,941
+2022,escola,microdados_ed_basica_2022.csv,190.0,cp1252,utf-8 falha na posição 7303 (byte 0xf4 = 'ô' em cp1252),;,385,224649,950
+2023,escola,microdados_ed_basica_2023.csv,210.0,cp1252,utf-8 falha na posição 7755 (byte 0xf4 = 'ô' em cp1252),;,408,217625,941
+2024,escola,microdados_ed_basica_2024.csv,217.9,cp1252,utf-8 falha na posição 8130 (byte 0xf4 = 'ô' em cp1252),;,426,215545,958
+2025,docente,Tabela_Docente_2025_V2.csv,88.3,cp1252,utf-8 falha na posição 3802 (byte 0xf4 = 'ô' em cp1252),;,184,178772,908
+2025,escola,Tabela_Escola_2025_V2.csv,141.4,cp1252,utf-8 falha na posição 6267 (byte 0xf4 = 'ô' em cp1252),;,290,214192,969
+2025,matricula,Tabela_Matricula_2025_V2.csv,123.3,cp1252,utf-8 falha na posição 4683 (byte 0xf4 = 'ô' em cp1252),;,263,178766,908
+2025,turma,Tabela_Turma_2025_V2.csv,99.9,cp1252,utf-8 falha na posição 3987 (byte 0xf4 = 'ô' em cp1252),;,218,178772,908

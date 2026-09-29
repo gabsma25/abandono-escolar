@@ -1,0 +1,691 @@
+tipo,nivel,coluna,descricao,2019,2020,2021,2022,2023,2024,2025,n_anos
+ATU,brasil_regioes_ufs,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+ATU,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,2,2,2,2,2,2,2,7
+ATU,brasil_regioes_ufs,NO_CATEGORIA,Localização,3,3,3,3,3,3,3,7
+ATU,brasil_regioes_ufs,NO_DEPENDENCIA,Dependência Administrativa,4,4,4,4,4,4,4,7
+ATU,brasil_regioes_ufs,ED_INF_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Total 1,5,5,5,5,5,5,5,7
+ATU,brasil_regioes_ufs,CRE_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Creche,6,6,6,6,6,6,6,7
+ATU,brasil_regioes_ufs,PRE_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Pré-Escola,7,7,7,7,7,7,7,7
+ATU,brasil_regioes_ufs,FUN_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Total,8,8,8,8,8,8,8,7
+ATU,brasil_regioes_ufs,FUN_AI_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Anos Iniciais,9,9,9,9,9,9,9,7
+ATU,brasil_regioes_ufs,FUN_AF_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Anos Finais,10,10,10,10,10,10,10,7
+ATU,brasil_regioes_ufs,FUN_01_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 1º Ano,11,11,11,11,11,11,11,7
+ATU,brasil_regioes_ufs,FUN_02_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 2° ano,12,12,12,12,12,12,12,7
+ATU,brasil_regioes_ufs,FUN_03_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 3° ano,13,13,13,13,13,13,13,7
+ATU,brasil_regioes_ufs,FUN_04_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 4° ano,14,14,14,14,14,14,14,7
+ATU,brasil_regioes_ufs,FUN_05_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 5° ano,15,15,15,15,15,15,15,7
+ATU,brasil_regioes_ufs,FUN_06_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 6° ano,16,16,16,16,16,16,16,7
+ATU,brasil_regioes_ufs,FUN_07_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 7° ano,17,17,17,17,17,17,17,7
+ATU,brasil_regioes_ufs,FUN_08_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 8° ano,18,18,18,18,18,18,18,7
+ATU,brasil_regioes_ufs,FUN_09_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 9° ano,19,19,19,19,19,19,19,7
+ATU,brasil_regioes_ufs,MULT_ETA_CAT_0,"Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Turmas Multietapa, Multi ou Correção de Fluxo 2",20,20,20,20,20,20,20,7
+ATU,brasil_regioes_ufs,MED_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › Total,21,21,21,21,21,21,21,7
+ATU,brasil_regioes_ufs,MED_01_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 1ª série,22,22,22,22,22,22,22,7
+ATU,brasil_regioes_ufs,MED_02_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 2ª série,23,23,23,23,23,23,23,7
+ATU,brasil_regioes_ufs,MED_03_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 3ª série,24,24,24,24,24,24,24,7
+ATU,brasil_regioes_ufs,MED_04_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 4ª série,25,25,25,25,25,25,25,7
+ATU,brasil_regioes_ufs,MED_NS_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › Não-Seriado,26,26,26,26,26,26,26,7
+ATU,escolas,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+ATU,escolas,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+ATU,escolas,SG_UF,UF,3,3,3,3,3,3,3,7
+ATU,escolas,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+ATU,escolas,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+ATU,escolas,CO_ENTIDADE,Código da Escola,6,6,6,6,6,6,6,7
+ATU,escolas,NO_ENTIDADE,Nome da Escola,7,7,7,7,7,7,7,7
+ATU,escolas,NO_CATEGORIA,Localização,8,8,8,8,8,8,8,7
+ATU,escolas,NO_DEPENDENCIA,Dependência Administrativa,9,9,9,9,9,9,9,7
+ATU,escolas,ED_INF_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Total 1,10,10,10,10,10,10,10,7
+ATU,escolas,CRE_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Creche,11,11,11,11,11,11,11,7
+ATU,escolas,PRE_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Pré-Escola,12,12,12,12,12,12,12,7
+ATU,escolas,FUN_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Total,13,13,13,13,13,13,13,7
+ATU,escolas,FUN_AI_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Anos Iniciais,14,14,14,14,14,14,14,7
+ATU,escolas,FUN_AF_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Anos Finais,15,15,15,15,15,15,15,7
+ATU,escolas,FUN_01_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 1º Ano,16,16,16,16,16,16,16,7
+ATU,escolas,FUN_02_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 2° ano,17,17,17,17,17,17,17,7
+ATU,escolas,FUN_03_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 3° ano,18,18,18,18,18,18,18,7
+ATU,escolas,FUN_04_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 4° ano,19,19,19,19,19,19,19,7
+ATU,escolas,FUN_05_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 5° ano,20,20,20,20,20,20,20,7
+ATU,escolas,FUN_06_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 6° ano,21,21,21,21,21,21,21,7
+ATU,escolas,FUN_07_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 7° ano,22,22,22,22,22,22,22,7
+ATU,escolas,FUN_08_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 8° ano,23,23,23,23,23,23,23,7
+ATU,escolas,FUN_09_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 9° ano,24,24,24,24,24,24,24,7
+ATU,escolas,MULT_ETA_CAT_0,"Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Turmas Multietapa, Multi ou Correção de Fluxo 2",25,25,25,25,25,25,25,7
+ATU,escolas,MED_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › Total,26,26,26,26,26,26,26,7
+ATU,escolas,MED_01_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 1ª série,27,27,27,27,27,27,27,7
+ATU,escolas,MED_02_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 2ª série,28,28,28,28,28,28,28,7
+ATU,escolas,MED_03_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 3ª série,29,29,29,29,29,29,29,7
+ATU,escolas,MED_04_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 4ª série,30,30,30,30,30,30,30,7
+ATU,escolas,MED_NS_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › Não-Seriado,31,31,31,31,31,31,31,7
+ATU,municipios,NU_ANO_CENSO,Ano,1,1,1,1,1,1,,6
+ATU,municipios,NO_REGIAO,Região,2,2,2,2,2,2,,6
+ATU,municipios,SG_UF,UF,3,3,3,3,3,3,,6
+ATU,municipios,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,,6
+ATU,municipios,NO_MUNICIPIO,Município,5,5,5,5,5,5,,6
+ATU,municipios,NO_CATEGORIA,Localização,6,6,6,6,6,6,,6
+ATU,municipios,NO_DEPENDENCIA,Dependência Administrativa,7,7,7,7,7,7,,6
+ATU,municipios,ED_INF_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Total 1,8,8,8,8,8,8,,6
+ATU,municipios,CRE_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Creche,9,9,9,9,9,9,,6
+ATU,municipios,PRE_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Educação Infantil › Pré-Escola,10,10,10,10,10,10,,6
+ATU,municipios,FUN_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Total,11,11,11,11,11,11,,6
+ATU,municipios,FUN_AI_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Anos Iniciais,12,12,12,12,12,12,,6
+ATU,municipios,FUN_AF_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Anos Finais,13,13,13,13,13,13,,6
+ATU,municipios,FUN_01_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 1º Ano,14,14,14,14,14,14,,6
+ATU,municipios,FUN_02_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 2° ano,15,15,15,15,15,15,,6
+ATU,municipios,FUN_03_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 3° ano,16,16,16,16,16,16,,6
+ATU,municipios,FUN_04_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 4° ano,17,17,17,17,17,17,,6
+ATU,municipios,FUN_05_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 5° ano,18,18,18,18,18,18,,6
+ATU,municipios,FUN_06_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 6° ano,19,19,19,19,19,19,,6
+ATU,municipios,FUN_07_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 7° ano,20,20,20,20,20,20,,6
+ATU,municipios,FUN_08_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 8° ano,21,21,21,21,21,21,,6
+ATU,municipios,FUN_09_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › 9° ano,22,22,22,22,22,22,,6
+ATU,municipios,MULT_ETA_CAT_0,"Média de Alunos por Turma / Etapas de Ensino › Ensino Fundamental › Turmas Multietapa, Multi ou Correção de Fluxo 2",23,23,23,23,23,23,,6
+ATU,municipios,MED_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › Total,24,24,24,24,24,24,,6
+ATU,municipios,MED_01_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 1ª série,25,25,25,25,25,25,,6
+ATU,municipios,MED_02_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 2ª série,26,26,26,26,26,26,,6
+ATU,municipios,MED_03_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 3ª série,27,27,27,27,27,27,,6
+ATU,municipios,MED_04_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 4ª série,28,28,28,28,28,28,,6
+ATU,municipios,MED_NS_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › Não-Seriado,29,29,29,29,29,29,,6
+HAD,brasil_regioes_ufs,NU_ANO_CENSO,Ano,,,,,,,1,1
+HAD,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,,,,,,,2,1
+HAD,brasil_regioes_ufs,NO_CATEGORIA,Localização,,,,,,,3,1
+HAD,brasil_regioes_ufs,NO_DEPENDENCIA,Dependência Administrativa,,,,,,,4,1
+HAD,brasil_regioes_ufs,ED_INF_CAT_0,Educação Infantil › Total,,,,,,,5,1
+HAD,brasil_regioes_ufs,CRE_CAT_0,Educação Infantil › Creche,,,,,,,6,1
+HAD,brasil_regioes_ufs,PRE_CAT_0,Educação Infantil › Pré-Escola,,,,,,,7,1
+HAD,brasil_regioes_ufs,FUN_CAT_0,Ensino Fundamental › Total,,,,,,,8,1
+HAD,brasil_regioes_ufs,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,,,,,,,9,1
+HAD,brasil_regioes_ufs,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,,,,,,,10,1
+HAD,brasil_regioes_ufs,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,,,,,,,11,1
+HAD,brasil_regioes_ufs,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,,,,,,,12,1
+HAD,brasil_regioes_ufs,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,,,,,,,13,1
+HAD,brasil_regioes_ufs,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,,,,,,,14,1
+HAD,brasil_regioes_ufs,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,,,,,,,15,1
+HAD,brasil_regioes_ufs,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,,,,,,,16,1
+HAD,brasil_regioes_ufs,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,,,,,,,17,1
+HAD,brasil_regioes_ufs,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,,,,,,,18,1
+HAD,brasil_regioes_ufs,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,,,,,,,19,1
+HAD,brasil_regioes_ufs,MED_CAT_0,Ensino Médio › Total,,,,,,,20,1
+HAD,brasil_regioes_ufs,MED_01_CAT_0,Ensino Médio › 1ª Série,,,,,,,21,1
+HAD,brasil_regioes_ufs,MED_02_CAT_0,Ensino Médio › 2ª Série,,,,,,,22,1
+HAD,brasil_regioes_ufs,MED_03_CAT_0,Ensino Médio › 3ª Série,,,,,,,23,1
+HAD,brasil_regioes_ufs,MED_04_CAT_0,Ensino Médio › 4ª Série,,,,,,,24,1
+HAD,brasil_regioes_ufs,MED_NS_CAT_0,Ensino Médio › Não-Seriado,,,,,,,25,1
+HAD,escolas,NU_ANO_CENSO,Ano,,,,,,,1,1
+HAD,escolas,NO_REGIAO,Região,,,,,,,2,1
+HAD,escolas,SG_UF,UF,,,,,,,3,1
+HAD,escolas,CO_MUNICIPIO,Código do Município,,,,,,,4,1
+HAD,escolas,NO_MUNICIPIO,Nome do Município,,,,,,,5,1
+HAD,escolas,CO_ENTIDADE,Código da Escola,,,,,,,6,1
+HAD,escolas,NO_ENTIDADE,Nome da Escola,,,,,,,7,1
+HAD,escolas,NO_CATEGORIA,Localização,,,,,,,8,1
+HAD,escolas,NO_DEPENDENCIA,Dependência Administrativa,,,,,,,9,1
+HAD,escolas,ED_INF_CAT_0,Educação Infantil › Total,,,,,,,10,1
+HAD,escolas,CRE_CAT_0,Educação Infantil › Creche,,,,,,,11,1
+HAD,escolas,PRE_CAT_0,Educação Infantil › Pré-Escola,,,,,,,12,1
+HAD,escolas,FUN_CAT_0,Ensino Fundamental › Total,,,,,,,13,1
+HAD,escolas,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,,,,,,,14,1
+HAD,escolas,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,,,,,,,15,1
+HAD,escolas,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,,,,,,,16,1
+HAD,escolas,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,,,,,,,17,1
+HAD,escolas,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,,,,,,,18,1
+HAD,escolas,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,,,,,,,19,1
+HAD,escolas,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,,,,,,,20,1
+HAD,escolas,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,,,,,,,21,1
+HAD,escolas,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,,,,,,,22,1
+HAD,escolas,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,,,,,,,23,1
+HAD,escolas,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,,,,,,,24,1
+HAD,escolas,MED_CAT_0,Ensino Médio › Total,,,,,,,25,1
+HAD,escolas,MED_01_CAT_0,Ensino Médio › 1ª Série,,,,,,,26,1
+HAD,escolas,MED_02_CAT_0,Ensino Médio › 2ª Série,,,,,,,27,1
+HAD,escolas,MED_03_CAT_0,Ensino Médio › 3ª Série,,,,,,,28,1
+HAD,escolas,MED_04_CAT_0,Ensino Médio › 4ª Série,,,,,,,29,1
+HAD,escolas,MED_NS_CAT_0,Ensino Médio › Não-Seriado,,,,,,,30,1
+HAD,municipios,NU_ANO_CENSO,Ano,,,,,,,1,1
+HAD,municipios,NO_REGIAO,Região,,,,,,,2,1
+HAD,municipios,SG_UF,Sigla da UF,,,,,,,3,1
+HAD,municipios,CO_MUNICIPIO,Código do Município,,,,,,,4,1
+HAD,municipios,NO_MUNICIPIO,Nome do Município,,,,,,,5,1
+HAD,municipios,NO_CATEGORIA,Localização,,,,,,,6,1
+HAD,municipios,NO_DEPENDENCIA,Dependência Administrativa,,,,,,,7,1
+HAD,municipios,ED_INF_CAT_0,Educação Infantil › Total,,,,,,,8,1
+HAD,municipios,CRE_CAT_0,Educação Infantil › Creche,,,,,,,9,1
+HAD,municipios,PRE_CAT_0,Educação Infantil › Pré-Escola,,,,,,,10,1
+HAD,municipios,FUN_CAT_0,Ensino Fundamental › Total,,,,,,,11,1
+HAD,municipios,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,,,,,,,12,1
+HAD,municipios,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,,,,,,,13,1
+HAD,municipios,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,,,,,,,14,1
+HAD,municipios,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,,,,,,,15,1
+HAD,municipios,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,,,,,,,16,1
+HAD,municipios,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,,,,,,,17,1
+HAD,municipios,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,,,,,,,18,1
+HAD,municipios,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,,,,,,,19,1
+HAD,municipios,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,,,,,,,20,1
+HAD,municipios,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,,,,,,,21,1
+HAD,municipios,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,,,,,,,22,1
+HAD,municipios,MED_CAT_0,Ensino Médio › Total,,,,,,,23,1
+HAD,municipios,MED_01_CAT_0,Ensino Médio › 1ª Série,,,,,,,24,1
+HAD,municipios,MED_02_CAT_0,Ensino Médio › 2ª Série,,,,,,,25,1
+HAD,municipios,MED_03_CAT_0,Ensino Médio › 3ª Série,,,,,,,26,1
+HAD,municipios,MED_04_CAT_0,Ensino Médio › 4ª Série,,,,,,,27,1
+HAD,municipios,MED_NS_CAT_01,Ensino Médio › Não-Seriado,,,,,,,28,1
+IED,brasil_regioes_ufs,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+IED,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,2,2,2,2,2,2,2,7
+IED,brasil_regioes_ufs,NO_CATEGORIA,Localização,3,3,3,3,3,3,3,7
+IED,brasil_regioes_ufs,NO_DEPENDENCIA,Dependência Administrativa,4,4,4,4,4,4,4,7
+IED,brasil_regioes_ufs,FUN_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 1,5,5,5,5,5,5,5,7
+IED,brasil_regioes_ufs,FUN_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 2,6,6,6,6,6,6,6,7
+IED,brasil_regioes_ufs,FUN_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 3,7,7,7,7,7,7,7,7
+IED,brasil_regioes_ufs,FUN_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 4,8,8,8,8,8,8,8,7
+IED,brasil_regioes_ufs,FUN_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 5,9,9,9,9,9,9,9,7
+IED,brasil_regioes_ufs,FUN_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 6,10,10,10,10,10,10,10,7
+IED,brasil_regioes_ufs,FUN_AI_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 1,11,11,11,11,11,11,11,7
+IED,brasil_regioes_ufs,FUN_AI_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 2,12,12,12,12,12,12,12,7
+IED,brasil_regioes_ufs,FUN_AI_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 3,13,13,13,13,13,13,13,7
+IED,brasil_regioes_ufs,FUN_AI_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 4,14,14,14,14,14,14,14,7
+IED,brasil_regioes_ufs,FUN_AI_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 5,15,15,15,15,15,15,15,7
+IED,brasil_regioes_ufs,FUN_AI_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 6,16,16,16,16,16,16,16,7
+IED,brasil_regioes_ufs,FUN_AF_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 1,17,17,17,17,17,17,17,7
+IED,brasil_regioes_ufs,FUN_AF_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 2,18,18,18,18,18,18,18,7
+IED,brasil_regioes_ufs,FUN_AF_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 3,19,19,19,19,19,19,19,7
+IED,brasil_regioes_ufs,FUN_AF_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 4,20,20,20,20,20,20,20,7
+IED,brasil_regioes_ufs,FUN_AF_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 5,21,21,21,21,21,21,21,7
+IED,brasil_regioes_ufs,FUN_AF_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 6,22,22,22,22,22,22,22,7
+IED,brasil_regioes_ufs,MED_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 1,23,23,23,23,23,23,23,7
+IED,brasil_regioes_ufs,MED_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 2,24,24,24,24,24,24,24,7
+IED,brasil_regioes_ufs,MED_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 3,25,25,25,25,25,25,25,7
+IED,brasil_regioes_ufs,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,26,26,26,26,26,26,26,7
+IED,brasil_regioes_ufs,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,27,27,27,27,27,27,27,7
+IED,brasil_regioes_ufs,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,28,28,28,28,28,28,28,7
+IED,escolas,NU_ANO_CENSO,Ano,,,1,1,1,1,1,5
+IED,escolas,NO_REGIAO,Região,,,2,2,2,2,2,5
+IED,escolas,SG_UF,UF,,,3,3,3,3,3,5
+IED,escolas,CO_MUNICIPIO,Código do Município,,,4,4,4,4,4,5
+IED,escolas,NO_MUNICIPIO,Nome do Município,,,5,5,5,5,5,5
+IED,escolas,CO_ENTIDADE,Código da Escola,,,6,6,6,6,6,5
+IED,escolas,NO_ENTIDADE,Nome da Escola,,,7,7,7,7,7,5
+IED,escolas,NO_CATEGORIA,Localização,,,8,8,8,8,8,5
+IED,escolas,NO_DEPENDENCIA,Dependência Administrativa,,,9,9,9,9,9,5
+IED,escolas,FUN_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 1,,,10,10,10,10,10,5
+IED,escolas,FUN_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 2,,,11,11,11,11,11,5
+IED,escolas,FUN_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 3,,,12,12,12,12,12,5
+IED,escolas,FUN_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 4,,,13,13,13,13,13,5
+IED,escolas,FUN_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 5,,,14,14,14,14,14,5
+IED,escolas,FUN_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 6,,,15,15,15,15,15,5
+IED,escolas,FUN_AI_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 1,,,16,16,16,16,16,5
+IED,escolas,FUN_AI_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 2,,,17,17,17,17,17,5
+IED,escolas,FUN_AI_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 3,,,18,18,18,18,18,5
+IED,escolas,FUN_AI_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 4,,,19,19,19,19,19,5
+IED,escolas,FUN_AI_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 5,,,20,20,20,20,20,5
+IED,escolas,FUN_AI_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 6,,,21,21,21,21,21,5
+IED,escolas,FUN_AF_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 1,,,22,22,22,22,22,5
+IED,escolas,FUN_AF_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 2,,,23,23,23,23,23,5
+IED,escolas,FUN_AF_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 3,,,24,24,24,24,24,5
+IED,escolas,FUN_AF_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 4,,,25,25,25,25,25,5
+IED,escolas,FUN_AF_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 5,,,26,26,26,26,26,5
+IED,escolas,FUN_AF_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 6,,,27,27,27,27,27,5
+IED,escolas,MED_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 1,,,28,28,28,28,28,5
+IED,escolas,MED_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 2,,,29,29,29,29,29,5
+IED,escolas,MED_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 3,,,30,30,30,30,30,5
+IED,escolas,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,,,31,31,31,31,31,5
+IED,escolas,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,,,32,32,32,32,32,5
+IED,escolas,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,,,33,33,33,33,33,5
+IED,municipios,NU_ANO_CENSO,Ano,,1,1,1,1,1,1,6
+IED,municipios,NO_REGIAO,Região,,2,2,2,2,2,2,6
+IED,municipios,SG_UF,Sigla,,3,3,3,3,3,3,6
+IED,municipios,CO_MUNICIPIO,Código do Município,,4,4,4,4,4,4,6
+IED,municipios,NO_MUNICIPIO,Nome do Município,,5,5,5,5,5,5,6
+IED,municipios,NO_CATEGORIA,Localização,,6,6,6,6,6,6,6
+IED,municipios,NO_DEPENDENCIA,Dependência Administrativa,,7,7,7,7,7,7,6
+IED,municipios,FUN_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 1,,8,8,8,8,8,8,6
+IED,municipios,FUN_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 2,,9,9,9,9,9,9,6
+IED,municipios,FUN_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 3,,10,10,10,10,10,10,6
+IED,municipios,FUN_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 4,,11,11,11,11,11,11,6
+IED,municipios,FUN_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 5,,12,12,12,12,12,12,6
+IED,municipios,FUN_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 6,,13,13,13,13,13,13,6
+IED,municipios,FUN_AI_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 1,,14,14,14,14,14,14,6
+IED,municipios,FUN_AI_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 2,,15,15,15,15,15,15,6
+IED,municipios,FUN_AI_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 3,,16,16,16,16,16,16,6
+IED,municipios,FUN_AI_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 4,,17,17,17,17,17,17,6
+IED,municipios,FUN_AI_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 5,,18,18,18,18,18,18,6
+IED,municipios,FUN_AI_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 6,,19,19,19,19,19,19,6
+IED,municipios,FUN_AF_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 1,,20,20,20,20,20,20,6
+IED,municipios,FUN_AF_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 2,,21,21,21,21,21,21,6
+IED,municipios,FUN_AF_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 3,,22,22,22,22,22,22,6
+IED,municipios,FUN_AF_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 4,,23,23,23,23,23,23,6
+IED,municipios,FUN_AF_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 5,,24,24,24,24,24,24,6
+IED,municipios,FUN_AF_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 6,,25,25,25,25,25,25,6
+IED,municipios,MED_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 1,,26,26,26,26,26,26,6
+IED,municipios,MED_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 2,,27,27,27,27,27,27,6
+IED,municipios,MED_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 3,,28,28,28,28,28,28,6
+IED,municipios,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,,29,29,29,29,29,29,6
+IED,municipios,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,,30,30,30,30,30,30,6
+IED,municipios,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,,31,31,31,31,31,31,6
+TDI,brasil_regioes_ufs,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+TDI,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,2,2,2,2,2,2,2,7
+TDI,brasil_regioes_ufs,NO_CATEGORIA,Localização,3,3,3,3,3,3,3,7
+TDI,brasil_regioes_ufs,NO_DEPENDENCIA,Dependência Administrativa,4,4,4,4,4,4,4,7
+TDI,brasil_regioes_ufs,FUN_CAT_0,Ensino Fundamental › Total,5,5,5,5,5,5,5,7
+TDI,brasil_regioes_ufs,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,6,6,6,6,6,6,6,7
+TDI,brasil_regioes_ufs,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,7,7,7,7,7,7,7,7
+TDI,brasil_regioes_ufs,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,8,8,8,8,8,8,8,7
+TDI,brasil_regioes_ufs,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,9,9,9,9,9,9,9,7
+TDI,brasil_regioes_ufs,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,10,10,10,10,10,10,10,7
+TDI,brasil_regioes_ufs,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,11,11,11,11,11,11,11,7
+TDI,brasil_regioes_ufs,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,12,12,12,12,12,12,12,7
+TDI,brasil_regioes_ufs,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,13,13,13,13,13,13,13,7
+TDI,brasil_regioes_ufs,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,14,14,14,14,14,14,14,7
+TDI,brasil_regioes_ufs,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,15,15,15,15,15,15,15,7
+TDI,brasil_regioes_ufs,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,16,16,16,16,16,16,16,7
+TDI,brasil_regioes_ufs,MED_CAT_0,Ensino Médio › Total,17,17,17,17,17,17,17,7
+TDI,brasil_regioes_ufs,MED_01_CAT_0,Ensino Médio › 1ª Série,18,18,18,18,18,18,18,7
+TDI,brasil_regioes_ufs,MED_02_CAT_0,Ensino Médio › 2ª Série,19,19,19,19,19,19,19,7
+TDI,brasil_regioes_ufs,MED_03_CAT_0,Ensino Médio › 3ª Série,20,20,20,20,20,20,20,7
+TDI,brasil_regioes_ufs,MED_04_CAT_0,Ensino Médio › 4ª Série,21,21,21,21,21,21,21,7
+TDI,escolas,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+TDI,escolas,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+TDI,escolas,SG_UF,UF,3,3,3,3,3,3,3,7
+TDI,escolas,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+TDI,escolas,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+TDI,escolas,CO_ENTIDADE,Código da Escola,6,6,6,6,6,6,6,7
+TDI,escolas,NO_ENTIDADE,Nome da Escola,7,7,7,7,7,7,7,7
+TDI,escolas,NO_CATEGORIA,Localização,8,8,8,8,8,8,8,7
+TDI,escolas,NO_DEPENDENCIA,Dependência Administrativa,9,9,9,9,9,9,9,7
+TDI,escolas,FUN_CAT_0,Ensino Fundamental › Total,10,10,10,10,10,10,10,7
+TDI,escolas,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,11,11,11,11,11,11,11,7
+TDI,escolas,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,12,12,12,12,12,12,12,7
+TDI,escolas,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,13,13,13,13,13,13,13,7
+TDI,escolas,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,14,14,14,14,14,14,14,7
+TDI,escolas,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,15,15,15,15,15,15,15,7
+TDI,escolas,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,16,16,16,16,16,16,16,7
+TDI,escolas,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,17,17,17,17,17,17,17,7
+TDI,escolas,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,18,18,18,18,18,18,18,7
+TDI,escolas,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,19,19,19,19,19,19,19,7
+TDI,escolas,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,20,20,20,20,20,20,20,7
+TDI,escolas,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,21,21,21,21,21,21,21,7
+TDI,escolas,MED_CAT_0,Ensino Médio › Total,22,22,22,22,22,22,22,7
+TDI,escolas,MED_01_CAT_0,Ensino Médio › 1ª Série,23,23,23,23,23,23,23,7
+TDI,escolas,MED_02_CAT_0,Ensino Médio › 2ª Série,24,24,24,24,24,24,24,7
+TDI,escolas,MED_03_CAT_0,Ensino Médio › 3ª Série,25,25,25,25,25,25,25,7
+TDI,escolas,MED_04_CAT_0,Ensino Médio › 4ª Série,26,26,26,26,26,26,26,7
+TDI,municipios,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+TDI,municipios,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+TDI,municipios,SG_UF,Sigla da UF,3,3,3,3,3,3,3,7
+TDI,municipios,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+TDI,municipios,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+TDI,municipios,NO_CATEGORIA,Localização,6,6,6,6,6,6,6,7
+TDI,municipios,NO_DEPENDENCIA,Dependência Administrativa,7,7,7,7,7,7,7,7
+TDI,municipios,FUN_CAT_0,Ensino Fundamental › Total,8,8,8,8,8,8,8,7
+TDI,municipios,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,9,9,9,9,9,9,9,7
+TDI,municipios,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,10,10,10,10,10,10,10,7
+TDI,municipios,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,11,11,11,11,11,11,11,7
+TDI,municipios,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,12,12,12,12,12,12,12,7
+TDI,municipios,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,13,13,13,13,13,13,13,7
+TDI,municipios,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,14,14,14,14,14,14,14,7
+TDI,municipios,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,15,15,15,15,15,15,15,7
+TDI,municipios,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,16,16,16,16,16,16,16,7
+TDI,municipios,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,17,17,17,17,17,17,17,7
+TDI,municipios,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,18,18,18,18,18,18,18,7
+TDI,municipios,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,19,19,19,19,19,19,19,7
+TDI,municipios,MED_CAT_0,Ensino Médio › Total,20,20,20,20,20,20,20,7
+TDI,municipios,MED_01_CAT_0,Ensino Médio › 1ª Série,21,21,21,21,21,21,21,7
+TDI,municipios,MED_02_CAT_0,Ensino Médio › 2ª Série,22,22,22,22,22,22,22,7
+TDI,municipios,MED_03_CAT_0,Ensino Médio › 3ª Série,23,23,23,23,23,23,23,7
+TDI,municipios,MED_04_CAT_0,Ensino Médio › 4ª Série,24,24,24,24,24,24,24,7
+tx_rend,brasil_regioes_ufs,ano,Ano,1,1,,,,,,2
+tx_rend,brasil_regioes_ufs,NU_ANO_CENSO,Ano,,,1,1,1,1,,4
+tx_rend,brasil_regioes_ufs,_SEM_NOME_2,Unidade Geográfica,2,2,,,,,,2
+tx_rend,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,,,2,2,2,2,,4
+tx_rend,brasil_regioes_ufs,TIPOLOCA,Localização,3,3,,,,,,2
+tx_rend,brasil_regioes_ufs,NO_CATEGORIA,Localização,,,3,3,3,3,,4
+tx_rend,brasil_regioes_ufs,DEPENDAD,Dependência Administrativa,4,4,,,,,,2
+tx_rend,brasil_regioes_ufs,NO_DEPENDENCIA,Dependência Administrativa,,,4,4,4,4,,4
+tx_rend,brasil_regioes_ufs,tap_FUN,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Total,5,5,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Total,,,5,5,5,5,,4
+tx_rend,brasil_regioes_ufs,tap_F14,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,6,6,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_AI,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,,6,6,6,6,,4
+tx_rend,brasil_regioes_ufs,tap_F04,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,7,7,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_AF,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,,,7,7,7,7,,4
+tx_rend,brasil_regioes_ufs,tap_F58,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,8,8,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_01,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,,,8,8,8,8,,4
+tx_rend,brasil_regioes_ufs,tap_F00,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,9,9,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_02,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,,,9,9,9,9,,4
+tx_rend,brasil_regioes_ufs,tap_F01,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,10,10,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_03,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,,,10,10,10,10,,4
+tx_rend,brasil_regioes_ufs,tap_F02,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,11,11,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_04,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,,,11,11,11,11,,4
+tx_rend,brasil_regioes_ufs,tap_F03,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,12,12,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_05,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,,,12,12,12,12,,4
+tx_rend,brasil_regioes_ufs,tap_F05,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,13,13,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_06,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,,,13,13,13,13,,4
+tx_rend,brasil_regioes_ufs,tap_F06,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,14,14,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_07,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,,,14,14,14,14,,4
+tx_rend,brasil_regioes_ufs,tap_F07,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,15,15,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_08,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,,,15,15,15,15,,4
+tx_rend,brasil_regioes_ufs,tap_F08,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,16,16,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_FUN_09,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,,,16,16,16,16,,4
+tx_rend,brasil_regioes_ufs,tap_MED,Taxa de Aprovação › Ensino Médio › Total,17,17,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_MED,Taxa de Aprovação › Ensino Médio › Total,,,17,17,17,17,,4
+tx_rend,brasil_regioes_ufs,tap_M01,Taxa de Aprovação › Ensino Médio › 1ª série,18,18,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_MED_01,Taxa de Aprovação › Ensino Médio › 1ª série,,,18,18,18,18,,4
+tx_rend,brasil_regioes_ufs,tap_M02,Taxa de Aprovação › Ensino Médio › 2ª série,19,19,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_MED_02,Taxa de Aprovação › Ensino Médio › 2ª série,,,19,19,19,19,,4
+tx_rend,brasil_regioes_ufs,tap_M03,Taxa de Aprovação › Ensino Médio › 3ª série,20,20,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_MED_03,Taxa de Aprovação › Ensino Médio › 3ª série,,,20,20,20,20,,4
+tx_rend,brasil_regioes_ufs,tap_M04,Taxa de Aprovação › Ensino Médio › 4ª série,21,21,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_MED_04,Taxa de Aprovação › Ensino Médio › 4ª série,,,21,21,21,21,,4
+tx_rend,brasil_regioes_ufs,tap_MNS,Taxa de Aprovação › Ensino Médio › Não-Seriado,22,22,,,,,,2
+tx_rend,brasil_regioes_ufs,1_CAT_MED_NS,Taxa de Aprovação › Ensino Médio › Não-Seriado,,,22,22,22,22,,4
+tx_rend,brasil_regioes_ufs,tre_FUN,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Total,23,23,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Total,,,23,23,23,23,,4
+tx_rend,brasil_regioes_ufs,tre_F14,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,24,24,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_AI,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,,24,24,24,24,,4
+tx_rend,brasil_regioes_ufs,tre_F04,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,25,25,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_AF,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,,,25,25,25,25,,4
+tx_rend,brasil_regioes_ufs,tre_F58,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,26,26,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_01,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,,,26,26,26,26,,4
+tx_rend,brasil_regioes_ufs,tre_F00,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,27,27,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_02,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,,,27,27,27,27,,4
+tx_rend,brasil_regioes_ufs,tre_F01,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,28,28,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_03,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,,,28,28,28,28,,4
+tx_rend,brasil_regioes_ufs,tre_F02,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,29,29,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_04,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,,,29,29,29,29,,4
+tx_rend,brasil_regioes_ufs,tre_F03,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,30,30,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_05,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,,,30,30,30,30,,4
+tx_rend,brasil_regioes_ufs,tre_F05,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,31,31,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_06,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,,,31,31,31,31,,4
+tx_rend,brasil_regioes_ufs,tre_F06,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,32,32,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_07,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,,,32,32,32,32,,4
+tx_rend,brasil_regioes_ufs,tre_F07,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,33,33,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_08,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,,,33,33,33,33,,4
+tx_rend,brasil_regioes_ufs,tre_F08,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,34,34,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_FUN_09,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,,,34,34,34,34,,4
+tx_rend,brasil_regioes_ufs,tre_MED,Taxa de Reprovação › Ensino Médio › Total,35,35,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_MED,Taxa de Reprovação › Ensino Médio › Total,,,35,35,35,35,,4
+tx_rend,brasil_regioes_ufs,tre_M01,Taxa de Reprovação › Ensino Médio › 1ª série,36,36,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_MED_01,Taxa de Reprovação › Ensino Médio › 1ª série,,,36,36,36,36,,4
+tx_rend,brasil_regioes_ufs,tre_M02,Taxa de Reprovação › Ensino Médio › 2ª série,37,37,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_MED_02,Taxa de Reprovação › Ensino Médio › 2ª série,,,37,37,37,37,,4
+tx_rend,brasil_regioes_ufs,tre_M03,Taxa de Reprovação › Ensino Médio › 3ª série,38,38,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_MED_03,Taxa de Reprovação › Ensino Médio › 3ª série,,,38,38,38,38,,4
+tx_rend,brasil_regioes_ufs,tre_M04,Taxa de Reprovação › Ensino Médio › 4ª série,39,39,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_MED_04,Taxa de Reprovação › Ensino Médio › 4ª série,,,39,39,39,39,,4
+tx_rend,brasil_regioes_ufs,tre_MNS,Taxa de Reprovação › Ensino Médio › Não-Seriado,40,40,,,,,,2
+tx_rend,brasil_regioes_ufs,2_CAT_MED_NS,Taxa de Reprovação › Ensino Médio › Não-Seriado,,,40,40,40,40,,4
+tx_rend,brasil_regioes_ufs,tab_FUN,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Total,41,41,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Total,,,41,41,41,41,,4
+tx_rend,brasil_regioes_ufs,tab_F14,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,42,42,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_AI,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,,42,42,42,42,,4
+tx_rend,brasil_regioes_ufs,tab_F04,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Finais,43,43,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_AF,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Finais,,,43,43,43,43,,4
+tx_rend,brasil_regioes_ufs,tab_F58,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 1º Ano,44,44,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_01,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 1º Ano,,,44,44,44,44,,4
+tx_rend,brasil_regioes_ufs,tab_F00,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 2º Ano,45,45,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_02,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 2º Ano,,,45,45,45,45,,4
+tx_rend,brasil_regioes_ufs,tab_F01,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 3º Ano,46,46,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_03,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 3º Ano,,,46,46,46,46,,4
+tx_rend,brasil_regioes_ufs,tab_F02,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 4º Ano,47,47,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_04,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 4º Ano,,,47,47,47,47,,4
+tx_rend,brasil_regioes_ufs,tab_F03,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 5º Ano,48,48,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_05,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 5º Ano,,,48,48,48,48,,4
+tx_rend,brasil_regioes_ufs,tab_F05,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 6º Ano,49,49,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_06,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 6º Ano,,,49,49,49,49,,4
+tx_rend,brasil_regioes_ufs,tab_F06,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 7º Ano,50,50,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_07,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 7º Ano,,,50,50,50,50,,4
+tx_rend,brasil_regioes_ufs,tab_F07,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 8º Ano,51,51,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_08,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 8º Ano,,,51,51,51,51,,4
+tx_rend,brasil_regioes_ufs,tab_F08,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 9º Ano,52,52,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_FUN_09,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 9º Ano,,,52,52,52,52,,4
+tx_rend,brasil_regioes_ufs,tab_MED,Taxa de Abandono › Ensino Médio › Total,53,53,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_MED,Taxa de Abandono › Ensino Médio › Total,,,53,53,53,53,,4
+tx_rend,brasil_regioes_ufs,tab_M01,Taxa de Abandono › Ensino Médio › 1ª série,54,54,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_MED_01,Taxa de Abandono › Ensino Médio › 1ª série,,,54,54,54,54,,4
+tx_rend,brasil_regioes_ufs,tab_M02,Taxa de Abandono › Ensino Médio › 2ª série,55,55,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_MED_02,Taxa de Abandono › Ensino Médio › 2ª série,,,55,55,55,55,,4
+tx_rend,brasil_regioes_ufs,tab_M03,Taxa de Abandono › Ensino Médio › 3ª série,56,56,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_MED_03,Taxa de Abandono › Ensino Médio › 3ª série,,,56,56,56,56,,4
+tx_rend,brasil_regioes_ufs,tab_M04,Taxa de Abandono › Ensino Médio › 4ª série,57,57,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_MED_04,Taxa de Abandono › Ensino Médio › 4ª série,,,57,57,57,57,,4
+tx_rend,brasil_regioes_ufs,tab_MNS,Taxa de Abandono › Ensino Médio › Não-Seriado,58,58,,,,,,2
+tx_rend,brasil_regioes_ufs,3_CAT_MED_NS,Taxa de Abandono › Ensino Médio › Não-Seriado,,,58,58,58,58,,4
+tx_rend,escolas,Ano,Ano,1,1,,,,,,2
+tx_rend,escolas,NU_ANO_CENSO,Ano,,,1,1,1,1,1,5
+tx_rend,escolas,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+tx_rend,escolas,SG_UF,UF,3,3,3,3,3,3,3,7
+tx_rend,escolas,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+tx_rend,escolas,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+tx_rend,escolas,CO_ENTIDADE,Código da Escola,6,6,6,6,6,6,6,7
+tx_rend,escolas,NO_ENTIDADE,Nome da Escola,7,7,7,7,7,7,7,7
+tx_rend,escolas,TIPOLOCA,Localização,8,8,,,,,,2
+tx_rend,escolas,NO_CATEGORIA,Localização,,,8,8,8,8,8,5
+tx_rend,escolas,Dependad,Dependência Administrativa,9,9,,,,,,2
+tx_rend,escolas,NO_DEPENDENCIA,Dependência Administrativa,,,9,9,9,9,9,5
+tx_rend,escolas,tap_FUN,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Total,10,10,,,,,,2
+tx_rend,escolas,1_CAT_FUN,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Total,,,10,10,10,10,10,5
+tx_rend,escolas,tap_F14,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,11,11,,,,,,2
+tx_rend,escolas,1_CAT_FUN_AI,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,,11,11,11,11,11,5
+tx_rend,escolas,tap_F04,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,12,12,,,,,,2
+tx_rend,escolas,1_CAT_FUN_AF,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,,,12,12,12,12,12,5
+tx_rend,escolas,tap_F58,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,13,13,,,,,,2
+tx_rend,escolas,1_CAT_FUN_01,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,,,13,13,13,13,13,5
+tx_rend,escolas,tap_F00,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,14,14,,,,,,2
+tx_rend,escolas,1_CAT_FUN_02,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,,,14,14,14,14,14,5
+tx_rend,escolas,tap_F01,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,15,15,,,,,,2
+tx_rend,escolas,1_CAT_FUN_03,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,,,15,15,15,15,15,5
+tx_rend,escolas,tap_F02,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,16,16,,,,,,2
+tx_rend,escolas,1_CAT_FUN_04,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,,,16,16,16,16,16,5
+tx_rend,escolas,tap_F03,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,17,17,,,,,,2
+tx_rend,escolas,1_CAT_FUN_05,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,,,17,17,17,17,17,5
+tx_rend,escolas,tap_F05,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,18,18,,,,,,2
+tx_rend,escolas,1_CAT_FUN_06,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,,,18,18,18,18,18,5
+tx_rend,escolas,tap_F06,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,19,19,,,,,,2
+tx_rend,escolas,1_CAT_FUN_07,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,,,19,19,19,19,19,5
+tx_rend,escolas,tap_F07,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,20,20,,,,,,2
+tx_rend,escolas,1_CAT_FUN_08,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,,,20,20,20,20,20,5
+tx_rend,escolas,tap_F08,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,21,21,,,,,,2
+tx_rend,escolas,1_CAT_FUN_09,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,,,21,21,21,21,21,5
+tx_rend,escolas,tap_MED,Taxa de Aprovação › Ensino Médio › Total,22,22,,,,,,2
+tx_rend,escolas,1_CAT_MED,Taxa de Aprovação › Ensino Médio › Total,,,22,22,22,22,22,5
+tx_rend,escolas,tap_M01,Taxa de Aprovação › Ensino Médio › 1ª série,23,23,,,,,,2
+tx_rend,escolas,1_CAT_MED_01,Taxa de Aprovação › Ensino Médio › 1ª série,,,23,23,23,23,23,5
+tx_rend,escolas,tap_M02,Taxa de Aprovação › Ensino Médio › 2ª série,24,24,,,,,,2
+tx_rend,escolas,1_CAT_MED_02,Taxa de Aprovação › Ensino Médio › 2ª série,,,24,24,24,24,24,5
+tx_rend,escolas,tap_M03,Taxa de Aprovação › Ensino Médio › 3ª série,25,25,,,,,,2
+tx_rend,escolas,1_CAT_MED_03,Taxa de Aprovação › Ensino Médio › 3ª série,,,25,25,25,25,25,5
+tx_rend,escolas,tap_M04,Taxa de Aprovação › Ensino Médio › 4ª série,26,26,,,,,,2
+tx_rend,escolas,1_CAT_MED_04,Taxa de Aprovação › Ensino Médio › 4ª série,,,26,26,26,26,26,5
+tx_rend,escolas,tap_MNS,Taxa de Aprovação › Ensino Médio › Não-Seriado,27,27,,,,,,2
+tx_rend,escolas,1_CAT_MED_NS,Taxa de Aprovação › Ensino Médio › Não-Seriado,,,27,27,27,27,27,5
+tx_rend,escolas,tre_FUN,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Total,28,28,,,,,,2
+tx_rend,escolas,2_CAT_FUN,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Total,,,28,28,28,28,28,5
+tx_rend,escolas,tre_F14,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,29,29,,,,,,2
+tx_rend,escolas,2_CAT_FUN_AI,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,,29,29,29,29,29,5
+tx_rend,escolas,tre_F04,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,30,30,,,,,,2
+tx_rend,escolas,2_CAT_FUN_AF,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,,,30,30,30,30,30,5
+tx_rend,escolas,tre_F58,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,31,31,,,,,,2
+tx_rend,escolas,2_CAT_FUN_01,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,,,31,31,31,31,31,5
+tx_rend,escolas,tre_F00,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,32,32,,,,,,2
+tx_rend,escolas,2_CAT_FUN_02,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,,,32,32,32,32,32,5
+tx_rend,escolas,tre_F01,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,33,33,,,,,,2
+tx_rend,escolas,2_CAT_FUN_03,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,,,33,33,33,33,33,5
+tx_rend,escolas,tre_F02,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,34,34,,,,,,2
+tx_rend,escolas,2_CAT_FUN_04,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,,,34,34,34,34,34,5
+tx_rend,escolas,tre_F03,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,35,35,,,,,,2
+tx_rend,escolas,2_CAT_FUN_05,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,,,35,35,35,35,35,5
+tx_rend,escolas,tre_F05,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,36,36,,,,,,2
+tx_rend,escolas,2_CAT_FUN_06,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,,,36,36,36,36,36,5
+tx_rend,escolas,tre_F06,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,37,37,,,,,,2
+tx_rend,escolas,2_CAT_FUN_07,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,,,37,37,37,37,37,5
+tx_rend,escolas,tre_F07,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,38,38,,,,,,2
+tx_rend,escolas,2_CAT_FUN_08,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,,,38,38,38,38,38,5
+tx_rend,escolas,tre_F08,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,39,39,,,,,,2
+tx_rend,escolas,2_CAT_FUN_09,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,,,39,39,39,39,39,5
+tx_rend,escolas,tre_MED,Taxa de Reprovação › Ensino Médio › Total,40,40,,,,,,2
+tx_rend,escolas,2_CAT_MED,Taxa de Reprovação › Ensino Médio › Total,,,40,40,40,40,40,5
+tx_rend,escolas,tre_M01,Taxa de Reprovação › Ensino Médio › 1ª série,41,41,,,,,,2
+tx_rend,escolas,2_CAT_MED_01,Taxa de Reprovação › Ensino Médio › 1ª série,,,41,41,41,41,41,5
+tx_rend,escolas,tre_M02,Taxa de Reprovação › Ensino Médio › 2ª série,42,42,,,,,,2
+tx_rend,escolas,2_CAT_MED_02,Taxa de Reprovação › Ensino Médio › 2ª série,,,42,42,42,42,42,5
+tx_rend,escolas,tre_M03,Taxa de Reprovação › Ensino Médio › 3ª série,43,43,,,,,,2
+tx_rend,escolas,2_CAT_MED_03,Taxa de Reprovação › Ensino Médio › 3ª série,,,43,43,43,43,43,5
+tx_rend,escolas,tre_M04,Taxa de Reprovação › Ensino Médio › 4ª série,44,44,,,,,,2
+tx_rend,escolas,2_CAT_MED_04,Taxa de Reprovação › Ensino Médio › 4ª série,,,44,44,44,44,44,5
+tx_rend,escolas,tre_MNS,Taxa de Reprovação › Ensino Médio › Não-Seriado,45,45,,,,,,2
+tx_rend,escolas,2_CAT_MED_NS,Taxa de Reprovação › Ensino Médio › Não-Seriado,,,45,45,45,45,45,5
+tx_rend,escolas,tab_FUN,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Total,46,46,,,,,,2
+tx_rend,escolas,3_CAT_FUN,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Total,,,46,46,46,46,46,5
+tx_rend,escolas,tab_F14,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,47,47,,,,,,2
+tx_rend,escolas,3_CAT_FUN_AI,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,,47,47,47,47,47,5
+tx_rend,escolas,tab_F04,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Finais,48,48,,,,,,2
+tx_rend,escolas,3_CAT_FUN_AF,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Finais,,,48,48,48,48,48,5
+tx_rend,escolas,tab_F58,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 1º Ano,49,49,,,,,,2
+tx_rend,escolas,3_CAT_FUN_01,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 1º Ano,,,49,49,49,49,49,5
+tx_rend,escolas,tab_F00,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 2º Ano,50,50,,,,,,2
+tx_rend,escolas,3_CAT_FUN_02,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 2º Ano,,,50,50,50,50,50,5
+tx_rend,escolas,tab_F01,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 3º Ano,51,51,,,,,,2
+tx_rend,escolas,3_CAT_FUN_03,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 3º Ano,,,51,51,51,51,51,5
+tx_rend,escolas,tab_F02,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 4º Ano,52,52,,,,,,2
+tx_rend,escolas,3_CAT_FUN_04,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 4º Ano,,,52,52,52,52,52,5
+tx_rend,escolas,tab_F03,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 5º Ano,53,53,,,,,,2
+tx_rend,escolas,3_CAT_FUN_05,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 5º Ano,,,53,53,53,53,53,5
+tx_rend,escolas,tab_F05,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 6º Ano,54,54,,,,,,2
+tx_rend,escolas,3_CAT_FUN_06,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 6º Ano,,,54,54,54,54,54,5
+tx_rend,escolas,tab_F06,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 7º Ano,55,55,,,,,,2
+tx_rend,escolas,3_CAT_FUN_07,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 7º Ano,,,55,55,55,55,55,5
+tx_rend,escolas,tab_F07,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 8º Ano,56,56,,,,,,2
+tx_rend,escolas,3_CAT_FUN_08,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 8º Ano,,,56,56,56,56,56,5
+tx_rend,escolas,tab_F08,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 9º Ano,57,57,,,,,,2
+tx_rend,escolas,3_CAT_FUN_09,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 9º Ano,,,57,57,57,57,57,5
+tx_rend,escolas,tab_MED,Taxa de Abandono › Ensino Médio › Total,58,58,,,,,,2
+tx_rend,escolas,3_CAT_MED,Taxa de Abandono › Ensino Médio › Total,,,58,58,58,58,58,5
+tx_rend,escolas,tab_M01,Taxa de Abandono › Ensino Médio › 1ª série,59,59,,,,,,2
+tx_rend,escolas,3_CAT_MED_01,Taxa de Abandono › Ensino Médio › 1ª série,,,59,59,59,59,59,5
+tx_rend,escolas,tab_M02,Taxa de Abandono › Ensino Médio › 2ª série,60,60,,,,,,2
+tx_rend,escolas,3_CAT_MED_02,Taxa de Abandono › Ensino Médio › 2ª série,,,60,60,60,60,60,5
+tx_rend,escolas,tab_M03,Taxa de Abandono › Ensino Médio › 3ª série,61,61,,,,,,2
+tx_rend,escolas,3_CAT_MED_03,Taxa de Abandono › Ensino Médio › 3ª série,,,61,61,61,61,61,5
+tx_rend,escolas,tab_M04,Taxa de Abandono › Ensino Médio › 4ª série,62,62,,,,,,2
+tx_rend,escolas,3_CAT_MED_04,Taxa de Abandono › Ensino Médio › 4ª série,,,62,62,62,62,62,5
+tx_rend,escolas,tab_MNS,Taxa de Abandono › Ensino Médio › Não-Seriado,63,63,,,,,,2
+tx_rend,escolas,3_CAT_MED_NS,Taxa de Abandono › Ensino Médio › Não-Seriado,,,63,63,63,63,63,5
+tx_rend,municipios,_SEM_NOME_1,Ano,1,,,,,,,1
+tx_rend,municipios,NU_ANO_CENSO,Ano,,1,1,1,1,1,1,6
+tx_rend,municipios,_SEM_NOME_2,Região,2,,,,,,,1
+tx_rend,municipios,NO_REGIAO,Região,,2,2,2,2,2,2,6
+tx_rend,municipios,_SEM_NOME_3,UF,3,,,,,,,1
+tx_rend,municipios,SG_UF,UF,,3,3,3,3,3,3,6
+tx_rend,municipios,_SEM_NOME_4,Código do Município,4,,,,,,,1
+tx_rend,municipios,CO_MUNICIPIO,Código do Município,,4,4,4,4,4,4,6
+tx_rend,municipios,_SEM_NOME_5,Nome do Município,5,,,,,,,1
+tx_rend,municipios,NO_MUNICIPIO,Nome do Município,,5,5,5,5,5,5,6
+tx_rend,municipios,_SEM_NOME_6,Localização,6,,,,,,,1
+tx_rend,municipios,NO_CATEGORIA,Localização,,6,6,6,6,6,6,6
+tx_rend,municipios,_SEM_NOME_7,Dependência Administrativa,7,,,,,,,1
+tx_rend,municipios,NO_DEPENDENCIA,Dependência Administrativa,,7,7,7,7,7,7,6
+tx_rend,municipios,_SEM_NOME_8,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Total,8,,,,,,,1
+tx_rend,municipios,1_CAT_FUN,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Total,,8,8,8,8,8,8,6
+tx_rend,municipios,_SEM_NOME_9,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,9,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_AI,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,9,9,9,9,9,9,6
+tx_rend,municipios,_SEM_NOME_10,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,10,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_AF,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,,10,10,10,10,10,10,6
+tx_rend,municipios,_SEM_NOME_11,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,11,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_01,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,,11,11,11,11,11,11,6
+tx_rend,municipios,_SEM_NOME_12,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,12,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_02,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,,12,12,12,12,12,12,6
+tx_rend,municipios,_SEM_NOME_13,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,13,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_03,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,,13,13,13,13,13,13,6
+tx_rend,municipios,_SEM_NOME_14,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,14,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_04,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,,14,14,14,14,14,14,6
+tx_rend,municipios,_SEM_NOME_15,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,15,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_05,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,,15,15,15,15,15,15,6
+tx_rend,municipios,_SEM_NOME_16,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,16,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_06,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,,16,16,16,16,16,16,6
+tx_rend,municipios,_SEM_NOME_17,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,17,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_07,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,,17,17,17,17,17,17,6
+tx_rend,municipios,_SEM_NOME_18,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,18,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_08,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,,18,18,18,18,18,18,6
+tx_rend,municipios,_SEM_NOME_19,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,19,,,,,,,1
+tx_rend,municipios,1_CAT_FUN_09,Taxa de Aprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,,19,19,19,19,19,19,6
+tx_rend,municipios,_SEM_NOME_20,Taxa de Aprovação › Ensino Médio › Total,20,,,,,,,1
+tx_rend,municipios,1_CAT_MED,Taxa de Aprovação › Ensino Médio › Total,,20,20,20,20,20,20,6
+tx_rend,municipios,_SEM_NOME_21,Taxa de Aprovação › Ensino Médio › 1ª série,21,,,,,,,1
+tx_rend,municipios,1_CAT_MED_01,Taxa de Aprovação › Ensino Médio › 1ª série,,21,21,21,21,21,21,6
+tx_rend,municipios,_SEM_NOME_22,Taxa de Aprovação › Ensino Médio › 2ª série,22,,,,,,,1
+tx_rend,municipios,1_CAT_MED_02,Taxa de Aprovação › Ensino Médio › 2ª série,,22,22,22,22,22,22,6
+tx_rend,municipios,_SEM_NOME_23,Taxa de Aprovação › Ensino Médio › 3ª série,23,,,,,,,1
+tx_rend,municipios,1_CAT_MED_03,Taxa de Aprovação › Ensino Médio › 3ª série,,23,23,23,23,23,23,6
+tx_rend,municipios,_SEM_NOME_24,Taxa de Aprovação › Ensino Médio › 4ª série,24,,,,,,,1
+tx_rend,municipios,1_CAT_MED_04,Taxa de Aprovação › Ensino Médio › 4ª série,,24,24,24,24,24,24,6
+tx_rend,municipios,_SEM_NOME_25,Taxa de Aprovação › Ensino Médio › Não-Seriado,25,,,,,,,1
+tx_rend,municipios,1_CAT_MED_NS,Taxa de Aprovação › Ensino Médio › Não-Seriado,,25,25,25,25,25,25,6
+tx_rend,municipios,_SEM_NOME_26,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Total,26,,,,,,,1
+tx_rend,municipios,2_CAT_FUN,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Total,,26,26,26,26,26,26,6
+tx_rend,municipios,_SEM_NOME_27,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,27,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_AI,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,27,27,27,27,27,27,6
+tx_rend,municipios,_SEM_NOME_28,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,28,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_AF,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › Anos Finais,,28,28,28,28,28,28,6
+tx_rend,municipios,_SEM_NOME_29,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,29,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_01,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 1º Ano,,29,29,29,29,29,29,6
+tx_rend,municipios,_SEM_NOME_30,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,30,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_02,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 2º Ano,,30,30,30,30,30,30,6
+tx_rend,municipios,_SEM_NOME_31,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,31,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_03,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 3º Ano,,31,31,31,31,31,31,6
+tx_rend,municipios,_SEM_NOME_32,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,32,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_04,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 4º Ano,,32,32,32,32,32,32,6
+tx_rend,municipios,_SEM_NOME_33,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,33,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_05,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 5º Ano,,33,33,33,33,33,33,6
+tx_rend,municipios,_SEM_NOME_34,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,34,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_06,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 6º Ano,,34,34,34,34,34,34,6
+tx_rend,municipios,_SEM_NOME_35,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,35,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_07,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 7º Ano,,35,35,35,35,35,35,6
+tx_rend,municipios,_SEM_NOME_36,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,36,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_08,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 8º Ano,,36,36,36,36,36,36,6
+tx_rend,municipios,_SEM_NOME_37,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,37,,,,,,,1
+tx_rend,municipios,2_CAT_FUN_09,Taxa de Reprovação › Ensino Fundamental de 8 e 9 anos › 9º Ano,,37,37,37,37,37,37,6
+tx_rend,municipios,_SEM_NOME_38,Taxa de Reprovação › Ensino Médio › Total,38,,,,,,,1
+tx_rend,municipios,2_CAT_MED,Taxa de Reprovação › Ensino Médio › Total,,38,38,38,38,38,38,6
+tx_rend,municipios,_SEM_NOME_39,Taxa de Reprovação › Ensino Médio › 1ª série,39,,,,,,,1
+tx_rend,municipios,2_CAT_MED_01,Taxa de Reprovação › Ensino Médio › 1ª série,,39,39,39,39,39,39,6
+tx_rend,municipios,_SEM_NOME_40,Taxa de Reprovação › Ensino Médio › 2ª série,40,,,,,,,1
+tx_rend,municipios,2_CAT_MED_02,Taxa de Reprovação › Ensino Médio › 2ª série,,40,40,40,40,40,40,6
+tx_rend,municipios,_SEM_NOME_41,Taxa de Reprovação › Ensino Médio › 3ª série,41,,,,,,,1
+tx_rend,municipios,2_CAT_MED_03,Taxa de Reprovação › Ensino Médio › 3ª série,,41,41,41,41,41,41,6
+tx_rend,municipios,_SEM_NOME_42,Taxa de Reprovação › Ensino Médio › 4ª série,42,,,,,,,1
+tx_rend,municipios,2_CAT_MED_04,Taxa de Reprovação › Ensino Médio › 4ª série,,42,42,42,42,42,42,6
+tx_rend,municipios,_SEM_NOME_43,Taxa de Reprovação › Ensino Médio › Não-Seriado,43,,,,,,,1
+tx_rend,municipios,2_CAT_MED_NS,Taxa de Reprovação › Ensino Médio › Não-Seriado,,43,43,43,43,43,43,6
+tx_rend,municipios,_SEM_NOME_44,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Total,44,,,,,,,1
+tx_rend,municipios,3_CAT_FUN,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Total,,44,44,44,44,44,44,6
+tx_rend,municipios,_SEM_NOME_45,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,45,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_AI,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Iniciais,,45,45,45,45,45,45,6
+tx_rend,municipios,_SEM_NOME_46,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Finais,46,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_AF,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › Anos Finais,,46,46,46,46,46,46,6
+tx_rend,municipios,_SEM_NOME_47,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 1º Ano,47,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_01,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 1º Ano,,47,47,47,47,47,47,6
+tx_rend,municipios,_SEM_NOME_48,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 2º Ano,48,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_02,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 2º Ano,,48,48,48,48,48,48,6
+tx_rend,municipios,_SEM_NOME_49,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 3º Ano,49,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_03,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 3º Ano,,49,49,49,49,49,49,6
+tx_rend,municipios,_SEM_NOME_50,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 4º Ano,50,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_04,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 4º Ano,,50,50,50,50,50,50,6
+tx_rend,municipios,_SEM_NOME_51,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 5º Ano,51,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_05,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 5º Ano,,51,51,51,51,51,51,6
+tx_rend,municipios,_SEM_NOME_52,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 6º Ano,52,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_06,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 6º Ano,,52,52,52,52,52,52,6
+tx_rend,municipios,_SEM_NOME_53,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 7º Ano,53,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_07,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 7º Ano,,53,53,53,53,53,53,6
+tx_rend,municipios,_SEM_NOME_54,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 8º Ano,54,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_08,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 8º Ano,,54,54,54,54,54,54,6
+tx_rend,municipios,_SEM_NOME_55,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 9º Ano,55,,,,,,,1
+tx_rend,municipios,3_CAT_FUN_09,Taxa de Abandono › Ensino Fundamental de 8 e 9 anos › 9º Ano,,55,55,55,55,55,55,6
+tx_rend,municipios,_SEM_NOME_56,Taxa de Abandono › Ensino Médio › Total,56,,,,,,,1
+tx_rend,municipios,3_CAT_MED,Taxa de Abandono › Ensino Médio › Total,,56,56,56,56,56,56,6
+tx_rend,municipios,_SEM_NOME_57,Taxa de Abandono › Ensino Médio › 1ª série,57,,,,,,,1
+tx_rend,municipios,3_CAT_MED_01,Taxa de Abandono › Ensino Médio › 1ª série,,57,57,57,57,57,57,6
+tx_rend,municipios,_SEM_NOME_58,Taxa de Abandono › Ensino Médio › 2ª série,58,,,,,,,1
+tx_rend,municipios,3_CAT_MED_02,Taxa de Abandono › Ensino Médio › 2ª série,,58,58,58,58,58,58,6
+tx_rend,municipios,_SEM_NOME_59,Taxa de Abandono › Ensino Médio › 3ª série,59,,,,,,,1
+tx_rend,municipios,3_CAT_MED_03,Taxa de Abandono › Ensino Médio › 3ª série,,59,59,59,59,59,59,6
+tx_rend,municipios,_SEM_NOME_60,Taxa de Abandono › Ensino Médio › 4ª série,60,,,,,,,1
+tx_rend,municipios,3_CAT_MED_04,Taxa de Abandono › Ensino Médio › 4ª série,,60,60,60,60,60,60,6
+tx_rend,municipios,_SEM_NOME_61,Taxa de Abandono › Ensino Médio › Não-Seriado,61,,,,,,,1
+tx_rend,municipios,3_CAT_MED_NS,Taxa de Abandono › Ensino Médio › Não-Seriado,,61,61,61,61,61,61,6

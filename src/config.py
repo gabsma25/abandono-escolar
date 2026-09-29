@@ -12,9 +12,14 @@ SEP = ";"
 
 # Chave: (ano: int, tabela: str)  →  Path
 # Tabelas disponíveis por ano:
-#   2022–2024 : "escola"
+#   2019–2024 : "escola"  (microdados_ed_basica_{ano}; 2020 tem extensão .CSV
+#                          em maiúsculas — nome original preservado, regra 1)
 #   2025      : "escola", "turma", "matricula", "docente"
+# Nunca monte o caminho por concatenação com o ano: use caminho(ano, tabela).
 ARQUIVOS: dict[tuple[int, str], pathlib.Path] = {
+    (2019, "escola"):    BRUTO / "microdados_ed_basica_2019.csv",
+    (2020, "escola"):    BRUTO / "microdados_ed_basica_2020.CSV",
+    (2021, "escola"):    BRUTO / "microdados_ed_basica_2021.csv",
     (2022, "escola"):    BRUTO / "microdados_ed_basica_2022.csv",
     (2023, "escola"):    BRUTO / "microdados_ed_basica_2023.csv",
     (2024, "escola"):    BRUTO / "microdados_ed_basica_2024.csv",
@@ -23,6 +28,16 @@ ARQUIVOS: dict[tuple[int, str], pathlib.Path] = {
     (2025, "matricula"): BRUTO / "Tabela_Matricula_2025_V2.csv",
     (2025, "docente"):   BRUTO / "Tabela_Docente_2025_V2.csv",
 }
+
+# Indicadores educacionais do INEP (desfechos e contexto), baixados como .zip
+# em dados/bruto/brutos-inep/ e extraídos por src/extrair_brutos_inep.py para
+# INDICADORES/{tipo}/{ano}/. Ver src/indicadores_inep.py para localizar um
+# arquivo por (tipo, ano, nivel).
+BRUTOS_INEP = BRUTO / "brutos-inep"
+INDICADORES = INTERIM / "brutos_inep_extraido"
+
+# Documentação oficial que acompanha os microdados (não é dado).
+DOC_CENSO = BRUTO / "doc-censo"
 
 _ANOS_DISPONIVEIS = sorted({ano for ano, _ in ARQUIVOS})
 _TABELAS_POR_ANO: dict[int, list[str]] = {}
