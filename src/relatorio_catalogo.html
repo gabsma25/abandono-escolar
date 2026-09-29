@@ -1,0 +1,351 @@
+<title>Catálogo Censo Escolar RR</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #f5f7f3;
+    --surface: #ffffff;
+    --surface-2: #eceee8;
+    --line: #d3d8cf;
+    --line-strong: #aab3a6;
+    --ink: #1b2320;
+    --ink-2: #4a544e;
+    --ink-3: #7b857e;
+    --accent: #2f6b4f;
+    --accent-ink: #ffffff;
+    --accent-soft: #dcebe1;
+    --rr: #8a5a12;
+    --rr-soft: #f3e7cf;
+    --ok: #3d8b5e;
+    --warn: #c48a1b;
+    --bad: #b8433d;
+    --ok-soft: #d9ecdf;
+    --warn-soft: #f6e7c4;
+    --bad-soft: #f2d5d2;
+    --focus: #2f6b4f;
+    --sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    --display: "Archivo", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #141917; --surface: #1c2320; --surface-2: #232b27;
+      --line: #2f3a34; --line-strong: #4a5a51;
+      --ink: #e6eae5; --ink-2: #b4bdb7; --ink-3: #849089;
+      --accent: #7fbf9c; --accent-ink: #10201a; --accent-soft: #24382e;
+      --rr: #e0b364; --rr-soft: #3a3020;
+      --ok: #6cc08c; --warn: #e2b04a; --bad: #e07b74;
+      --ok-soft: #22392c; --warn-soft: #3d3419; --bad-soft: #43221f;
+      --focus: #7fbf9c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #141917; --surface: #1c2320; --surface-2: #232b27;
+    --line: #2f3a34; --line-strong: #4a5a51;
+    --ink: #e6eae5; --ink-2: #b4bdb7; --ink-3: #849089;
+    --accent: #7fbf9c; --accent-ink: #10201a; --accent-soft: #24382e;
+    --rr: #e0b364; --rr-soft: #3a3020;
+    --ok: #6cc08c; --warn: #e2b04a; --bad: #e07b74;
+    --ok-soft: #22392c; --warn-soft: #3d3419; --bad-soft: #43221f;
+    --focus: #7fbf9c;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.45;
+    padding-inline: 16px; padding-block: 0 48px;
+  }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+  code, .mono { font-family: var(--mono); font-size: 0.86em; }
+
+  header.top {
+    max-width: 1400px; margin: 0 auto; padding-block: 28px 18px;
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  header.top h1 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.01em; }
+  header.top p { margin: 4px 0 0; color: var(--ink-2); max-width: 62ch; }
+  .eyebrow { font-family: var(--display); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+
+  .app { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 28px; padding-top: 20px; }
+  @media (max-width: 860px) { .app { grid-template-columns: 1fr; } aside { position: static !important; } }
+
+  aside { position: sticky; top: 12px; align-self: start; max-height: calc(100vh - 24px); overflow: auto; display: flex; flex-direction: column; gap: 22px; }
+  .nav-group { display: flex; flex-direction: column; gap: 2px; }
+  .nav-group .eyebrow { margin-bottom: 6px; }
+  .nav-btn {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+    width: 100%; text-align: left; border: 0; background: transparent; color: var(--ink);
+    font: inherit; padding: 6px 10px; border-radius: 6px; cursor: pointer;
+  }
+  .nav-btn:hover { background: var(--surface-2); }
+  .nav-btn[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
+  .nav-btn .n { font-family: var(--mono); font-size: 0.78rem; color: inherit; opacity: 0.75; font-variant-numeric: tabular-nums; }
+
+  main { min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+  .view-head h2 { font-size: 1.25rem; font-weight: 600; }
+  .view-head p { margin: 4px 0 0; color: var(--ink-2); max-width: 70ch; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+  .tile .k { font-size: 0.74rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--display); font-weight: 600; }
+  .tile .v { font-family: var(--display); font-size: 1.45rem; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .tile .v small { font-size: 0.85rem; font-weight: 500; color: var(--ink-2); margin-left: 4px; }
+  .tile.rr .v { color: var(--rr); }
+
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .toolbar input[type="search"], .toolbar select {
+    font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 6px; padding: 7px 10px; min-width: 0;
+  }
+  .toolbar input[type="search"] { flex: 1 1 240px; }
+  .toolbar label.chk { display: inline-flex; gap: 6px; align-items: center; color: var(--ink-2); }
+  .count { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-left: auto; }
+
+  .tbl-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+  th, td { padding: 7px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  th { position: sticky; top: 0; background: var(--surface-2); font-family: var(--display); font-weight: 600; font-size: 0.74rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; z-index: 1; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.pos { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  td.var { white-space: nowrap; font-family: var(--mono); font-size: 0.84rem; font-weight: 500; }
+  td.desc { color: var(--ink-2); min-width: 22ch; }
+  td.ex { color: var(--ink-2); font-family: var(--mono); font-size: 0.76rem; max-width: 34ch; overflow-wrap: anywhere; }
+  .chip { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); font-size: 0.78rem; white-space: nowrap; }
+  .chip.tipo { background: transparent; border: 1px solid var(--line); }
+
+  .fill { display: inline-grid; grid-template-columns: 56px auto; align-items: center; gap: 6px; }
+  .fill .bar { height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+  .fill .bar i { display: block; height: 100%; background: var(--ok); }
+  .fill.warn .bar i { background: var(--warn); }
+  .fill.bad .bar i { background: var(--bad); }
+  .fill span { font-variant-numeric: tabular-nums; font-size: 0.86rem; }
+
+  .dots { display: inline-flex; gap: 3px; }
+  .dot { width: 14px; height: 14px; border-radius: 3px; background: var(--surface-2); border: 1px solid var(--line); font-size: 0; }
+  .dot.on { background: var(--accent); border-color: var(--accent); }
+  .dot.rrf { background: var(--rr); border-color: var(--rr); }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; color: var(--ink-3); font-size: 0.82rem; align-items: center; }
+  .legend .dot { vertical-align: middle; margin-right: 4px; }
+
+  .status { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 0.78rem; font-family: var(--display); font-weight: 600; }
+  .status.aberto { background: var(--warn-soft); color: var(--warn); }
+  .status.resolvido { background: var(--ok-soft); color: var(--ok); }
+  .status.informativo { background: var(--surface-2); color: var(--ink-2); }
+  .note { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 6px 6px 0; color: var(--ink-2); font-size: 0.92rem; max-width: 80ch; }
+  .empty { padding: 28px; text-align: center; color: var(--ink-3); }
+  @media (prefers-reduced-motion: no-preference) { .nav-btn, .fill .bar i { transition: background-color .15s ease, width .25s ease; } }
+</style>
+
+<header class="top">
+  <div>
+    <div class="eyebrow">INEP · Censo Escolar e Indicadores Educacionais · Roraima 2019–2025</div>
+    <h1>Catálogo Censo Escolar RR</h1>
+    <p>Todas as variáveis de cada tabela disponível no projeto, com presença por ano, preenchimento no Brasil e em Roraima e exemplos de valores. Gerado por código a partir dos arquivos brutos; nenhum número foi digitado.</p>
+  </div>
+</header>
+
+<div class="app">
+  <aside id="nav" aria-label="Tabelas"></aside>
+  <main id="main"></main>
+</div>
+
+<script>
+const D = /*__DADOS__*/null;
+
+const ANOS = ["2019","2020","2021","2022","2023","2024","2025"];
+const ROTULOS_MICRO = D.inventario.map(r => r.tabela === "escola" ? r.ano : `${r.ano}_${r.tabela}`);
+const NOME_TAB = { escola: "Escola", turma: "Turma", matricula: "Matrícula", docente: "Docente" };
+const NOME_NIVEL = { escolas: "escolas", municipios: "municípios", brasil_regioes_ufs: "Brasil / regiões / UFs" };
+const NOME_TIPO = { tx_rend: "Taxas de rendimento (aprovação, reprovação, abandono)", TDI: "Distorção idade-série", ATU: "Média de alunos por turma", IED: "Esforço docente", HAD: "Horas-aula diárias" };
+
+const num = n => Number(n).toLocaleString("pt-BR");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const views = [];
+for (const r of D.inventario) {
+  const rot = r.tabela === "escola" ? r.ano : `${r.ano}_${r.tabela}`;
+  views.push({ id: `micro:${rot}`, grupo: r.tabela === "escola" ? "Microdados · tabela Escola" : "Microdados 2025 · tabelas separadas",
+    rotulo: r.tabela === "escola" ? r.ano : `${NOME_TAB[r.tabela]} ${r.ano}`, n: Number(r.n_colunas), kind: "micro", rot, inv: r });
+}
+views.push({ id: "consolidado", grupo: "Consolidado", rotulo: "Todas as variáveis", n: D.catalogo.length, kind: "consolidado" });
+const indKeys = new Map();
+for (const r of D.presenca_ind) { const k = `${r.tipo}|${r.nivel}`; indKeys.set(k, (indKeys.get(k) || 0) + 1); }
+const ordemTipo = ["tx_rend","TDI","ATU","IED","HAD"], ordemNivel = ["escolas","municipios","brasil_regioes_ufs"];
+[...indKeys.keys()].sort((a,b) => { const [ta,na]=a.split("|"), [tb,nb]=b.split("|"); return ordemTipo.indexOf(ta)-ordemTipo.indexOf(tb) || ordemNivel.indexOf(na)-ordemNivel.indexOf(nb); })
+  .forEach(k => { const [tipo, nivel] = k.split("|"); views.push({ id: `ind:${k}`, grupo: "Indicadores INEP", rotulo: `${tipo} · ${NOME_NIVEL[nivel]}`, n: indKeys.get(k), kind: "ind", tipo, nivel }); });
+if (!D.presenca_ind.length) views.push({ id: "ind:pendente", grupo: "Indicadores INEP", rotulo: "(perfil ainda não gerado)", n: 0, kind: "vazio" });
+views.push({ id: "extraidos", grupo: "Indicadores INEP", rotulo: "Arquivos extraídos", n: D.extraidos.length, kind: "extraidos" });
+views.push({ id: "problemas", grupo: "Qualidade", rotulo: "Problemas registrados", n: D.problemas.length, kind: "problemas" });
+
+let atual = views[0].id;
+const estado = { busca: "", bloco: "", soEstaveis: false };
+
+function renderNav() {
+  const grupos = [...new Set(views.map(v => v.grupo))];
+  document.getElementById("nav").innerHTML = grupos.map(g => `
+    <div class="nav-group"><div class="eyebrow">${esc(g)}</div>
+      ${views.filter(v => v.grupo === g).map(v => `<button class="nav-btn" data-id="${esc(v.id)}" aria-current="${v.id === atual}"><span>${esc(v.rotulo)}</span><span class="n">${num(v.n)}</span></button>`).join("")}
+    </div>`).join("");
+  document.querySelectorAll(".nav-btn").forEach(b => b.addEventListener("click", () => { atual = b.dataset.id; estado.busca = ""; estado.bloco = ""; render(); }));
+}
+
+function fill(pct) {
+  const p = Number(pct); const cls = p >= 95 ? "" : p >= 50 ? "warn" : "bad";
+  return `<span class="fill ${cls}"><span class="bar"><i style="width:${p}%"></i></span><span>${p.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1})}%</span></span>`;
+}
+function dots(rotulos, presentes, cls = "on") {
+  return `<span class="dots">${rotulos.map(r => `<span class="dot ${presentes[r] ? cls : ""}" title="${esc(r)}${presentes[r] ? " · posição " + presentes[r] : " · ausente"}">${esc(r)}</span>`).join("")}</span>`;
+}
+function toolbar(blocos, extra = "") {
+  return `<div class="toolbar">
+    <input type="search" id="busca" placeholder="Buscar variável ou descrição…" value="${esc(estado.busca)}" aria-label="Buscar">
+    ${blocos ? `<select id="bloco" aria-label="Bloco"><option value="">Todos os blocos</option>${blocos.map(b => `<option value="${esc(b)}" ${b === estado.bloco ? "selected" : ""}>${esc(b)}</option>`).join("")}</select>` : ""}
+    ${extra}<span class="count" id="count"></span></div>`;
+}
+function wire(renderTable) {
+  const b = document.getElementById("busca"); if (b) b.addEventListener("input", () => { estado.busca = b.value; renderTable(); });
+  const s = document.getElementById("bloco"); if (s) s.addEventListener("change", () => { estado.bloco = s.value; renderTable(); });
+  const e = document.getElementById("estaveis"); if (e) e.addEventListener("change", () => { estado.soEstaveis = e.checked; renderTable(); });
+}
+function filtra(rows, campos) {
+  const q = estado.busca.trim().toLowerCase();
+  return rows.filter(r => (!estado.bloco || r.bloco === estado.bloco) && (!q || campos.some(c => String(r[c] ?? "").toLowerCase().includes(q))));
+}
+function setCount(n, total) { document.getElementById("count").textContent = `${num(n)} de ${num(total)}`; }
+
+function viewMicro(v) {
+  const rows = D.catalogo_longo.filter(r => r.arquivo === v.rot);
+  const blocos = [...new Set(rows.map(r => r.bloco))].sort((a,b) => a.localeCompare(b, "pt-BR"));
+  const inv = v.inv;
+  const medRR = mediana(rows.map(r => Number(r.pct_preenchido_rr)));
+  const main = document.getElementById("main");
+  main.innerHTML = `
+    <div class="view-head"><div class="eyebrow">Microdados · ${esc(NOME_TAB[inv.tabela])} ${esc(inv.ano)}</div>
+      <h2><code>${esc(inv.arquivo)}</code></h2>
+      <p>${esc(inv.encoding)}, separador <code>${esc(inv.separador)}</code>, uma linha por escola. Preenchimento = campo não vazio no CSV; “distintos” e exemplos contam só as linhas de Roraima.</p></div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Variáveis</div><div class="v">${num(inv.n_colunas)}</div></div>
+      <div class="tile"><div class="k">Linhas · Brasil</div><div class="v">${num(inv.n_linhas)}</div></div>
+      <div class="tile rr"><div class="k">Linhas · Roraima</div><div class="v">${num(inv.n_linhas_rr)}</div></div>
+      <div class="tile"><div class="k">Blocos temáticos</div><div class="v">${blocos.length}</div></div>
+      <div class="tile rr"><div class="k">Preenchimento mediano · RR</div><div class="v">${medRR.toLocaleString("pt-BR",{maximumFractionDigits:1})}<small>%</small></div></div>
+    </div>
+    ${toolbar(blocos)}
+    <div class="tbl-wrap" id="tbl"></div>`;
+  const renderTable = () => {
+    const f = filtra(rows, ["coluna", "bloco", "exemplos_rr"]); setCount(f.length, rows.length);
+    document.getElementById("tbl").innerHTML = f.length ? `<table><thead><tr>
+      <th class="num">#</th><th>Variável</th><th>Bloco</th><th>Tipo</th><th>Preenchido · BR</th><th>Preenchido · RR</th><th class="num">Distintos · RR</th><th>Valores mais frequentes em RR (n)</th></tr></thead><tbody>
+      ${f.map(r => `<tr><td class="pos num">${r.posicao}</td><td class="var">${esc(r.coluna)}</td><td><span class="chip">${esc(r.bloco)}</span></td><td><span class="chip tipo">${esc(r.tipo_semantico)}</span></td>
+        <td>${fill(r.pct_preenchido_br)}</td><td>${fill(r.pct_preenchido_rr)}</td><td class="num">${num(r.n_distintos_rr)}</td><td class="ex">${esc(r.exemplos_rr)}</td></tr>`).join("")}
+      </tbody></table>` : `<div class="empty">Nenhuma variável corresponde ao filtro.</div>`;
+  };
+  wire(renderTable); renderTable();
+}
+
+function viewConsolidado() {
+  const rows = D.catalogo;
+  const blocos = [...new Set(rows.map(r => r.bloco))].sort((a,b) => a.localeCompare(b, "pt-BR"));
+  const estaveis = rows.filter(r => ANOS.every(a => r[a])).length;
+  const main = document.getElementById("main");
+  main.innerHTML = `
+    <div class="view-head"><div class="eyebrow">Consolidado · 10 arquivos</div><h2>Todas as variáveis dos microdados</h2>
+      <p>Uma linha por nome de variável. Os quadrados mostram em quais arquivos ela existe (ao passar o mouse, a posição da coluna). As estatísticas vêm do arquivo mais recente em que a variável aparece.</p></div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Variáveis distintas</div><div class="v">${num(rows.length)}</div></div>
+      <div class="tile"><div class="k">Presentes em todos os 7 anos (Escola)</div><div class="v">${num(estaveis)}</div></div>
+      <div class="tile"><div class="k">Só em 2025</div><div class="v">${num(rows.filter(r => !ANOS.slice(0,6).some(a => r[a]) && (r["2025"] || r["2025_turma"] || r["2025_matricula"] || r["2025_docente"])).length)}</div></div>
+      <div class="tile"><div class="k">Só até 2022</div><div class="v">${num(rows.filter(r => r["2022"] && !r["2023"] && !r["2024"] && !r["2025"]).length)}</div></div>
+    </div>
+    <div class="legend"><span><span class="dot on"></span>Escola 2019–2025</span><span><span class="dot rrf"></span>Turma / Matrícula / Docente 2025</span><span>Ordem dos quadrados: ${ROTULOS_MICRO.map(esc).join(" · ")}</span></div>
+    ${toolbar(blocos, `<label class="chk"><input type="checkbox" id="estaveis" ${estado.soEstaveis ? "checked" : ""}> só presentes nos 7 anos</label>`)}
+    <div class="tbl-wrap" id="tbl"></div>`;
+  const renderTable = () => {
+    let f = filtra(rows, ["coluna", "bloco", "exemplos_rr_ref"]);
+    if (estado.soEstaveis) f = f.filter(r => ANOS.every(a => r[a]));
+    setCount(f.length, rows.length);
+    document.getElementById("tbl").innerHTML = f.length ? `<table><thead><tr>
+      <th>Variável</th><th>Bloco</th><th>Tipo</th><th>Presença por arquivo</th><th class="num">Arquivos</th><th>Ref.</th><th>Preenchido · RR (ref.)</th><th class="num">Distintos · RR</th><th>Valores mais frequentes em RR (n)</th></tr></thead><tbody>
+      ${f.map(r => `<tr><td class="var">${esc(r.coluna)}</td><td><span class="chip">${esc(r.bloco)}</span></td><td><span class="chip tipo">${esc(r.tipo_semantico)}</span></td>
+        <td><span class="dots">${ROTULOS_MICRO.map(rot => `<span class="dot ${r[rot] ? (rot.includes("_") ? "rrf" : "on") : ""}" title="${esc(rot)}${r[rot] ? " · posição " + r[rot] : " · ausente"}">${esc(rot)}</span>`).join("")}</span></td>
+        <td class="num">${r.n_arquivos}</td><td class="pos">${esc(r.arquivo_ref)}</td><td>${fill(r.pct_preenchido_rr_ref)}</td><td class="num">${num(r.n_distintos_rr_ref)}</td><td class="ex">${esc(r.exemplos_rr_ref)}</td></tr>`).join("")}
+      </tbody></table>` : `<div class="empty">Nenhuma variável corresponde ao filtro.</div>`;
+  };
+  wire(renderTable); renderTable();
+}
+
+function viewInd(v) {
+  const rows = D.presenca_ind.filter(r => r.tipo === v.tipo && r.nivel === v.nivel);
+  const inv = D.inventario_ind.filter(r => r.tipo === v.tipo && r.nivel === v.nivel).sort((a,b) => a.ano - b.ano);
+  const main = document.getElementById("main");
+  main.innerHTML = `
+    <div class="view-head"><div class="eyebrow">Indicadores INEP · ${esc(v.tipo)} · nível ${esc(NOME_NIVEL[v.nivel])}</div><h2>${esc(NOME_TIPO[v.tipo] || v.tipo)}</h2>
+      <p>Nome técnico (linha de cabeçalho da planilha) e descrição montada a partir do cabeçalho humano. Quadrados = anos em que a coluna existe nessa posição. Ausência nos dados é a string <code>--</code>.</p></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Ano</th><th>Arquivo</th><th class="num">Colunas</th><th class="num">Linhas de dados</th><th class="num">Linhas · RR</th><th class="num">Escolas distintas</th><th class="num">Linha do cabeçalho técnico</th></tr></thead><tbody>
+      ${inv.map(r => `<tr><td>${r.ano}</td><td class="mono">${esc(r.arquivo)}</td><td class="num">${num(r.n_colunas)}</td><td class="num">${num(r.n_linhas_dados)}</td><td class="num">${num(r.n_linhas_rr)}</td><td class="num">${r.n_entidades_distintas ? num(r.n_entidades_distintas) : "—"}</td><td class="num">${Number(r.linha_cabecalho) ? r.linha_cabecalho : "sem nomes técnicos"}</td></tr>`).join("")}
+    </tbody></table></div>
+    ${toolbar(null)}
+    <div class="tbl-wrap" id="tbl"></div>`;
+  const renderTable = () => {
+    const f = filtra(rows, ["coluna", "descricao"]); setCount(f.length, rows.length);
+    document.getElementById("tbl").innerHTML = f.length ? `<table><thead><tr><th>Nome técnico</th><th>Descrição (cabeçalho humano)</th><th>Anos 2019 → 2025</th><th class="num">Anos</th></tr></thead><tbody>
+      ${f.map(r => `<tr><td class="var">${esc(r.coluna)}</td><td class="desc">${esc(r.descricao)}</td><td>${dots(ANOS, r)}</td><td class="num">${r.n_anos}</td></tr>`).join("")}
+      </tbody></table>` : `<div class="empty">Nenhuma coluna corresponde ao filtro.</div>`;
+  };
+  wire(renderTable); renderTable();
+}
+
+function viewProblemas() {
+  const rows = D.problemas;
+  document.getElementById("main").innerHTML = `
+    <div class="view-head"><div class="eyebrow">Qualidade dos dados</div><h2>Problemas registrados na leitura</h2>
+      <p>Rupturas de esquema, versionamento e cobertura encontrados ao ler os arquivos (<code>docs/problemas.csv</code>). Um item “aberto” é uma decisão pendente, não um erro do código.</p></div>
+    <div class="tbl-wrap"><table><thead><tr><th>ID</th><th>Tipo</th><th>Objeto</th><th>Descrição</th><th>Impacto</th><th>Status</th></tr></thead><tbody>
+      ${rows.map(r => `<tr><td class="mono">${esc(r.id)}</td><td><span class="chip">${esc(r.tipo)}</span></td><td class="desc mono" style="font-size:.78rem">${esc(r.objeto_afetado)}</td><td class="desc" style="min-width:36ch">${esc(r.descricao)}</td><td class="desc" style="min-width:28ch">${esc(r.impacto)}</td><td><span class="status ${esc(r.status)}">${esc(r.status)}</span></td></tr>`).join("")}
+    </tbody></table></div>`;
+}
+
+function viewExtraidos() {
+  const rows = D.extraidos;
+  const tipos = [...new Set(rows.map(r => r.tipo))].sort((a,b) => ordemTipo.indexOf(a) - ordemTipo.indexOf(b));
+  const mb = rows.reduce((s, r) => s + Number(r.tamanho_mb || 0), 0);
+  const cel = (tipo, nivel, ano) => { const r = rows.find(x => x.tipo === tipo && x.nivel === nivel && x.ano === ano); return r ? `<span class="dot ${r.md5_confere === "False" ? "rrf" : "on"}" title="${esc(r.arquivo)}${r.md5_confere === "False" ? " · md5 não confere (P007)" : r.md5_confere === "" ? " · sem md5 oficial (P008)" : ""}">${ano}</span>` : `<span class="dot" title="${tipo} ${nivel} ${ano} · não baixado">${ano}</span>`; };
+  document.getElementById("main").innerHTML = `
+    <div class="view-head"><div class="eyebrow">Indicadores INEP · dados/interim/brutos_inep_extraido/</div><h2>Relação dos arquivos extraídos</h2>
+      <p>Planilhas <code>.xlsx</code> extraídas dos <code>.zip</code> de <code>dados/bruto/brutos-inep/</code> por <code>src/extrair_brutos_inep.py</code>, organizadas em <code>{tipo}/{ano}/</code>. O md5 de cada uma foi conferido contra o <code>md5_*.txt</code> do próprio INEP.</p></div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Planilhas extraídas</div><div class="v">${num(rows.length)}</div></div>
+      <div class="tile"><div class="k">Tamanho no disco</div><div class="v">${mb.toLocaleString("pt-BR",{maximumFractionDigits:0})}<small>MB</small></div></div>
+      <div class="tile"><div class="k">md5 confere</div><div class="v">${num(rows.filter(r => r.md5_confere === "True").length)}</div></div>
+      <div class="tile"><div class="k">md5 não confere / sem md5</div><div class="v">${num(rows.filter(r => r.md5_confere === "False").length)}<small>/ ${num(rows.filter(r => r.md5_confere === "").length)}</small></div></div>
+    </div>
+    <div class="legend"><span><span class="dot on"></span>extraído, md5 ok</span><span><span class="dot rrf"></span>extraído, md5 não confere</span><span><span class="dot"></span>não baixado</span></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Indicador</th><th>Nível</th><th>Anos 2019 → 2025</th></tr></thead><tbody>
+      ${tipos.flatMap(tipo => ordemNivel.filter(n => rows.some(r => r.tipo === tipo && r.nivel === n)).map(nivel => `<tr><td class="var">${esc(tipo)}</td><td>${esc(NOME_NIVEL[nivel])}</td><td><span class="dots">${ANOS.map(a => cel(tipo, nivel, a)).join("")}</span></td></tr>`)).join("")}
+    </tbody></table></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Indicador</th><th class="num">Ano</th><th>Nível</th><th>Arquivo extraído</th><th class="num">MB</th><th>md5</th><th>Zip de origem</th></tr></thead><tbody>
+      ${rows.map(r => `<tr><td class="var">${esc(r.tipo)}</td><td class="num">${r.ano}</td><td>${esc(NOME_NIVEL[r.nivel])}</td><td class="mono" style="font-size:.78rem">${esc(r.arquivo)}</td><td class="num">${Number(r.tamanho_mb).toLocaleString("pt-BR",{minimumFractionDigits:1})}</td>
+        <td>${r.md5_confere === "True" ? '<span class="status resolvido">confere</span>' : r.md5_confere === "False" ? '<span class="status aberto">não confere</span>' : '<span class="status informativo">sem md5</span>'}</td><td class="mono" style="font-size:.78rem">${esc(r.zip_original)}</td></tr>`).join("")}
+    </tbody></table></div>`;
+}
+
+function mediana(xs) { const s = [...xs].sort((a,b) => a-b); const m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : (s[m-1]+s[m])/2) : 0; }
+
+function render() {
+  renderNav();
+  const v = views.find(x => x.id === atual);
+  if (v.kind === "micro") viewMicro(v);
+  else if (v.kind === "consolidado") viewConsolidado();
+  else if (v.kind === "ind") viewInd(v);
+  else if (v.kind === "problemas") viewProblemas();
+  else if (v.kind === "extraidos") viewExtraidos();
+  else document.getElementById("main").innerHTML = `<div class="empty">Rode <code>python -m src.indicadores_inep</code> e depois <code>python -m src.relatorio_catalogo</code>.</div>`;
+  window.scrollTo({ top: 0 });
+}
+render();
+</script>
