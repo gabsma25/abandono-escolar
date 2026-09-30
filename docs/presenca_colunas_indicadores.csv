@@ -85,89 +85,90 @@ ATU,municipios,MED_02_CAT_0,Média de Alunos por Turma / Etapas de Ensino › En
 ATU,municipios,MED_03_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 3ª série,27,27,27,27,27,27,,6
 ATU,municipios,MED_04_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › 4ª série,28,28,28,28,28,28,,6
 ATU,municipios,MED_NS_CAT_0,Média de Alunos por Turma / Etapas de Ensino › Ensino Médio › Não-Seriado,29,29,29,29,29,29,,6
-HAD,brasil_regioes_ufs,NU_ANO_CENSO,Ano,,,,,,,1,1
-HAD,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,,,,,,,2,1
-HAD,brasil_regioes_ufs,NO_CATEGORIA,Localização,,,,,,,3,1
-HAD,brasil_regioes_ufs,NO_DEPENDENCIA,Dependência Administrativa,,,,,,,4,1
-HAD,brasil_regioes_ufs,ED_INF_CAT_0,Educação Infantil › Total,,,,,,,5,1
-HAD,brasil_regioes_ufs,CRE_CAT_0,Educação Infantil › Creche,,,,,,,6,1
-HAD,brasil_regioes_ufs,PRE_CAT_0,Educação Infantil › Pré-Escola,,,,,,,7,1
-HAD,brasil_regioes_ufs,FUN_CAT_0,Ensino Fundamental › Total,,,,,,,8,1
-HAD,brasil_regioes_ufs,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,,,,,,,9,1
-HAD,brasil_regioes_ufs,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,,,,,,,10,1
-HAD,brasil_regioes_ufs,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,,,,,,,11,1
-HAD,brasil_regioes_ufs,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,,,,,,,12,1
-HAD,brasil_regioes_ufs,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,,,,,,,13,1
-HAD,brasil_regioes_ufs,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,,,,,,,14,1
-HAD,brasil_regioes_ufs,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,,,,,,,15,1
-HAD,brasil_regioes_ufs,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,,,,,,,16,1
-HAD,brasil_regioes_ufs,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,,,,,,,17,1
-HAD,brasil_regioes_ufs,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,,,,,,,18,1
-HAD,brasil_regioes_ufs,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,,,,,,,19,1
-HAD,brasil_regioes_ufs,MED_CAT_0,Ensino Médio › Total,,,,,,,20,1
-HAD,brasil_regioes_ufs,MED_01_CAT_0,Ensino Médio › 1ª Série,,,,,,,21,1
-HAD,brasil_regioes_ufs,MED_02_CAT_0,Ensino Médio › 2ª Série,,,,,,,22,1
-HAD,brasil_regioes_ufs,MED_03_CAT_0,Ensino Médio › 3ª Série,,,,,,,23,1
-HAD,brasil_regioes_ufs,MED_04_CAT_0,Ensino Médio › 4ª Série,,,,,,,24,1
-HAD,brasil_regioes_ufs,MED_NS_CAT_0,Ensino Médio › Não-Seriado,,,,,,,25,1
-HAD,escolas,NU_ANO_CENSO,Ano,,,,,,,1,1
-HAD,escolas,NO_REGIAO,Região,,,,,,,2,1
-HAD,escolas,SG_UF,UF,,,,,,,3,1
-HAD,escolas,CO_MUNICIPIO,Código do Município,,,,,,,4,1
-HAD,escolas,NO_MUNICIPIO,Nome do Município,,,,,,,5,1
-HAD,escolas,CO_ENTIDADE,Código da Escola,,,,,,,6,1
-HAD,escolas,NO_ENTIDADE,Nome da Escola,,,,,,,7,1
-HAD,escolas,NO_CATEGORIA,Localização,,,,,,,8,1
-HAD,escolas,NO_DEPENDENCIA,Dependência Administrativa,,,,,,,9,1
-HAD,escolas,ED_INF_CAT_0,Educação Infantil › Total,,,,,,,10,1
-HAD,escolas,CRE_CAT_0,Educação Infantil › Creche,,,,,,,11,1
-HAD,escolas,PRE_CAT_0,Educação Infantil › Pré-Escola,,,,,,,12,1
-HAD,escolas,FUN_CAT_0,Ensino Fundamental › Total,,,,,,,13,1
-HAD,escolas,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,,,,,,,14,1
-HAD,escolas,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,,,,,,,15,1
-HAD,escolas,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,,,,,,,16,1
-HAD,escolas,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,,,,,,,17,1
-HAD,escolas,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,,,,,,,18,1
-HAD,escolas,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,,,,,,,19,1
-HAD,escolas,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,,,,,,,20,1
-HAD,escolas,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,,,,,,,21,1
-HAD,escolas,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,,,,,,,22,1
-HAD,escolas,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,,,,,,,23,1
-HAD,escolas,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,,,,,,,24,1
-HAD,escolas,MED_CAT_0,Ensino Médio › Total,,,,,,,25,1
-HAD,escolas,MED_01_CAT_0,Ensino Médio › 1ª Série,,,,,,,26,1
-HAD,escolas,MED_02_CAT_0,Ensino Médio › 2ª Série,,,,,,,27,1
-HAD,escolas,MED_03_CAT_0,Ensino Médio › 3ª Série,,,,,,,28,1
-HAD,escolas,MED_04_CAT_0,Ensino Médio › 4ª Série,,,,,,,29,1
-HAD,escolas,MED_NS_CAT_0,Ensino Médio › Não-Seriado,,,,,,,30,1
-HAD,municipios,NU_ANO_CENSO,Ano,,,,,,,1,1
-HAD,municipios,NO_REGIAO,Região,,,,,,,2,1
-HAD,municipios,SG_UF,Sigla da UF,,,,,,,3,1
-HAD,municipios,CO_MUNICIPIO,Código do Município,,,,,,,4,1
-HAD,municipios,NO_MUNICIPIO,Nome do Município,,,,,,,5,1
-HAD,municipios,NO_CATEGORIA,Localização,,,,,,,6,1
-HAD,municipios,NO_DEPENDENCIA,Dependência Administrativa,,,,,,,7,1
-HAD,municipios,ED_INF_CAT_0,Educação Infantil › Total,,,,,,,8,1
-HAD,municipios,CRE_CAT_0,Educação Infantil › Creche,,,,,,,9,1
-HAD,municipios,PRE_CAT_0,Educação Infantil › Pré-Escola,,,,,,,10,1
-HAD,municipios,FUN_CAT_0,Ensino Fundamental › Total,,,,,,,11,1
-HAD,municipios,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,,,,,,,12,1
-HAD,municipios,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,,,,,,,13,1
-HAD,municipios,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,,,,,,,14,1
-HAD,municipios,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,,,,,,,15,1
-HAD,municipios,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,,,,,,,16,1
-HAD,municipios,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,,,,,,,17,1
-HAD,municipios,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,,,,,,,18,1
-HAD,municipios,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,,,,,,,19,1
-HAD,municipios,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,,,,,,,20,1
-HAD,municipios,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,,,,,,,21,1
-HAD,municipios,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,,,,,,,22,1
-HAD,municipios,MED_CAT_0,Ensino Médio › Total,,,,,,,23,1
-HAD,municipios,MED_01_CAT_0,Ensino Médio › 1ª Série,,,,,,,24,1
-HAD,municipios,MED_02_CAT_0,Ensino Médio › 2ª Série,,,,,,,25,1
-HAD,municipios,MED_03_CAT_0,Ensino Médio › 3ª Série,,,,,,,26,1
-HAD,municipios,MED_04_CAT_0,Ensino Médio › 4ª Série,,,,,,,27,1
-HAD,municipios,MED_NS_CAT_01,Ensino Médio › Não-Seriado,,,,,,,28,1
+HAD,brasil_regioes_ufs,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+HAD,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,2,2,2,2,2,2,2,7
+HAD,brasil_regioes_ufs,NO_CATEGORIA,Localização,3,3,3,3,3,3,3,7
+HAD,brasil_regioes_ufs,NO_DEPENDENCIA,Dependência Administrativa,4,4,4,4,4,4,4,7
+HAD,brasil_regioes_ufs,ED_INF_CAT_0,Educação Infantil › Total,5,5,5,5,5,5,5,7
+HAD,brasil_regioes_ufs,CRE_CAT_0,Educação Infantil › Creche,6,6,6,6,6,6,6,7
+HAD,brasil_regioes_ufs,PRE_CAT_0,Educação Infantil › Pré-Escola,7,7,7,7,7,7,7,7
+HAD,brasil_regioes_ufs,FUN_CAT_0,Ensino Fundamental › Total,8,8,8,8,8,8,8,7
+HAD,brasil_regioes_ufs,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,9,9,9,9,9,9,9,7
+HAD,brasil_regioes_ufs,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,10,10,10,10,10,10,10,7
+HAD,brasil_regioes_ufs,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,11,11,11,11,11,11,11,7
+HAD,brasil_regioes_ufs,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,12,12,12,12,12,12,12,7
+HAD,brasil_regioes_ufs,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,13,13,13,13,13,13,13,7
+HAD,brasil_regioes_ufs,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,14,14,14,14,14,14,14,7
+HAD,brasil_regioes_ufs,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,15,15,15,15,15,15,15,7
+HAD,brasil_regioes_ufs,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,16,16,16,16,16,16,16,7
+HAD,brasil_regioes_ufs,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,17,17,17,17,17,17,17,7
+HAD,brasil_regioes_ufs,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,18,18,18,18,18,18,18,7
+HAD,brasil_regioes_ufs,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,19,19,19,19,19,19,19,7
+HAD,brasil_regioes_ufs,MED_CAT_0,Ensino Médio › Total,20,20,20,20,20,20,20,7
+HAD,brasil_regioes_ufs,MED_01_CAT_0,Ensino Médio › 1ª Série,21,21,21,21,21,21,21,7
+HAD,brasil_regioes_ufs,MED_02_CAT_0,Ensino Médio › 2ª Série,22,22,22,22,22,22,22,7
+HAD,brasil_regioes_ufs,MED_03_CAT_0,Ensino Médio › 3ª Série,23,23,23,23,23,23,23,7
+HAD,brasil_regioes_ufs,MED_04_CAT_0,Ensino Médio › 4ª Série,24,24,24,24,24,24,24,7
+HAD,brasil_regioes_ufs,MED_NS_CAT_0,Ensino Médio › Não-Seriado,25,25,25,25,25,25,25,7
+HAD,escolas,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+HAD,escolas,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+HAD,escolas,SG_UF,UF,3,3,3,3,3,3,3,7
+HAD,escolas,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+HAD,escolas,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+HAD,escolas,CO_ENTIDADE,Código da Escola,6,6,6,6,6,6,6,7
+HAD,escolas,NO_ENTIDADE,Nome da Escola,7,7,7,7,7,7,7,7
+HAD,escolas,NO_CATEGORIA,Localização,8,8,8,8,8,8,8,7
+HAD,escolas,NO_DEPENDENCIA,Dependência Administrativa,9,9,9,9,9,9,9,7
+HAD,escolas,ED_INF_CAT_0,Educação Infantil › Total,10,10,10,10,10,10,10,7
+HAD,escolas,CRE_CAT_0,Educação Infantil › Creche,11,11,11,11,11,11,11,7
+HAD,escolas,PRE_CAT_0,Educação Infantil › Pré-Escola,12,12,12,12,12,12,12,7
+HAD,escolas,FUN_CAT_0,Ensino Fundamental › Total,13,13,13,13,13,13,13,7
+HAD,escolas,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,14,14,14,14,14,14,14,7
+HAD,escolas,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,15,15,15,15,15,15,15,7
+HAD,escolas,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,16,16,16,16,16,16,16,7
+HAD,escolas,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,17,17,17,17,17,17,17,7
+HAD,escolas,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,18,18,18,18,18,18,18,7
+HAD,escolas,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,19,19,19,19,19,19,19,7
+HAD,escolas,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,20,20,20,20,20,20,20,7
+HAD,escolas,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,21,21,21,21,21,21,21,7
+HAD,escolas,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,22,22,22,22,22,22,22,7
+HAD,escolas,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,23,23,23,23,23,23,23,7
+HAD,escolas,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,24,24,24,24,24,24,24,7
+HAD,escolas,MED_CAT_0,Ensino Médio › Total,25,25,25,25,25,25,25,7
+HAD,escolas,MED_01_CAT_0,Ensino Médio › 1ª Série,26,26,26,26,26,26,26,7
+HAD,escolas,MED_02_CAT_0,Ensino Médio › 2ª Série,27,27,27,27,27,27,27,7
+HAD,escolas,MED_03_CAT_0,Ensino Médio › 3ª Série,28,28,28,28,28,28,28,7
+HAD,escolas,MED_04_CAT_0,Ensino Médio › 4ª Série,29,29,29,29,29,29,29,7
+HAD,escolas,MED_NS_CAT_0,Ensino Médio › Não-Seriado,30,30,30,30,30,30,30,7
+HAD,municipios,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+HAD,municipios,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+HAD,municipios,SG_UF,Sigla da UF,3,3,3,3,3,3,3,7
+HAD,municipios,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+HAD,municipios,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+HAD,municipios,NO_CATEGORIA,Localização,6,6,6,6,6,6,6,7
+HAD,municipios,NO_DEPENDENCIA,Dependência Administrativa,7,7,7,7,7,7,7,7
+HAD,municipios,ED_INF_CAT_0,Educação Infantil › Total,8,8,8,8,8,8,8,7
+HAD,municipios,CRE_CAT_0,Educação Infantil › Creche,9,9,9,9,9,9,9,7
+HAD,municipios,PRE_CAT_0,Educação Infantil › Pré-Escola,10,10,10,10,10,10,10,7
+HAD,municipios,FUN_CAT_0,Ensino Fundamental › Total,11,11,11,11,11,11,11,7
+HAD,municipios,FUN_AI_CAT_0,Ensino Fundamental › Anos Iniciais,12,12,12,12,12,12,12,7
+HAD,municipios,FUN_AF_CAT_0,Ensino Fundamental › Anos Finais,13,13,13,13,13,13,13,7
+HAD,municipios,FUN_01_CAT_0,Ensino Fundamental › 1º Ano,14,14,14,14,14,14,14,7
+HAD,municipios,FUN_02_CAT_0,Ensino Fundamental › 2º Ano,15,15,15,15,15,15,15,7
+HAD,municipios,FUN_03_CAT_0,Ensino Fundamental › 3º Ano,16,16,16,16,16,16,16,7
+HAD,municipios,FUN_04_CAT_0,Ensino Fundamental › 4º Ano,17,17,17,17,17,17,17,7
+HAD,municipios,FUN_05_CAT_0,Ensino Fundamental › 5º Ano,18,18,18,18,18,18,18,7
+HAD,municipios,FUN_06_CAT_0,Ensino Fundamental › 6º Ano,19,19,19,19,19,19,19,7
+HAD,municipios,FUN_07_CAT_0,Ensino Fundamental › 7º Ano,20,20,20,20,20,20,20,7
+HAD,municipios,FUN_08_CAT_0,Ensino Fundamental › 8º Ano,21,21,21,21,21,21,21,7
+HAD,municipios,FUN_09_CAT_0,Ensino Fundamental › 9º Ano,22,22,22,22,22,22,22,7
+HAD,municipios,MED_CAT_0,Ensino Médio › Total,23,23,23,23,23,23,23,7
+HAD,municipios,MED_01_CAT_0,Ensino Médio › 1ª Série,24,24,24,24,24,24,24,7
+HAD,municipios,MED_02_CAT_0,Ensino Médio › 2ª Série,25,25,25,25,25,25,25,7
+HAD,municipios,MED_03_CAT_0,Ensino Médio › 3ª Série,26,26,26,26,26,26,26,7
+HAD,municipios,MED_04_CAT_0,Ensino Médio › 4ª Série,27,27,27,27,27,27,27,7
+HAD,municipios,MED_NS_CAT_0,Ensino Médio › Não-Seriado,28,,,,,,,1
+HAD,municipios,MED_NS_CAT_01,Ensino Médio › Não-Seriado,,28,28,28,28,28,28,6
 IED,brasil_regioes_ufs,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
 IED,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,2,2,2,2,2,2,2,7
 IED,brasil_regioes_ufs,NO_CATEGORIA,Localização,3,3,3,3,3,3,3,7
@@ -196,70 +197,70 @@ IED,brasil_regioes_ufs,MED_CAT_3,Percentual de docentes por nível de esforço3 
 IED,brasil_regioes_ufs,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,26,26,26,26,26,26,26,7
 IED,brasil_regioes_ufs,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,27,27,27,27,27,27,27,7
 IED,brasil_regioes_ufs,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,28,28,28,28,28,28,28,7
-IED,escolas,NU_ANO_CENSO,Ano,,,1,1,1,1,1,5
-IED,escolas,NO_REGIAO,Região,,,2,2,2,2,2,5
-IED,escolas,SG_UF,UF,,,3,3,3,3,3,5
-IED,escolas,CO_MUNICIPIO,Código do Município,,,4,4,4,4,4,5
-IED,escolas,NO_MUNICIPIO,Nome do Município,,,5,5,5,5,5,5
-IED,escolas,CO_ENTIDADE,Código da Escola,,,6,6,6,6,6,5
-IED,escolas,NO_ENTIDADE,Nome da Escola,,,7,7,7,7,7,5
-IED,escolas,NO_CATEGORIA,Localização,,,8,8,8,8,8,5
-IED,escolas,NO_DEPENDENCIA,Dependência Administrativa,,,9,9,9,9,9,5
-IED,escolas,FUN_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 1,,,10,10,10,10,10,5
-IED,escolas,FUN_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 2,,,11,11,11,11,11,5
-IED,escolas,FUN_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 3,,,12,12,12,12,12,5
-IED,escolas,FUN_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 4,,,13,13,13,13,13,5
-IED,escolas,FUN_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 5,,,14,14,14,14,14,5
-IED,escolas,FUN_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 6,,,15,15,15,15,15,5
-IED,escolas,FUN_AI_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 1,,,16,16,16,16,16,5
-IED,escolas,FUN_AI_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 2,,,17,17,17,17,17,5
-IED,escolas,FUN_AI_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 3,,,18,18,18,18,18,5
-IED,escolas,FUN_AI_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 4,,,19,19,19,19,19,5
-IED,escolas,FUN_AI_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 5,,,20,20,20,20,20,5
-IED,escolas,FUN_AI_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 6,,,21,21,21,21,21,5
-IED,escolas,FUN_AF_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 1,,,22,22,22,22,22,5
-IED,escolas,FUN_AF_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 2,,,23,23,23,23,23,5
-IED,escolas,FUN_AF_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 3,,,24,24,24,24,24,5
-IED,escolas,FUN_AF_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 4,,,25,25,25,25,25,5
-IED,escolas,FUN_AF_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 5,,,26,26,26,26,26,5
-IED,escolas,FUN_AF_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 6,,,27,27,27,27,27,5
-IED,escolas,MED_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 1,,,28,28,28,28,28,5
-IED,escolas,MED_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 2,,,29,29,29,29,29,5
-IED,escolas,MED_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 3,,,30,30,30,30,30,5
-IED,escolas,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,,,31,31,31,31,31,5
-IED,escolas,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,,,32,32,32,32,32,5
-IED,escolas,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,,,33,33,33,33,33,5
-IED,municipios,NU_ANO_CENSO,Ano,,1,1,1,1,1,1,6
-IED,municipios,NO_REGIAO,Região,,2,2,2,2,2,2,6
-IED,municipios,SG_UF,Sigla,,3,3,3,3,3,3,6
-IED,municipios,CO_MUNICIPIO,Código do Município,,4,4,4,4,4,4,6
-IED,municipios,NO_MUNICIPIO,Nome do Município,,5,5,5,5,5,5,6
-IED,municipios,NO_CATEGORIA,Localização,,6,6,6,6,6,6,6
-IED,municipios,NO_DEPENDENCIA,Dependência Administrativa,,7,7,7,7,7,7,6
-IED,municipios,FUN_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 1,,8,8,8,8,8,8,6
-IED,municipios,FUN_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 2,,9,9,9,9,9,9,6
-IED,municipios,FUN_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 3,,10,10,10,10,10,10,6
-IED,municipios,FUN_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 4,,11,11,11,11,11,11,6
-IED,municipios,FUN_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 5,,12,12,12,12,12,12,6
-IED,municipios,FUN_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 6,,13,13,13,13,13,13,6
-IED,municipios,FUN_AI_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 1,,14,14,14,14,14,14,6
-IED,municipios,FUN_AI_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 2,,15,15,15,15,15,15,6
-IED,municipios,FUN_AI_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 3,,16,16,16,16,16,16,6
-IED,municipios,FUN_AI_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 4,,17,17,17,17,17,17,6
-IED,municipios,FUN_AI_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 5,,18,18,18,18,18,18,6
-IED,municipios,FUN_AI_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 6,,19,19,19,19,19,19,6
-IED,municipios,FUN_AF_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 1,,20,20,20,20,20,20,6
-IED,municipios,FUN_AF_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 2,,21,21,21,21,21,21,6
-IED,municipios,FUN_AF_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 3,,22,22,22,22,22,22,6
-IED,municipios,FUN_AF_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 4,,23,23,23,23,23,23,6
-IED,municipios,FUN_AF_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 5,,24,24,24,24,24,24,6
-IED,municipios,FUN_AF_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 6,,25,25,25,25,25,25,6
-IED,municipios,MED_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 1,,26,26,26,26,26,26,6
-IED,municipios,MED_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 2,,27,27,27,27,27,27,6
-IED,municipios,MED_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 3,,28,28,28,28,28,28,6
-IED,municipios,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,,29,29,29,29,29,29,6
-IED,municipios,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,,30,30,30,30,30,30,6
-IED,municipios,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,,31,31,31,31,31,31,6
+IED,escolas,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+IED,escolas,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+IED,escolas,SG_UF,UF,3,3,3,3,3,3,3,7
+IED,escolas,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+IED,escolas,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+IED,escolas,CO_ENTIDADE,Código da Escola,6,6,6,6,6,6,6,7
+IED,escolas,NO_ENTIDADE,Nome da Escola,7,7,7,7,7,7,7,7
+IED,escolas,NO_CATEGORIA,Localização,8,8,8,8,8,8,8,7
+IED,escolas,NO_DEPENDENCIA,Dependência Administrativa,9,9,9,9,9,9,9,7
+IED,escolas,FUN_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 1,10,10,10,10,10,10,10,7
+IED,escolas,FUN_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 2,11,11,11,11,11,11,11,7
+IED,escolas,FUN_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 3,12,12,12,12,12,12,12,7
+IED,escolas,FUN_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 4,13,13,13,13,13,13,13,7
+IED,escolas,FUN_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 5,14,14,14,14,14,14,14,7
+IED,escolas,FUN_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 6,15,15,15,15,15,15,15,7
+IED,escolas,FUN_AI_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 1,16,16,16,16,16,16,16,7
+IED,escolas,FUN_AI_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 2,17,17,17,17,17,17,17,7
+IED,escolas,FUN_AI_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 3,18,18,18,18,18,18,18,7
+IED,escolas,FUN_AI_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 4,19,19,19,19,19,19,19,7
+IED,escolas,FUN_AI_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 5,20,20,20,20,20,20,20,7
+IED,escolas,FUN_AI_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 6,21,21,21,21,21,21,21,7
+IED,escolas,FUN_AF_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 1,22,22,22,22,22,22,22,7
+IED,escolas,FUN_AF_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 2,23,23,23,23,23,23,23,7
+IED,escolas,FUN_AF_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 3,24,24,24,24,24,24,24,7
+IED,escolas,FUN_AF_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 4,25,25,25,25,25,25,25,7
+IED,escolas,FUN_AF_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 5,26,26,26,26,26,26,26,7
+IED,escolas,FUN_AF_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 6,27,27,27,27,27,27,27,7
+IED,escolas,MED_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 1,28,28,28,28,28,28,28,7
+IED,escolas,MED_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 2,29,29,29,29,29,29,29,7
+IED,escolas,MED_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 3,30,30,30,30,30,30,30,7
+IED,escolas,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,31,31,31,31,31,31,31,7
+IED,escolas,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,32,32,32,32,32,32,32,7
+IED,escolas,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,33,33,33,33,33,33,33,7
+IED,municipios,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
+IED,municipios,NO_REGIAO,Região,2,2,2,2,2,2,2,7
+IED,municipios,SG_UF,Sigla,3,3,3,3,3,3,3,7
+IED,municipios,CO_MUNICIPIO,Código do Município,4,4,4,4,4,4,4,7
+IED,municipios,NO_MUNICIPIO,Nome do Município,5,5,5,5,5,5,5,7
+IED,municipios,NO_CATEGORIA,Localização,6,6,6,6,6,6,6,7
+IED,municipios,NO_DEPENDENCIA,Dependência Administrativa,7,7,7,7,7,7,7,7
+IED,municipios,FUN_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 1,8,8,8,8,8,8,8,7
+IED,municipios,FUN_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 2,9,9,9,9,9,9,9,7
+IED,municipios,FUN_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 3,10,10,10,10,10,10,10,7
+IED,municipios,FUN_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 4,11,11,11,11,11,11,11,7
+IED,municipios,FUN_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 5,12,12,12,12,12,12,12,7
+IED,municipios,FUN_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Total › Nível 6,13,13,13,13,13,13,13,7
+IED,municipios,FUN_AI_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 1,14,14,14,14,14,14,14,7
+IED,municipios,FUN_AI_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 2,15,15,15,15,15,15,15,7
+IED,municipios,FUN_AI_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 3,16,16,16,16,16,16,16,7
+IED,municipios,FUN_AI_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 4,17,17,17,17,17,17,17,7
+IED,municipios,FUN_AI_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 5,18,18,18,18,18,18,18,7
+IED,municipios,FUN_AI_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Iniciais › Nível 6,19,19,19,19,19,19,19,7
+IED,municipios,FUN_AF_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 1,20,20,20,20,20,20,20,7
+IED,municipios,FUN_AF_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 2,21,21,21,21,21,21,21,7
+IED,municipios,FUN_AF_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 3,22,22,22,22,22,22,22,7
+IED,municipios,FUN_AF_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 4,23,23,23,23,23,23,23,7
+IED,municipios,FUN_AF_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 5,24,24,24,24,24,24,24,7
+IED,municipios,FUN_AF_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Fundamental › Anos Finais › Nível 6,25,25,25,25,25,25,25,7
+IED,municipios,MED_CAT_1,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 1,26,26,26,26,26,26,26,7
+IED,municipios,MED_CAT_2,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 2,27,27,27,27,27,27,27,7
+IED,municipios,MED_CAT_3,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 3,28,28,28,28,28,28,28,7
+IED,municipios,MED_CAT_4,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 4,29,29,29,29,29,29,29,7
+IED,municipios,MED_CAT_5,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 5,30,30,30,30,30,30,30,7
+IED,municipios,MED_CAT_6,Percentual de docentes por nível de esforço3 e etapa de ensino › Ensino Médio › Nível 6,31,31,31,31,31,31,31,7
 TDI,brasil_regioes_ufs,NU_ANO_CENSO,Ano,1,1,1,1,1,1,1,7
 TDI,brasil_regioes_ufs,UNIDGEO,Unidade Geográfica,2,2,2,2,2,2,2,7
 TDI,brasil_regioes_ufs,NO_CATEGORIA,Localização,3,3,3,3,3,3,3,7
