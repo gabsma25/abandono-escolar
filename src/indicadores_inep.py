@@ -75,7 +75,7 @@ def listar_extraidos() -> list[tuple[str, int, str, pathlib.Path]]:
     itens = []
     with manifesto.open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
-            if r["acao"] == "extraido" and r["arquivo_extraido"].lower().endswith(".xlsx"):
+            if r["acao"] == "extraido" and r["arquivo_extraido"].endswith(".xlsx"):
                 itens.append((r["tipo"], int(r["ano"]), r["nivel"], DADOS / r["arquivo_extraido"]))
     return sorted(itens)
 

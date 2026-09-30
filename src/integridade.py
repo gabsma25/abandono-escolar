@@ -104,8 +104,11 @@ def md5_do_zip(zf: zipfile.ZipFile) -> dict[str, str]:
     grafa '.csv' para '.CSV', '_v2' para '_V2', '.xlsX' para '.xlsx'."""
     esperados: dict[str, str] = {}
     for info in zf.infolist():
-        if pathlib.PurePosixPath(info.filename).suffix.lower() == ".txt":
+        if pathlib.PurePosixPath(info.filename).suffix == ".txt":
             for membro, md5 in ler_md5_txt(zf.read(info)).items():
+                # Caixa ignorada DE PROPÓSITO (CLAUDE.md §7): o .txt de md5 do INEP grafa o
+                # nome com outra caixa ('.csv' para '.CSV' em 2020, '_v2' para '_V2' em 2025,
+                # '.xlsX' em HAD municípios 2019–2021). O arquivo em si é localizado pelo nome exato.
                 esperados[membro.lower()] = md5
     return esperados
 

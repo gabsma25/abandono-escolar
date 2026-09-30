@@ -641,6 +641,11 @@ Bloqueiam a fase 2 (`filtros.py`):
   existem; hash divergente diz o arquivo, o esperado e o obtido — nunca
   `FileNotFoundError` cru.
 - Escrita em pasta imutável só por `src/integridade.py` (regra 1).
+- **Comparação de nome de arquivo do INEP é sensível a caixa por padrão.**
+  Ignorar caixa é decisão explícita, justificada e comentada no ponto onde
+  acontece (hoje só a busca do md5 no `.txt` do INEP, que grafa `.csv`/`.CSV`,
+  `_v2`/`_V2`, `.xlsX`). Os dois erros de levantamento de 2026-09-30 vieram de
+  comparar ignorando caixa sem decidir isso.
 - Escrita em Parquet como formato canônico (preserva tipos nullable), com cópia
   CSV `sep=";"` para conferência humana.
 - Sem `print` solto em `src/`; use `logging`. `print` só em notebook.

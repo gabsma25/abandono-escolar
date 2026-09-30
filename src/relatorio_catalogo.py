@@ -35,7 +35,7 @@ def relacao_extraidos() -> list[dict]:
     linhas = []
     with manifesto.open(encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
-            if r["acao"] != "extraido" or not r["arquivo_extraido"].lower().endswith(".xlsx"):
+            if r["acao"] != "extraido" or not r["arquivo_extraido"].endswith(".xlsx"):
                 continue
             arq = DADOS / r["arquivo_extraido"]
             linhas.append({

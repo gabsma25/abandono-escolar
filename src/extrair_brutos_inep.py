@@ -158,7 +158,7 @@ def extrair(
         logger.warning(
             "%d zip(s) não reconhecido(s): %s", len(nao_reconhecidos), nao_reconhecidos
         )
-    planilhas = [i for i in resultado if i.acao == "extraido" and i.membro.lower().endswith(".xlsx")]
+    planilhas = [i for i in resultado if i.acao == "extraido" and i.membro.endswith(".xlsx")]
     resumir_md5_desatualizado(
         {pathlib.PurePosixPath(i.membro).name for i in planilhas if i.md5_confere is False},
         {pathlib.PurePosixPath(i.membro).name for i in planilhas if i.md5_confere is not None},
@@ -177,13 +177,16 @@ def _extrair_membros(
 
         for info in membros:
             nome = pathlib.PurePosixPath(info.filename).name
-            acao = _ACAO_POR_EXTENSAO.get(pathlib.PurePosixPath(nome).suffix.lower(), "ignorado_lixo")
+            acao = _ACAO_POR_EXTENSAO.get(pathlib.PurePosixPath(nome).suffix, "ignorado_lixo")
             if nome.startswith(".~lock"):
                 acao = "ignorado_lixo"
 
             extraido: pathlib.Path | None = None
             md5_ok: bool | None = None
             status = ""
+            # Caixa ignorada DE PROPÓSITO (CLAUDE.md §7): o .txt de md5 do INEP grafa o
+            # nome com outra caixa ('.csv' para '.CSV' em 2020, '_v2' para '_V2' em 2025,
+            # '.xlsX' em HAD municípios 2019–2021). O arquivo em si é localizado pelo nome exato.
             md5_esp = md5_esperados.get(nome.lower())
             if acao == "extraido":
                 extraido = pasta / nome   # achatado: a pasta interna do zip repete tipo/ano
@@ -242,7 +245,7 @@ if __name__ == "__main__":
                     help="regrava arquivos já presentes em bruto/indicadores/ (CLAUDE.md §3, regra 1)")
     itens = extrair(sobrescrever=ap.parse_args().sobrescrever)
     relacao = escrever_extracao(itens)
-    n_xlsx = sum(1 for i in itens if i.acao == "extraido" and i.membro.lower().endswith(".xlsx"))
+    n_xlsx = sum(1 for i in itens if i.acao == "extraido" and i.membro.endswith(".xlsx"))
     n_md5_ok = sum(1 for i in itens if i.md5_confere is True)
     n_md5_falha = sum(1 for i in itens if i.md5_confere is False)
     n_dup = sum(1 for i in itens if i.acao == "duplicata_zip")

@@ -164,6 +164,9 @@ def extrair_membro(
         )
     with zipfile.ZipFile(zip_path) as zf:
         info = _localizar_membro(zf, membro, zip_path)
+        # Caixa ignorada DE PROPÓSITO (CLAUDE.md §7): o .txt de md5 do INEP grafa o
+        # nome com outra caixa ('.csv' para '.CSV' em 2020, '_v2' para '_V2' em 2025,
+        # '.xlsX' em HAD municípios 2019–2021). O arquivo em si é localizado pelo nome exato.
         ref = Referencia(sha_esperado, md5_do_zip(zf).get(membro.lower()), info.CRC)
         with zf.open(info) as fonte:
             status = gravar_conferido(fonte, destino, ref, sobrescrever=sobrescrever,
@@ -276,7 +279,7 @@ def _nome_do_link(href: str) -> str:
 
 def _links_zip(soup: BeautifulSoup) -> list:
     return [a for a in soup.find_all("a", href=True)
-            if urllib.parse.urlparse(a["href"]).path.lower().endswith(".zip")]
+            if urllib.parse.urlparse(a["href"]).path.endswith(".zip")]
 
 
 def parse_microdados(html: str, pagina: str = PAGINA_MICRODADOS) -> list[Link]:
@@ -467,7 +470,7 @@ def linhas_manifesto(caminho: pathlib.Path = MANIFEST) -> list[dict]:
 def _zips_de_origem(linhas: list[dict]) -> list[dict]:
     """Linhas de origem/ que são zips do INEP (a documentação sai de dentro deles)."""
     return [lin for lin in linhas
-            if lin["estagio"] == "origem" and lin["arquivo"].lower().endswith(".zip")]
+            if lin["estagio"] == "origem" and lin["arquivo"].endswith(".zip")]
 
 
 def copiar_local(fonte: pathlib.Path, destino: pathlib.Path, ref: Referencia,
