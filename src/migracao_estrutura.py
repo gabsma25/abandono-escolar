@@ -1,12 +1,12 @@
 """Migração única (2026-09-30) de dados/ para a estrutura por estágio.
 
     antes                                      depois
-    ~/Downloads, OneDrive/.../TCC  *.zip   →   dados/origem/censo/
-    dados/bruto/brutos-inep/*.zip          →   dados/origem/indicadores/
-    dados/bruto/doc-censo/*.pdf            →   dados/origem/doc/
-    dados/interim/brutos_inep_extraido/    →   dados/bruto/indicadores/
-    dados/Processados/                     →   dados/externo/base_longitudinal_v1/
-    (extraídos dos zips de censo)          →   dados/bruto/censo/
+    ~/Downloads, OneDrive/.../TCC  *.zip   ->   dados/origem/censo/
+    dados/bruto/brutos-inep/*.zip          ->   dados/origem/indicadores/
+    dados/bruto/doc-censo/*.pdf            ->   dados/origem/doc/
+    dados/interim/brutos_inep_extraido/    ->   dados/bruto/indicadores/
+    dados/Processados/                     ->   dados/externo/base_longitudinal_v1/
+    (extraídos dos zips de censo)          ->   dados/bruto/censo/
 
 Cada movimento confere o sha256 antes e depois; se o arquivo consta do
 manifesto, confere também contra ele. Qualquer divergência interrompe a
