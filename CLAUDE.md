@@ -93,10 +93,12 @@ por `python -m src.manifesto`.
 | `processado/` | saída final deste projeto | **vazia** |
 
 **O que ainda não existe:** `dados/processado/` está vazia;
-`src/base_longitudinal.py`, `src/bootstrap.py`, `src/filtros.py`,
+`src/base_longitudinal.py`, `src/filtros.py`,
 `src/agregacao.py`, o notebook 01, `docs/dicionario_anotado.csv`,
-`docs/desfechos.csv` e `docs/funil_contagem.csv` não existem. `src/aquisicao.py`
-tem só a camada de extração — descoberta e download estão por fazer.
+`docs/desfechos.csv` e `docs/funil_contagem.csv` não existem. O caminho de
+download de `src/aquisicao.py` está implementado e testado contra servidor
+falso, mas **nunca foi exercitado contra o INEP** (nesta máquina os zips vêm
+de `--origem-local`; decisão da pesquisadora, 2026-09-30).
 
 **Ausência deliberada, não erro:** dois arquivos que o INEP publica não estão
 no projeto — `ATU_2025_MUNICIPIOS.zip` (nível municípios) e
@@ -404,8 +406,9 @@ abandono-escolar/
 ├── src/
 │   ├── config.py               # caminhos por estágio, ARQUIVOS, caminho(), listas de colunas
 │   ├── integridade.py          # conferência de hash e escrita segura (regra 1)
-│   ├── aquisicao.py            # origem/censo → bruto/censo (extração); descoberta e download (a fazer)
-│   ├── bootstrap.py            # clone limpo → estado atual, na ordem certa (a fazer)
+│   ├── aquisicao.py            # descoberta, download/cópia local → origem/; extração → bruto/censo
+│   ├── fontes_inep.csv         # fallback estático: arquivo → URL (captura de 2026-09-30)
+│   ├── bootstrap.py            # clone limpo → estado atual, na ordem certa
 │   ├── migracao_estrutura.py   # migração única de 2026-09-30 (histórico, não roda de novo)
 │   ├── manifesto.py            # gera dados/MANIFEST.csv
 │   ├── extrair_brutos_inep.py  # origem/indicadores → bruto/indicadores, confere md5
@@ -422,7 +425,7 @@ abandono-escolar/
 │   └── fixtures/html/{AAAA-MM-DD}/ # 6 páginas do INEP (caminho = URL) + capturas.csv
 ├── pytest.ini
 ├── requirements.txt            # UTF-8
-├── README.md                   # (a fazer)
+├── README.md                   # para quem chega: o que é, bootstrap, fontes, limitações
 └── CLAUDE.md
 ```
 
@@ -431,7 +434,7 @@ Comandos que regeneram o que está em `docs/` e `dados/`, na ordem:
 ```
 python -m src.aquisicao                  # origem/censo → bruto/censo (+ origem/doc)
 python -m src.extrair_brutos_inep        # origem/indicadores → bruto/indicadores, docs/extracao_indicadores.csv
-python -m src.manifesto                  # dados/MANIFEST.csv
+python -m src.manifesto                  # dados/MANIFEST.csv — só quando o conjunto de dados muda de propósito
 python -m src.indicadores_inep           # docs/inventario_indicadores.csv, presenca_colunas_indicadores.csv
 python -m src.indicadores_rr             # dados/interim/indicadores_rr/{tipo}_{ano}.parquet
 python -m src.leitura                    # docs/inventario.csv, presenca_colunas_escola.csv
@@ -443,9 +446,13 @@ python -m pytest                         # testes
 
 `aquisicao`, `extrair_brutos_inep` e `indicadores_rr` pulam o que já existe
 e confere; `--sobrescrever` regrava. O inventário das planilhas
-(`indicadores_inep`) leva ~30–40 min (openpyxl `read_only`, ~1 min por
-planilha de escolas) — rode em segundo plano. `python -m src.bootstrap`
-(a fazer) encadeará tudo isso para um clone limpo.
+(`indicadores_inep`) leva ~20–40 min (openpyxl `read_only`, ~1 min por
+planilha de escolas) — rode em segundo plano. Num clone limpo, tudo isso é
+encadeado por `python -m src.bootstrap --origem-local DIR` (zips no disco) ou
+`--baixar` (rede; sem essa flag nenhuma requisição é feita);
+`--so-aquisicao` para depois da conferência contra o manifesto.
+`python -m src.aquisicao --descobrir-do-cache AAAA-MM-DD` reexamina uma
+captura de páginas sem nova raspagem e regrava `src/fontes_inep.csv`.
 
 Sempre `python -m src.<modulo>` a partir da raiz (os módulos importam
 `src.config`).
@@ -693,3 +700,8 @@ A fase atual se considera pronta quando:
 9. Um clone limpo, com os zips disponíveis em `dados/origem/` (ou baixáveis
    do INEP com o mesmo sha256 do manifesto), chega ao mesmo estado por
    `python -m src.bootstrap`, e `git status` em `docs/` fica limpo.
+   **Verificado em 2026-09-30 com `--origem-local`:** clone do commit
+   `973bab2`, 36 min, `git status` limpo, os 26 Parquets de
+   `interim/indicadores_rr/` idênticos byte a byte, base v1.0 ausente
+   tratada como aviso. O caminho `--baixar` só foi testado contra servidor
+   falso.
