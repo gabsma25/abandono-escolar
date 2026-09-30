@@ -1,5 +1,15 @@
-"""Gera dados/MANIFEST.csv: procedência de tudo que está em dados/origem/,
-dados/bruto/ e dados/externo/, com sha256 e data de download.
+"""Gera dados/MANIFEST.csv: sha256 de tudo que está em dados/origem/,
+dados/bruto/ e dados/externo/, e da base regerada em dados/processado/.
+
+Os estágios têm semânticas DIFERENTES para o mesmo hash:
+- origem/, bruto/, externo/: "este arquivo continua sendo o que recebemos" —
+  imutável (CLAUDE.md §3, regra 1); divergência é erro.
+- processado/: "esta execução produziu o mesmo resultado da anterior" —
+  regenerável por definição, a regra 1 não se aplica. Divergência não é
+  erro: é sinal de que a saída mudou, e aparece como diff do MANIFEST.csv no
+  git. Só funciona porque a geração é determinística (bibliotecas fixadas no
+  requirements.txt; verificado em 2026-09-30: duas execuções, mesmos bytes).
+  A coluna data_download, aqui, é a data de geração.
 
 Uma linha por arquivo, com o estágio (origem / bruto / externo) e quem o
 fornece (inep / orientador). Registrar os zips de origem/ permite validar um
@@ -20,6 +30,7 @@ import logging
 import pathlib
 
 from src.aquisicao import DOCUMENTACAO, MICRODADOS_ZIP
+from src.base_longitudinal import SAIDA as BASE_REGERADA
 from src.config import (
     ARQUIVOS,
     BASE_LONGITUDINAL_V1,
@@ -82,6 +93,10 @@ def _itens() -> list[Item]:
         ("externo", "orientador", "", "base_longitudinal_v1", p)
         for p in sorted(BASE_LONGITUDINAL_V1.glob("*")) if p.is_file()
     ]
+    itens += [
+        ("processado", "projeto", "", "base_longitudinal", p)
+        for p in (BASE_REGERADA, BASE_REGERADA.with_suffix(".csv"))
+    ]
     return itens
 
 
@@ -98,9 +113,8 @@ def gerar(caminho_manifest: pathlib.Path = MANIFEST) -> pathlib.Path:
     for estagio, origem, ano, tabela, p in _itens():
         if not p.exists():
             raise FileNotFoundError(f"Arquivo esperado em dados/{estagio}/ não existe: {p}")
-        data = anteriores.get(p.name) or dt.datetime.fromtimestamp(
-            p.stat().st_mtime, tz=dt.timezone.utc
-        ).date().isoformat()
+        gerado_em = dt.datetime.fromtimestamp(p.stat().st_mtime, tz=dt.timezone.utc).date().isoformat()
+        data = gerado_em if estagio == "processado" else (anteriores.get(p.name) or gerado_em)
         rel = p.relative_to(DADOS).as_posix()
         logger.info("sha256 %s", rel)
         linhas.append([estagio, origem, ano, tabela, rel, sha256_arquivo(p), data])

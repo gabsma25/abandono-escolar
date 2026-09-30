@@ -597,19 +597,33 @@ def adquirir(
 def verificar_manifesto(manifesto: pathlib.Path = MANIFEST, raiz: pathlib.Path = DADOS
                         ) -> tuple[list[str], list[str]]:
     """Confere cada linha do manifesto no disco → (erros, avisos).
-    Ausência em externo/ é aviso (dado de terceiro, CLAUDE.md §2.3); em
-    origem/ ou bruto/, erro. Hash divergente é sempre erro."""
+
+    origem/ e bruto/: ausência ou hash divergente é erro (regra 1).
+    externo/: ausência é aviso (dado de terceiro, CLAUDE.md §2.3); hash
+    divergente é erro. processado/: regenerável — ausência e divergência são
+    avisos; divergência quer dizer "a saída mudou", não "o dado foi violado"."""
     erros, avisos = [], []
     for lin in linhas_manifesto(manifesto):
-        p = raiz / lin["arquivo"]
+        p, estagio = raiz / lin["arquivo"], lin["estagio"]
         if not p.exists():
-            msg = f"falta {lin['arquivo']}"
-            (avisos if lin["estagio"] == "externo" else erros).append(msg)
-        elif sha256_arquivo(p) != lin["sha256"]:
-            erros.append(f"sha256 diverge em {lin['arquivo']}: esperado {lin['sha256']}, "
-                         f"obtido {sha256_arquivo(p)}")
+            if estagio == "externo":
+                avisos.append(f"falta {lin['arquivo']} (dado externo, entregue pelo orientador; "
+                              f"não obtenível do INEP)")
+            elif estagio == "processado":
+                avisos.append(f"falta {lin['arquivo']} (regenerável: python -m src.base_longitudinal)")
+            else:
+                erros.append(f"falta {lin['arquivo']}")
+            continue
+        obtido = sha256_arquivo(p)
+        if obtido == lin["sha256"]:
+            continue
+        msg = f"sha256 diverge em {lin['arquivo']}: esperado {lin['sha256']}, obtido {obtido}"
+        if estagio == "processado":
+            avisos.append(msg + " — a saída regerada mudou em relação à registrada")
+        else:
+            erros.append(msg)
     for a in avisos:
-        logger.warning("Manifesto: %s (dado externo, entregue pelo orientador; não obtenível do INEP)", a)
+        logger.warning("Manifesto: %s", a)
     for e in erros:
         logger.error("Manifesto: %s", e)
     return erros, avisos

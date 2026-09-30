@@ -194,7 +194,7 @@ def test_verificar_manifesto_externo_ausente_e_aviso(tmp_path):
     (raiz / "origem" / "indicadores").mkdir(parents=True)
     (raiz / "origem" / "indicadores" / "X.zip").write_bytes(CONTEUDO)
     erros, avisos = verificar_manifesto(m, raiz)
-    assert erros == [] and avisos == ["falta externo/base_longitudinal_v1/base.csv"]
+    assert erros == [] and len(avisos) == 1 and avisos[0].startswith("falta externo/base_longitudinal_v1/base.csv")
 
     (raiz / "origem" / "indicadores" / "X.zip").write_bytes(b"adulterado")
     erros, _ = verificar_manifesto(m, raiz)
