@@ -14,6 +14,7 @@ Regras aplicadas na leitura (CLAUDE.md §3):
 """
 from __future__ import annotations
 
+import argparse
 import logging
 import pathlib
 
@@ -115,5 +116,8 @@ def gravar_todos(destino: pathlib.Path = INDICADORES_RR, sobrescrever: bool = Fa
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
-    for p in gravar_todos():
+    ap = argparse.ArgumentParser(description="Recorte de RR das planilhas de escolas → Parquet.")
+    ap.add_argument("--sobrescrever", action="store_true",
+                    help="regrava os Parquets já presentes em dados/interim/indicadores_rr/")
+    for p in gravar_todos(sobrescrever=ap.parse_args().sobrescrever):
         logger.info("Gravado %s", p)
