@@ -44,16 +44,17 @@ ESPACO_MB = {
     "bruto/ (extraído)": 3046,
     "interim/, docs/catalogo_variaveis.html": 4,
 }
-# Tempo aproximado por etapa, medido em 2026-09-30 num notebook com SSD.
+# Tempo por etapa, arredondado para cima, do bootstrap num clone limpo em
+# 2026-09-30 (notebook com SSD, zips por --origem-local; total medido: 36 min).
 # O download depende da conexão: 2,9 GB a 10 Mbit/s ≈ 40 min.
 MINUTOS = {
-    "aquisicao": 2,
-    "extracao": 3,
-    "conferencia": 2,
+    "aquisicao": 1,
+    "extracao": 1,
+    "conferencia": 1,
     "inventario_microdados": 1,
-    "catalogo_microdados": 2,
-    "inventario_indicadores": 40,
-    "recorte_rr": 25,
+    "catalogo_microdados": 1,
+    "inventario_indicadores": 23,
+    "recorte_rr": 13,
     "analise_base_v1": 1,
     "catalogo_html": 1,
 }
