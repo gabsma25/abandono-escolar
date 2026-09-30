@@ -1,0 +1,2 @@
+# Páginas do INEP capturadas: bytes exatos (o sha256 está em capturas.csv).
+tests/fixtures/** -text
