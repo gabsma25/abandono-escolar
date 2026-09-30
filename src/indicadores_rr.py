@@ -1,6 +1,6 @@
 """Recorte de Roraima das planilhas de indicadores do INEP no nível escola.
 
-Lê cada planilha extraída (dados/interim/brutos_inep_extraido/{tipo}/{ano}/)
+Lê cada planilha extraída (dados/bruto/indicadores/{tipo}/{ano}/)
 em modo read_only, detecta a linha de nomes técnicos do mesmo modo que
 src/indicadores_inep.py, mantém só as linhas com SG_UF == 'RR' e grava um
 Parquet por (tipo, ano) em dados/interim/indicadores_rr/{tipo}_{ano}.parquet

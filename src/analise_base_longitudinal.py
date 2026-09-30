@@ -1,5 +1,5 @@
 """Análise descritiva da base longitudinal v1.0 do orientador
-(dados/Processados/base_longitudinal_abandono_rr_2019_2025.csv).
+(dados/externo/base_longitudinal_v1/base_longitudinal_abandono_rr_2019_2025.csv).
 
 Gera em docs/ as tabelas citadas em docs/metodologia_variaveis.md:
 - desfechos_distribuicao.csv   — por etapa × ano: n, média, mediana, p75, p90,
@@ -22,11 +22,11 @@ import pathlib
 
 import pandas as pd
 
-from src.config import DOCS, RAIZ
+from src.config import BASE_LONGITUDINAL_V1, DOCS
 
 logger = logging.getLogger(__name__)
 
-BASE_ORIENTADOR = RAIZ / "dados" / "Processados" / "base_longitudinal_abandono_rr_2019_2025.csv"
+BASE_ORIENTADOR = BASE_LONGITUDINAL_V1 / "base_longitudinal_abandono_rr_2019_2025.csv"
 DESFECHOS = {"AF": "ABANDONO_FUN_AF", "EM": "ABANDONO_MED"}
 
 
@@ -34,7 +34,9 @@ def carregar_base(caminho: pathlib.Path = BASE_ORIENTADOR) -> pd.DataFrame:
     if not caminho.exists():
         raise FileNotFoundError(
             f"Base do orientador não encontrada em {caminho}.\n"
-            f"Ela é entregue pronta (dados/Processados/), não é gerada por este projeto ainda."
+            f"Ela é dado externo, entregue pelo orientador (dados/externo/base_longitudinal_v1/),\n"
+            f"não é obtenível do INEP nem gerada por este projeto ainda; o sha256 esperado está\n"
+            f"em dados/MANIFEST.csv (estagio=externo)."
         )
     return pd.read_csv(caminho, encoding="utf-8-sig", dtype={"CO_ENTIDADE": "string", "CO_MUNICIPIO": "string"})
 

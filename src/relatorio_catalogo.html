@@ -316,8 +316,8 @@ function viewExtraidos() {
   const mb = rows.reduce((s, r) => s + Number(r.tamanho_mb || 0), 0);
   const cel = (tipo, nivel, ano) => { const r = rows.find(x => x.tipo === tipo && x.nivel === nivel && x.ano === ano); return r ? `<span class="dot ${r.md5_confere === "False" ? "rrf" : "on"}" title="${esc(r.arquivo)}${r.md5_confere === "False" ? " · md5 não confere (P007)" : r.md5_confere === "" ? " · sem md5 oficial (P008)" : ""}">${ano}</span>` : `<span class="dot" title="${tipo} ${nivel} ${ano} · não baixado">${ano}</span>`; };
   document.getElementById("main").innerHTML = `
-    <div class="view-head"><div class="eyebrow">Indicadores INEP · dados/interim/brutos_inep_extraido/</div><h2>Relação dos arquivos extraídos</h2>
-      <p>Planilhas <code>.xlsx</code> extraídas dos <code>.zip</code> de <code>dados/bruto/brutos-inep/</code> por <code>src/extrair_brutos_inep.py</code>, organizadas em <code>{tipo}/{ano}/</code>. O md5 de cada uma foi conferido contra o <code>md5_*.txt</code> do próprio INEP.</p></div>
+    <div class="view-head"><div class="eyebrow">Indicadores INEP · dados/bruto/indicadores/</div><h2>Relação dos arquivos extraídos</h2>
+      <p>Planilhas <code>.xlsx</code> extraídas dos <code>.zip</code> de <code>dados/origem/indicadores/</code> por <code>src/extrair_brutos_inep.py</code>, organizadas em <code>{tipo}/{ano}/</code>. O md5 de cada uma foi conferido contra o <code>md5_*.txt</code> do próprio INEP.</p></div>
     <div class="tiles">
       <div class="tile"><div class="k">Planilhas extraídas</div><div class="v">${num(rows.length)}</div></div>
       <div class="tile"><div class="k">Tamanho no disco</div><div class="v">${mb.toLocaleString("pt-BR",{maximumFractionDigits:0})}<small>MB</small></div></div>

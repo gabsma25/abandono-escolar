@@ -1,5 +1,5 @@
 """Localização e perfil das planilhas de indicadores do INEP já extraídas por
-src/extrair_brutos_inep.py em dados/interim/brutos_inep_extraido/{tipo}/{ano}/.
+src/extrair_brutos_inep.py em dados/bruto/indicadores/{tipo}/{ano}/.
 
 Layout observado em todas as planilhas (uma aba por arquivo): linhas de título
 e cabeçalho humano no topo, depois UMA linha com os nomes técnicos das colunas
@@ -55,7 +55,7 @@ def caminho_indicador(tipo: str, ano: int, nivel: str) -> pathlib.Path:
         )
         raise FileNotFoundError(
             f"Indicador ({tipo!r}, {ano}, {nivel!r}) não está extraído em {p}.\n"
-            f"Se o .zip existe em dados/bruto/brutos-inep/, rode "
+            f"Se o .zip existe em dados/origem/indicadores/, rode "
             f"`python -m src.extrair_brutos_inep`; senão, baixar arquivo novo é "
             f"decisão da pesquisadora (CLAUDE.md §6).\n"
             f"Arquivos de {tipo} disponíveis: {existentes}"
