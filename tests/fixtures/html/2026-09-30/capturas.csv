@@ -1,0 +1,7 @@
+arquivo,url,data_captura,sha256,bytes
+indicadores-educacionais.html,https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais,2026-09-30,1901597cd14c07e2f51d032d215a7fb7e359d0b978068411afe935c3aa962985,229419
+indicadores-educacionais/esforco-docente.html,https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/esforco-docente,2026-09-30,9972e841c563224cefbde61027283f9a487d8f1e461288124112e7985319100a,219615
+indicadores-educacionais/taxas-de-rendimento-escolar.html,https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-rendimento-escolar,2026-09-30,ee567c514f48e37c93ce7264c6d20039f5aa67aa52daf6b7284ff454f0143adb,223570
+indicadores-educacionais/taxas-de-rendimento-escolar/2021.html,https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-rendimento-escolar/2021,2026-09-30,302e2099a821231353f74e738a534a758f95caaccf73ffdfb4c59eef4f1522b7,210495
+indicadores-educacionais/taxas-de-rendimento-escolar/2024.html,https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-rendimento-escolar/2024,2026-09-30,c89b32215f2285bd1c3e08994881a9833b17628f7d80997b8387d8ec09e0b090,210402
+microdados/censo-escolar.html,https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar,2026-09-30,64b430a5e5189ad01c02301eec0290dab23e012d854dfc86eaee9d64b2f39ef7,219952

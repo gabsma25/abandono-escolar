@@ -202,10 +202,25 @@ def gravar_conferido(
     with parcial.open("wb") as dst:
         for bloco in iter(lambda: fonte.read(1 << 20), b""):
             dst.write(bloco)
-    d = digestos(parcial)
+    d = promover(parcial, destino, ref, descricao=descricao)
+    return Resultado("sobrescrito" if existe else "extraido", d)
+
+
+def promover(
+    temporario: pathlib.Path, destino: pathlib.Path, ref: Referencia, *, descricao: str = "",
+) -> Digestos:
+    """Confere `temporario` contra `ref` e o renomeia para `destino`.
+
+    É o último passo de toda escrita em pasta imutável: extração de zip
+    (gravar_conferido), download e cópia de origem local (src/aquisicao.py).
+    Se não confere, `temporario` vai para cache_download/divergente/ e nada
+    chega a `destino`. `temporario` e `destino` precisam estar no mesmo
+    volume (ambos sob dados/), para o renomear ser atômico.
+    """
+    d = digestos(temporario)
     erros, avisos = _divergencias(d, ref, destino.name)
     if erros:
-        alvo = _para_divergente(parcial, destino.name, d)
+        alvo = _para_divergente(temporario, destino.name, d)
         raise ErroIntegridade(
             f"{destino.name}{' (' + descricao + ')' if descricao else ''} não confere; "
             f"guardado em {alvo}, fora das pastas imutáveis.\n" + "\n".join(erros)
@@ -214,8 +229,9 @@ def gravar_conferido(
         logger.warning("%s: %s", destino.name, a)
     if ref.sha256_manifesto is None and ref.md5_inep is None and ref.crc32_zip is None:
         logger.warning("%s sem nenhum hash de referência; gravado sem conferência.", destino.name)
-    os.replace(parcial, destino)
-    return Resultado("sobrescrito" if existe else "extraido", d)
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    os.replace(temporario, destino)
+    return d
 
 
 def resumir_md5_desatualizado(divergentes: set[str], conferidos: set[str]) -> set[str]:

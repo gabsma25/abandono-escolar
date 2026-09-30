@@ -193,7 +193,7 @@ def _extrair_membros(
                                          descricao=f"de {arquivo_zip.name}")
                 status = r.status
                 if status != "ja_presente":
-                    logger.info("%s: %s ← %s", status, nome, arquivo_zip.name)
+                    logger.info("%s: %s <- %s", status, nome, arquivo_zip.name)
                 if md5_esp is not None:
                     md5_ok = r.digestos.md5 == md5_esp
 
