@@ -1,8 +1,14 @@
-"""Gera dados/MANIFEST.csv: procedência de TUDO que está em dados/bruto/
-(microdados, .zip de indicadores e documentação), com sha256 e data de download.
+"""Gera dados/MANIFEST.csv: procedência de tudo que está em dados/origem/,
+dados/bruto/ e dados/externo/, com sha256 e data de download.
+
+Uma linha por arquivo, com o estágio (origem / bruto / externo) e quem o
+fornece (inep / orientador). Registrar os zips de origem/ permite validar um
+zip antes de extraí-lo; registrar o extraído em bruto/ permite validar a
+extração. `arquivo` é o caminho relativo a dados/.
 
 A data de download de um arquivo já presente no manifesto anterior é
-preservada; para arquivo novo usa-se a data de modificação no disco, que é a
+preservada (casada pelo nome-base, que sobrevive à migração de pastas de
+2026-09-30); para arquivo novo usa-se a data de modificação no disco, que é a
 data em que foi salvo na pasta. O manifesto é o único item de dados/ versionado
 no git (CLAUDE.md §3, regra 2).
 """
@@ -10,39 +16,71 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
-import hashlib
 import logging
 import pathlib
 
-from src.config import ARQUIVOS, BRUTO, BRUTOS_INEP, DOC_CENSO
+from src.aquisicao import DOCUMENTACAO, MICRODADOS_ZIP, sha256_arquivo
+from src.config import (
+    ARQUIVOS,
+    BASE_LONGITUDINAL_V1,
+    DADOS,
+    INDICADORES,
+    MANIFEST,
+    ORIGEM_CENSO,
+    ORIGEM_DOC,
+    ORIGEM_INDICADORES,
+)
 from src.extrair_brutos_inep import parse_nome_zip
 
 logger = logging.getLogger(__name__)
 
-MANIFEST = BRUTO.parent / "MANIFEST.csv"
-CAMPOS = ["ano", "tabela", "arquivo", "sha256", "data_download"]
+CAMPOS = ["estagio", "origem", "ano", "tabela", "arquivo", "sha256", "data_download"]
+
+# (estagio, origem, ano, tabela, path)
+Item = tuple[str, str, str, str, pathlib.Path]
 
 
-def _sha256(caminho: pathlib.Path) -> str:
-    h = hashlib.sha256()
-    with caminho.open("rb") as f:
-        for bloco in iter(lambda: f.read(1 << 20), b""):
-            h.update(bloco)
-    return h.hexdigest()
+def _itens_indicadores_extraidos() -> list[Item]:
+    """.xlsx e md5_*.txt de bruto/indicadores/, rotulados pelo _manifesto.csv
+    que src/extrair_brutos_inep.py grava junto (tipo, ano e nível do zip)."""
+    rotulos = INDICADORES / "_manifesto.csv"
+    if not rotulos.exists():
+        raise FileNotFoundError(
+            f"{rotulos} não existe. Rode `python -m src.extrair_brutos_inep` antes."
+        )
+    itens: list[Item] = []
+    with rotulos.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["acao"] == "extraido":
+                itens.append((
+                    "bruto", "inep", r["ano"], f"indicador_{r['tipo']}_{r['nivel']}",
+                    INDICADORES / r["arquivo_extraido"],
+                ))
+    return sorted(itens, key=lambda i: i[4])
 
 
-def _itens_bruto() -> list[tuple[str, str, pathlib.Path]]:
-    """[(ano, tabela, path)] de tudo que deve constar no manifesto."""
-    itens: list[tuple[str, str, pathlib.Path]] = [
-        (str(ano), tabela, p) for (ano, tabela), p in sorted(ARQUIVOS.items())
+def _itens() -> list[Item]:
+    """Tudo que deve constar no manifesto, na ordem origem → bruto → externo."""
+    itens: list[Item] = [
+        ("origem", "inep", str(ano), "microdados", ORIGEM_CENSO / nome)
+        for ano, nome in sorted(MICRODADOS_ZIP.items())
     ]
-    for z in sorted(BRUTOS_INEP.glob("*.zip")):
-        parsed = parse_nome_zip(z.stem.split(" (")[0])
+    for z in sorted(ORIGEM_INDICADORES.glob("*.zip")):
+        parsed = parse_nome_zip(z.stem)
         tipo, ano, nivel = parsed if parsed else ("?", "", "?")
-        itens.append((str(ano), f"indicador_{tipo}_{nivel}", z))
-    for d in sorted(DOC_CENSO.glob("*")):
-        if d.is_file():
-            itens.append(("", "documentacao", d))
+        itens.append(("origem", "inep", str(ano), f"indicador_{tipo}_{nivel}", z))
+    itens += [
+        ("origem", "inep", str(ano), "documentacao", ORIGEM_DOC / nome)
+        for nome, (ano, _membro) in sorted(DOCUMENTACAO.items())
+    ]
+    itens += [
+        ("bruto", "inep", str(ano), tabela, p) for (ano, tabela), p in sorted(ARQUIVOS.items())
+    ]
+    itens += _itens_indicadores_extraidos()
+    itens += [
+        ("externo", "orientador", "", "base_longitudinal_v1", p)
+        for p in sorted(BASE_LONGITUDINAL_V1.glob("*")) if p.is_file()
+    ]
     return itens
 
 
@@ -50,16 +88,21 @@ def gerar(caminho_manifest: pathlib.Path = MANIFEST) -> pathlib.Path:
     anteriores: dict[str, str] = {}
     if caminho_manifest.exists():
         with caminho_manifest.open(encoding="utf-8") as f:
-            anteriores = {r["arquivo"]: r["data_download"] for r in csv.DictReader(f)}
+            anteriores = {
+                pathlib.PurePosixPath(r["arquivo"]).name: r["data_download"]
+                for r in csv.DictReader(f)
+            }
 
     linhas = []
-    for ano, tabela, p in _itens_bruto():
+    for estagio, origem, ano, tabela, p in _itens():
         if not p.exists():
-            raise FileNotFoundError(f"Arquivo esperado não existe em dados/bruto/: {p}")
-        rel = p.relative_to(BRUTO).as_posix()
-        data = anteriores.get(rel) or anteriores.get(p.name) or dt.datetime.fromtimestamp(p.stat().st_mtime, tz=dt.timezone.utc).date().isoformat()
+            raise FileNotFoundError(f"Arquivo esperado em dados/{estagio}/ não existe: {p}")
+        data = anteriores.get(p.name) or dt.datetime.fromtimestamp(
+            p.stat().st_mtime, tz=dt.timezone.utc
+        ).date().isoformat()
+        rel = p.relative_to(DADOS).as_posix()
         logger.info("sha256 %s", rel)
-        linhas.append([ano, tabela, rel, _sha256(p), data])
+        linhas.append([estagio, origem, ano, tabela, rel, sha256_arquivo(p), data])
 
     with caminho_manifest.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
