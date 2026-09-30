@@ -77,9 +77,20 @@ os arquivos mandam.
 `dados/` é organizada pelo estágio do dado (migração de 2026-09-30,
 `src/migracao_estrutura.py`, log em `dados/migracao_estrutura_log.csv`).
 `dados/MANIFEST.csv` registra sha256 de tudo em `origem/`, `bruto/` e
-`externo/`, com as colunas `estagio,origem,ano,tabela,arquivo,sha256,data_download`
-(`arquivo` relativo a `dados/`; `origem` = `inep` ou `orientador`). É gerado
-por `python -m src.manifesto`.
+`externo/` e da base regerada em `processado/`, com as colunas
+`estagio,origem,ano,tabela,arquivo,sha256,data_download` (`arquivo` relativo a
+`dados/`; `origem` = `inep`, `orientador` ou `projeto`). É gerado por
+`python -m src.manifesto`.
+
+**O mesmo hash tem dois significados.** Em `origem/`, `bruto/` e `externo/`:
+"este arquivo continua sendo o que recebemos" — imutável, divergência é erro
+(regra 1). Em `processado/`: "esta execução produziu o mesmo resultado da
+anterior" — regenerável, a regra 1 não se aplica; divergência é aviso e
+aparece como diff do `MANIFEST.csv` no git, que é o sinal de que a saída
+mudou. Isso depende de a geração ser determinística: `pyarrow`, `pandas` e
+`numpy` estão fixados no `requirements.txt` (uma atualização pode mudar
+metadados do Parquet sem mudar valor nenhum). Em `processado/`,
+`data_download` é a data de geração.
 
 | Pasta | Conteúdo | Arquivos |
 |-------|----------|----------|
@@ -90,10 +101,9 @@ por `python -m src.manifesto`.
 | `bruto/indicadores/{tipo}/{ano}/` | `.xlsx` + `.txt` de md5 extraídos dos zips | 206 |
 | `externo/base_longitudinal_v1/` | base longitudinal v1.0 do orientador | 6 |
 | `interim/indicadores_rr/` | recorte RR em Parquet, `{tipo}_{ano}.parquet` | 26 |
-| `processado/` | saída final deste projeto | **vazia** |
+| `processado/` | base longitudinal regerada (`.parquet` + `.csv`) | 2 |
 
-**O que ainda não existe:** `dados/processado/` está vazia;
-`src/base_longitudinal.py`, `src/filtros.py`,
+**O que ainda não existe:** `src/filtros.py`,
 `src/agregacao.py`, o notebook 01, `docs/dicionario_anotado.csv`,
 `docs/desfechos.csv` e `docs/funil_contagem.csv` não existem. O caminho de
 download de `src/aquisicao.py` está implementado e testado contra servidor
@@ -372,7 +382,7 @@ abandono-escolar/
 │   │   └── indicadores/            # {tipo}/{ano}/*.xlsx + .txt de md5
 │   ├── interim/
 │   │   └── indicadores_rr/         # {tipo}_{ano}.parquet, recorte RR, nomes originais
-│   ├── processado/                 # saída final deste projeto (vazia)
+│   ├── processado/                 # base longitudinal regerada — regenerável, não imutável
 │   ├── externo/                    # dados de terceiros, não obteníveis do INEP — imutável
 │   │   └── base_longitudinal_v1/   # entrega do orientador, 17/09/2026
 │   ├── cache_download/             # não imutável: downloads a conferir, divergente/,
@@ -388,6 +398,7 @@ abandono-escolar/
 │   ├── inventario_indicadores.csv        # uma linha por planilha de indicador (gerado)
 │   ├── presenca_colunas_indicadores.csv  # coluna × tipo/nível × ano + descrição (gerado)
 │   ├── extracao_indicadores.csv          # membro × zip de indicador: ação, md5 conferido (gerado)
+│   ├── comparacao_base_v1.csv            # base regerada × v1.0, por coluna, com sha256 da v1.0 (gerado)
 │   ├── catalogo_variaveis_microdados.csv # coluna × arquivo: bloco, preenchimento, exemplos (gerado)
 │   ├── catalogo_variaveis.csv            # coluna consolidada × 10 arquivos (gerado)
 │   ├── catalogo_variaveis.html           # página navegável do catálogo (gerada, fora do git)
@@ -418,7 +429,7 @@ abandono-escolar/
 │   ├── leitura.py              # perfil dos CSV de microdados, inventário, presença
 │   ├── catalogo_microdados.py  # catálogo de todas as variáveis, com estatísticas BR/RR
 │   ├── relatorio_catalogo.py   # + relatorio_catalogo.html (molde) → docs/catalogo_variaveis.html
-│   ├── base_longitudinal.py    # harmonização + união + derivadas + validações (a fazer)
+│   ├── base_longitudinal.py    # harmonização + união + derivadas + validações + comparação com a v1.0
 │   ├── filtros.py              # funil de recorte com contagem (fase 2, a fazer)
 │   └── agregacao.py            # Turma/Matrícula/Docente → escola (fase 2, a fazer)
 ├── tests/                      # pytest; zips sintéticos, sem rede, sem tocar em dados/
@@ -437,6 +448,7 @@ python -m src.extrair_brutos_inep        # origem/indicadores → bruto/indicado
 python -m src.manifesto                  # dados/MANIFEST.csv — só quando o conjunto de dados muda de propósito
 python -m src.indicadores_inep           # docs/inventario_indicadores.csv, presenca_colunas_indicadores.csv
 python -m src.indicadores_rr             # dados/interim/indicadores_rr/{tipo}_{ano}.parquet
+python -m src.base_longitudinal          # dados/processado/base_longitudinal_rr_2019_2025.*, docs/comparacao_base_v1.csv
 python -m src.leitura                    # docs/inventario.csv, presenca_colunas_escola.csv
 python -m src.catalogo_microdados        # docs/catalogo_variaveis_microdados.csv, catalogo_variaveis.csv
 python -m src.relatorio_catalogo         # docs/catalogo_variaveis.html
@@ -589,7 +601,7 @@ treino 2019–22 → 2020–23, validação 2023 → 24, teste 2024 → 25 bloqu
 
 ### Decisões em aberto
 
-Bloqueiam `src/base_longitudinal.py`:
+Afetam a base longitudinal (o módulo está pronto sem elas; D8 entra como mais uma `Fonte`, sem reescrita):
 
 - **D8** — trazer `IN_EDUCACAO_INDIGENA`, `TP_LOCALIZACAO_DIFERENCIADA`,
   `QT_MAT_FUND_AF` e `QT_MAT_MED` do Censo já na fase 1 (estrato + peso).
@@ -677,6 +689,15 @@ microdados 2019–2025 extraídos dos zips e conferidos contra o manifesto;
 manifesto por estágio, cobrindo também os zips; HAD 2019–2024 e IED
 2019–2020 incluídos (P019); `src/integridade.py` e extrator sem regravação;
 primeiros testes pytest; relação de extração movida de `bruto/` para `docs/extracao_indicadores.csv`; divergências de md5 do INEP conhecidas nomeadas; levantamento dos arquivos de hash dos 103 zips; 42 páginas do INEP capturadas.
+
+Feito em 2026-09-30 (critérios 1–4): `src/base_longitudinal.py` regera a
+base (6.054 × 59) e ela bate com a v1.0 do orientador (sha256 `32181194…` em
+`docs/comparacao_base_v1.csv`): 50 colunas idênticas e 8 idênticas na
+tolerância absoluta de 1e-9 — `IED_*_ALTO` e os seis `*_DELTA1`, com diferença
+máxima de 1,4e-14 (ponto flutuante). Nenhuma divergência de ausência nem de
+valor; nenhuma linha a propor em `docs/problemas.csv`. Validações do JSON por
+`assert`; hash da base no manifesto (`estagio=processado`); duas execuções
+geram os mesmos bytes.
 
 A fase atual se considera pronta quando:
 

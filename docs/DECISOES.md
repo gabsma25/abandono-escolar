@@ -374,3 +374,35 @@ especificação.
 Melhorias identificadas entram aqui como "adiado deliberadamente".
 
 **Adiado deliberadamente:** (nenhuma até esta data)
+
+---
+
+## 2026-09-30 — Regeração da base longitudinal e comparação com a v1.0
+
+**Decisão:** `src/base_longitudinal.py` regera a base com as regras
+verificadas contra a v1.0 antes de escrever código: universo = união das
+chaves das quatro fontes; identidade = primeiro valor não nulo na ordem
+tx_rend → TDI → ATU → IED; `DISP_*` sobre as colunas mantidas de cada fonte;
+`ANO_ALVO = ANO + 1` se a escola existe em t+1; derivadas temporais por
+junção explícita em `ANO ± 1` (não `shift()`), ausente em qualquer ponta dá
+ausente. O mapeamento posicional de tx_rend 2019–2020 é conferido contra o
+rótulo humano de cada uma das 63 posições (`docs/presenca_colunas_indicadores.csv`)
+antes de ser usado.
+
+Comparação (`docs/comparacao_base_v1.csv`, com o sha256 da v1.0 usada): a
+ausência é comparada antes dos valores (NaN ≠ NaN tornaria idênticas colunas
+divergentes e vice-versa). Tolerância **absoluta** de 1e-9 só nas colunas que
+passaram por aritmética (`IED_*_ALTO`, `*_DELTA1`) — as grandezas são
+limitadas (0–100), então tolerância relativa seria frouxa perto de 100 e
+rígida perto de 0. Diferença dentro da tolerância é contada e reportada
+(`max_diferenca_abs`), não omitida. A mesma tolerância vale no limite
+[0, 100] das colunas calculadas: 76,9 + 15,4 + 7,7 = 100.00000000000001.
+
+**Evidência:** 50 colunas idênticas e 8 idênticas na tolerância (máx.
+1,4e-14); nenhuma divergência de ausência, de valor ou de universo. A
+comparação acusou todas as diferenças plantadas num teste manual (linha a
+menos, ausência trocada, +0,1 em taxa copiada, +1e-12 e +1e-6 em colunas
+calculadas, nome trocado). Duas execuções geram os mesmos bytes.
+
+**Alternativa descartada:** arredondar as somas para bater com a v1.0 —
+mudaria o cálculo para igualar a referência em vez de explicar a diferença.
