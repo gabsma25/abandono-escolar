@@ -1,16 +1,13 @@
 """Aquisição dos dados do INEP: zips em dados/origem/ → arquivos em dados/bruto/.
 
-Único módulo autorizado a criar arquivo em dados/origem/ e dados/bruto/
-(CLAUDE.md §3, regra 1), e só o que não existe: arquivo presente e íntegro é
-pulado; arquivo presente e divergente é erro, nunca sobrescrito.
+Cria em dados/origem/ e dados/bruto/ só o que não existe (CLAUDE.md §3,
+regra 1): toda escrita passa por src/integridade.py:gravar_conferido.
 
 Camada de extração (esta versão). Dos zips de microdados sai só o que o
 projeto usa, com o nome exato do INEP (inclusive o `.CSV` maiúsculo de 2020):
 o arquivo de escolas de cada ano e, em 2025, também Turma, Matrícula e
-Docente. Cada arquivo é conferido duas vezes: contra o md5_*.txt do próprio
-INEP dentro do zip e contra o sha256 de dados/MANIFEST.csv. Grava-se primeiro
-em `<nome>.parcial` e só se renomeia para o nome final depois das duas
-conferências — um arquivo com o nome final em bruto/ está sempre íntegro.
+Docente. Cada arquivo é conferido contra o sha256 de dados/MANIFEST.csv e
+contra o md5_*.txt do próprio INEP dentro do zip.
 
 Fatos dos zips que o código trata (verificados em 2026-09-29):
 - a pasta interna muda a cada ano ("microdados_ed_basica_2019/",
@@ -23,15 +20,20 @@ Fatos dos zips que o código trata (verificados em 2026-09-29):
 """
 from __future__ import annotations
 
-import csv
-import hashlib
+import argparse
 import logging
-import os
 import pathlib
 import zipfile
 
-from src.config import ARQUIVOS, MANIFEST, ORIGEM_CENSO, ORIGEM_DOC
-from src.extrair_brutos_inep import _ler_md5_txt
+from src.config import ARQUIVOS, ORIGEM_CENSO, ORIGEM_DOC
+from src.integridade import (
+    ErroIntegridade,
+    Referencia,
+    confere_existente,
+    gravar_conferido,
+    hashes_manifesto,
+    md5_do_zip,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -56,45 +58,6 @@ DOCUMENTACAO: dict[str, tuple[int, str]] = {
     "Nota-2021.pdf": (2021, "Nota.pdf"),
 }
 
-_SUFIXO_PARCIAL = ".parcial"
-
-
-class ErroIntegridade(RuntimeError):
-    """Hash divergente, membro ausente ou arquivo existente que não confere."""
-
-
-def sha256_arquivo(caminho: pathlib.Path) -> str:
-    h = hashlib.sha256()
-    with caminho.open("rb") as f:
-        for bloco in iter(lambda: f.read(1 << 20), b""):
-            h.update(bloco)
-    return h.hexdigest()
-
-
-def hashes_manifesto(caminho: pathlib.Path = MANIFEST) -> dict[str, str]:
-    """{nome-base do arquivo: sha256} de dados/MANIFEST.csv.
-
-    Chave pelo nome-base para valer tanto no manifesto antigo (caminho
-    relativo a bruto/) quanto no novo (relativo a dados/, com `estagio`).
-    Nome-base repetido com hash diferente é ambíguo e vira erro.
-    """
-    if not caminho.exists():
-        raise FileNotFoundError(
-            f"Manifesto não encontrado: {caminho}\n"
-            f"Ele é versionado no git; restaure com `git checkout -- dados/MANIFEST.csv`."
-        )
-    hashes: dict[str, str] = {}
-    with caminho.open(encoding="utf-8") as f:
-        for linha in csv.DictReader(f):
-            nome = pathlib.PurePosixPath(linha["arquivo"]).name
-            anterior = hashes.setdefault(nome, linha["sha256"])
-            if anterior != linha["sha256"]:
-                raise ErroIntegridade(
-                    f"Nome-base {nome!r} aparece no manifesto com dois sha256 "
-                    f"diferentes ({anterior} e {linha['sha256']})."
-                )
-    return hashes
-
 
 def _localizar_membro(zf: zipfile.ZipFile, nome: str, zip_path: pathlib.Path) -> zipfile.ZipInfo:
     achados = [
@@ -112,73 +75,35 @@ def _localizar_membro(zf: zipfile.ZipFile, nome: str, zip_path: pathlib.Path) ->
     )
 
 
-def _md5_do_inep(zf: zipfile.ZipFile) -> dict[str, str]:
-    """{nome em minúsculas: md5} de todos os md5_*.txt do zip."""
-    esperados: dict[str, str] = {}
-    for info in zf.infolist():
-        nome = pathlib.PurePosixPath(info.filename).name
-        if nome.lower().startswith("md5_") and nome.lower().endswith(".txt"):
-            for membro, md5 in _ler_md5_txt(zf.read(info)).items():
-                esperados[membro.lower()] = md5
-    return esperados
-
-
 def extrair_membro(
-    zip_path: pathlib.Path, membro: str, destino: pathlib.Path, sha_esperado: str
+    zip_path: pathlib.Path, membro: str, destino: pathlib.Path, sha_esperado: str,
+    *, sobrescrever: bool = False,
 ) -> str:
-    """Extrai `membro` (nome-base) de `zip_path` para `destino`.
-
-    Retorna "ja_presente" se `destino` existe e confere, "extraido" se foi
-    criado agora. Levanta ErroIntegridade se `destino` existe e diverge (não
-    sobrescreve), se o md5 do INEP não confere ou se o sha256 do manifesto
-    não confere — nesses dois casos nada é deixado em `destino`.
-    """
-    if destino.exists():
-        obtido = sha256_arquivo(destino)
-        if obtido == sha_esperado:
-            logger.info("Já presente e íntegro: %s", destino.name)
-            return "ja_presente"
-        raise ErroIntegridade(
-            f"{destino} já existe e não confere com o manifesto — não será sobrescrito.\n"
-            f"sha256 esperado: {sha_esperado}\nsha256 obtido:   {obtido}"
-        )
+    """Extrai `membro` (nome-base) de `zip_path` para `destino`, conferido
+    contra `sha_esperado` (manifesto) e o md5 do INEP. Retorna o status de
+    `gravar_conferido`: "ja_presente", "extraido" ou "sobrescrito"."""
+    # Confere o existente sem abrir o zip: o zip pode nem estar mais no disco.
+    if not sobrescrever and confere_existente(destino, Referencia(sha_esperado)) is not None:
+        logger.info("Já presente e íntegro, não tocado: %s", destino.name)
+        return "ja_presente"
     if not zip_path.exists():
         existentes = sorted(p.name for p in zip_path.parent.glob("*.zip")) if zip_path.parent.is_dir() else []
         raise FileNotFoundError(
             f"Zip não encontrado: {zip_path}\nZips em {zip_path.parent}: {existentes or 'nenhum'}"
         )
-
-    destino.parent.mkdir(parents=True, exist_ok=True)
-    parcial = destino.with_name(destino.name + _SUFIXO_PARCIAL)
-    sha, md5 = hashlib.sha256(), hashlib.md5()
     with zipfile.ZipFile(zip_path) as zf:
         info = _localizar_membro(zf, membro, zip_path)
-        md5_inep = _md5_do_inep(zf).get(membro.lower())
-        with zf.open(info) as src, parcial.open("wb") as dst:
-            for bloco in iter(lambda: src.read(1 << 20), b""):
-                sha.update(bloco)
-                md5.update(bloco)
-                dst.write(bloco)
-
-    problemas = []
-    if md5_inep is not None and md5.hexdigest() != md5_inep:
-        problemas.append(f"md5 do INEP esperado: {md5_inep}\nmd5 obtido:           {md5.hexdigest()}")
-    if sha.hexdigest() != sha_esperado:
-        problemas.append(f"sha256 esperado (manifesto): {sha_esperado}\nsha256 obtido:               {sha.hexdigest()}")
-    if problemas:
-        parcial.unlink()
-        raise ErroIntegridade(
-            f"{membro} extraído de {zip_path.name} não confere:\n" + "\n".join(problemas)
-        )
-    if md5_inep is None:
-        logger.warning("%s não tem md5 no zip do INEP; conferido só pelo manifesto.", membro)
-    os.replace(parcial, destino)
-    logger.info("Extraído e conferido: %s ← %s", destino.name, zip_path.name)
-    return "extraido"
+        ref = Referencia(sha_esperado, md5_do_zip(zf).get(membro.lower()), info.CRC)
+        with zf.open(info) as fonte:
+            status = gravar_conferido(fonte, destino, ref, sobrescrever=sobrescrever,
+                                      descricao=f"de {zip_path.name}").status
+    logger.info("%s: %s ← %s", status, destino.name, zip_path.name)
+    return status
 
 
 def extrair_censo(
-    ano: int, origem: pathlib.Path = ORIGEM_CENSO, hashes: dict[str, str] | None = None
+    ano: int, origem: pathlib.Path = ORIGEM_CENSO, hashes: dict[str, str] | None = None,
+    *, sobrescrever: bool = False,
 ) -> dict[str, str]:
     """Extrai de origem/censo/ as tabelas de ARQUIVOS do `ano` → {arquivo: status}."""
     if ano not in MICRODADOS_ZIP:
@@ -191,17 +116,37 @@ def extrair_censo(
             continue
         if destino.name not in hashes:
             raise ErroIntegridade(f"{destino.name} não está em dados/MANIFEST.csv; nada a conferir.")
-        status[destino.name] = extrair_membro(zip_path, destino.name, destino, hashes[destino.name])
+        status[destino.name] = extrair_membro(
+            zip_path, destino.name, destino, hashes[destino.name], sobrescrever=sobrescrever,
+        )
     return status
 
 
 def extrair_documentacao(
     origem: pathlib.Path = ORIGEM_CENSO, destino: pathlib.Path = ORIGEM_DOC,
-    hashes: dict[str, str] | None = None,
+    hashes: dict[str, str] | None = None, *, sobrescrever: bool = False,
 ) -> dict[str, str]:
     """Extrai os PDFs de DOCUMENTACAO dos zips de microdados → {arquivo: status}."""
     hashes = hashes if hashes is not None else hashes_manifesto()
     return {
-        nome: extrair_membro(origem / MICRODADOS_ZIP[ano], membro, destino / nome, hashes[nome])
+        nome: extrair_membro(origem / MICRODADOS_ZIP[ano], membro, destino / nome,
+                             hashes[nome], sobrescrever=sobrescrever)
         for nome, (ano, membro) in DOCUMENTACAO.items()
     }
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description="Extrai os microdados de dados/origem/censo/ para dados/bruto/censo/.")
+    ap.add_argument("--anos", type=int, nargs="+", default=sorted(MICRODADOS_ZIP))
+    ap.add_argument("--sobrescrever", action="store_true",
+                    help="regrava arquivos já presentes (CLAUDE.md §3, regra 1)")
+    args = ap.parse_args()
+    hashes = hashes_manifesto()
+    for ano in args.anos:
+        extrair_censo(ano, hashes=hashes, sobrescrever=args.sobrescrever)
+    extrair_documentacao(hashes=hashes, sobrescrever=args.sobrescrever)
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+    main()

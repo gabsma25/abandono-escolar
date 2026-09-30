@@ -19,7 +19,7 @@ import datetime as dt
 import logging
 import pathlib
 
-from src.aquisicao import DOCUMENTACAO, MICRODADOS_ZIP, sha256_arquivo
+from src.aquisicao import DOCUMENTACAO, MICRODADOS_ZIP
 from src.config import (
     ARQUIVOS,
     BASE_LONGITUDINAL_V1,
@@ -31,6 +31,7 @@ from src.config import (
     ORIGEM_INDICADORES,
 )
 from src.extrair_brutos_inep import parse_nome_zip
+from src.integridade import sha256_arquivo
 
 logger = logging.getLogger(__name__)
 

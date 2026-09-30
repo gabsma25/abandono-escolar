@@ -13,6 +13,10 @@ INTERIM = DADOS / "interim"          # transformado por este projeto
 PROCESSADO = DADOS / "processado"    # saída final deste projeto
 EXTERNO = DADOS / "externo"          # dados de terceiros, não obteníveis do INEP
 MANIFEST = DADOS / "MANIFEST.csv"
+# Zips baixados ainda não conferidos e, em divergente/, todo arquivo cujo hash
+# não conferiu — nunca entram em origem/ ou bruto/ (CLAUDE.md §3, regra 1).
+CACHE_DOWNLOAD = DADOS / "cache_download"
+DIVERGENTE = CACHE_DOWNLOAD / "divergente"
 
 ORIGEM_CENSO = ORIGEM / "censo"
 BRUTO_CENSO = BRUTO / "censo"

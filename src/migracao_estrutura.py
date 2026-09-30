@@ -33,14 +33,7 @@ import shutil
 
 import send2trash
 
-from src.aquisicao import (
-    DOCUMENTACAO,
-    MICRODADOS_ZIP,
-    ErroIntegridade,
-    extrair_censo,
-    hashes_manifesto,
-    sha256_arquivo,
-)
+from src.aquisicao import DOCUMENTACAO, MICRODADOS_ZIP, extrair_censo
 from src.config import (
     BASE_LONGITUDINAL_V1,
     BRUTO,
@@ -51,6 +44,7 @@ from src.config import (
     ORIGEM_DOC,
     ORIGEM_INDICADORES,
 )
+from src.integridade import ErroIntegridade, hashes_manifesto, sha256_arquivo
 
 logger = logging.getLogger(__name__)
 
