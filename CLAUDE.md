@@ -104,8 +104,7 @@ metadados do Parquet sem mudar valor nenhum). Em `processado/`,
 | `processado/` | base longitudinal regerada (`.parquet` + `.csv`) | 2 |
 
 **O que ainda não existe:** `src/filtros.py`,
-`src/agregacao.py`, o notebook 01, `docs/dicionario_anotado.csv`,
-`docs/desfechos.csv` e `docs/funil_contagem.csv` não existem. O caminho de
+`src/agregacao.py`, o notebook 01 e `docs/funil_contagem.csv` não existem. O caminho de
 download de `src/aquisicao.py` está implementado e testado contra servidor
 falso, mas **nunca foi exercitado contra o INEP** (nesta máquina os zips vêm
 de `--origem-local`; decisão da pesquisadora, 2026-09-30).
@@ -407,8 +406,8 @@ abandono-escolar/
 │   ├── desfechos_cobertura.csv           # ano: públicas, com AF, com EM, com alvo (gerado)
 │   ├── ausencia_base_longitudinal.csv    # % de ausência por variável (gerado)
 │   ├── estrato_nome_indigena.csv         # proxy fraco de estrato indígena (gerado)
-│   ├── dicionario_anotado.csv            # Tabela B: variável × papel (a fazer)
-│   ├── desfechos.csv                     # Tabela C (a fazer; = §5 da metodologia)
+│   ├── dicionario_anotado.csv            # Tabela B: variável × papel, do §4 da metodologia (gerado)
+│   ├── desfechos.csv                     # Tabela C: desfechos, do §5 da metodologia (gerado)
 │   ├── problemas.csv                     # Tabela D (P001–P018; P019–P021 a colar)
 │   ├── funil_contagem.csv                # (a fazer)
 │   └── DECISOES.md                       # log de decisões (ver seção 6)
@@ -430,6 +429,7 @@ abandono-escolar/
 │   ├── catalogo_microdados.py  # catálogo de todas as variáveis, com estatísticas BR/RR
 │   ├── relatorio_catalogo.py   # + relatorio_catalogo.html (molde) → docs/catalogo_variaveis.html
 │   ├── base_longitudinal.py    # harmonização + união + derivadas + validações + comparação com a v1.0
+│   ├── tabelas_metodologia.py  # tabelas do §4/§5 da metodologia → dicionario_anotado.csv, desfechos.csv
 │   ├── filtros.py              # funil de recorte com contagem (fase 2, a fazer)
 │   └── agregacao.py            # Turma/Matrícula/Docente → escola (fase 2, a fazer)
 ├── tests/                      # pytest; zips sintéticos, sem rede, sem tocar em dados/
@@ -449,6 +449,7 @@ python -m src.manifesto                  # dados/MANIFEST.csv — só quando o c
 python -m src.indicadores_inep           # docs/inventario_indicadores.csv, presenca_colunas_indicadores.csv
 python -m src.indicadores_rr             # dados/interim/indicadores_rr/{tipo}_{ano}.parquet
 python -m src.base_longitudinal          # dados/processado/base_longitudinal_rr_2019_2025.*, docs/comparacao_base_v1.csv
+python -m src.tabelas_metodologia        # docs/dicionario_anotado.csv, docs/desfechos.csv
 python -m src.leitura                    # docs/inventario.csv, presenca_colunas_escola.csv
 python -m src.catalogo_microdados        # docs/catalogo_variaveis_microdados.csv, catalogo_variaveis.csv
 python -m src.relatorio_catalogo         # docs/catalogo_variaveis.html
@@ -493,9 +494,14 @@ história; o módulo faz o trabalho e é testável.
 
 ## 5. Papel das variáveis
 
-Cada variável recebe exatamente um papel em `docs/dicionario_anotado.csv`.
-A definição por variável da fase 1 (origem, coluna técnica por geração,
-fórmula, papel) está em `docs/metodologia_variaveis.md` §4.
+Cada variável recebe exatamente um papel em `docs/dicionario_anotado.csv`,
+gerado por `python -m src.tabelas_metodologia` a partir das tabelas de
+`docs/metodologia_variaveis.md` §4 — o papel se decide no documento, nunca no
+código ou no CSV. Vocabulário da fase 1 (2026-09-30): `chave`, `descrição`,
+`filtro`, `estrato`, `controle de ausência`, `preditor`, `desfecho`, `peso`.
+"Derivada" não é papel (é origem); limite de uso vai na coluna `restricao`
+(ex.: "só cenário A", "só 2021+ (E5)"). `DEPENDENCIA` é estrato (o filtro do
+universo é `REDE_PUBLICA`); `DISP_*` são controle de ausência.
 
 **Fase 1 — indicadores do INEP.** Conjunto "Core": taxas de rendimento de `t`
 (aprovação, reprovação, abandono da etapa), `TDI`, `ATU`, lags e variações
@@ -698,6 +704,12 @@ máxima de 1,4e-14 (ponto flutuante). Nenhuma divergência de ausência nem de
 valor; nenhuma linha a propor em `docs/problemas.csv`. Validações do JSON por
 `assert`; hash da base no manifesto (`estagio=processado`); duas execuções
 geram os mesmos bytes.
+
+Feito em 2026-09-30 (critério 5): `docs/desfechos.csv` (6 desfechos) e
+`docs/dicionario_anotado.csv` (59 variáveis vigentes = as 59 colunas da base,
+mais 7 propostas) gerados das tabelas da metodologia, com papel explícito em
+toda linha; o gerador acusa papel fora do vocabulário, variável repetida e
+coluna da base sem linha.
 
 A fase atual se considera pronta quando:
 

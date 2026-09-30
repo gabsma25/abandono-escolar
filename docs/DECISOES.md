@@ -406,3 +406,27 @@ calculadas, nome trocado). Duas execuções geram os mesmos bytes.
 
 **Alternativa descartada:** arredondar as somas para bater com a v1.0 —
 mudaria o cálculo para igualar a referência em vez de explicar a diferença.
+
+---
+
+## 2026-09-30 — Papel das variáveis da fase 1 (Tabela B)
+
+**Decisão:** vocabulário de papéis `chave`, `descrição`, `filtro`, `estrato`,
+`controle de ausência`, `preditor`, `desfecho`, `peso`; exatamente um por
+variável; "derivada" deixa de ser papel e fica na origem; limite de uso em
+coluna própria (`restricao`). `DEPENDENCIA` é **estrato** (o filtro do
+universo, D3, é `REDE_PUBLICA`; assim as redes públicas podem ser
+comparadas). `DISP_*` são **controle de ausência**. O papel é escrito nas
+tabelas do §4 da metodologia (colunas Papel e Restrição em 4.1–4.7 e tabela
+nova em 4.6 com as 12 derivadas temporais), de onde
+`python -m src.tabelas_metodologia` gera `docs/dicionario_anotado.csv`.
+Decisões da pesquisadora em 2026-09-30.
+
+**Evidência:** antes, só 4.1 e 4.7 tinham papel em tabela; 32 variáveis
+(4.2–4.5) tinham papel só no texto ou em lugar nenhum (ATU), as 12 derivadas
+temporais não tinham tabela, e havia "filtro + estrato" em `DEPENDENCIA`.
+Resultado: 59 variáveis vigentes = as 59 colunas da base regerada; 7
+propostas (`ATU_MULTI`, `IN_MULTISSERIADA` e as cinco da D8).
+
+**Alternativa descartada:** lista de papéis no código — o papel é decisão de
+método e mora no documento de método.
