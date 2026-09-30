@@ -232,3 +232,87 @@ obrigatória) abortava o inventário inteiro. A descrição expôs P014.
 
 **Alternativa descartada:** ignorar o cabeçalho humano — perderia a única
 fonte de significado das colunas e a evidência de P010/P014.
+
+---
+
+## 2026-09-30 — dados/ organizada por estágio do dado
+
+**Decisão:** o estágio define a pasta: `origem/` (compactados como vieram da
+fonte), `bruto/` (extraído, nome original do INEP), `interim/`, `processado/`
+e `externo/` (dados de terceiros). Os zips de microdados, que estavam fora do
+projeto (`~/Downloads`, OneDrive), foram movidos para `origem/censo/`; os de
+indicadores de `bruto/brutos-inep/` para `origem/indicadores/`; as planilhas
+extraídas de `interim/brutos_inep_extraido/` para `bruto/indicadores/`; a base
+do orientador de `Processados/` para `externo/base_longitudinal_v1/`. Os 10
+CSVs de microdados, que não estavam no disco, foram extraídos dos zips.
+Migração por `src/migracao_estrutura.py`, log em
+`dados/migracao_estrutura_log.csv`.
+
+**Evidência:** sha256 conferido antes e depois de cada um dos 283 movimentos,
+nenhuma divergência; os 10 CSVs extraídos conferem com o manifesto anterior e
+com o md5 do INEP. As 94 linhas comuns aos dois manifestos mantêm sha256 e
+data. 84 cópias idênticas (82 em `~/Downloads` e as duas
+`TDI_2025_MUNICIPIOS (1).zip`, P005) foram para a Lixeira do Windows, não
+apagadas.
+
+**Alternativa descartada:** manter zips de indicadores em `bruto/` e
+extraídos em `interim/` — o mesmo estágio teria tratamento diferente para
+censo e indicadores, e `Processados/` continuaria colidindo com `processado/`.
+
+---
+
+## 2026-09-30 — Manifesto cobre origem, bruto e externo
+
+**Decisão:** `dados/MANIFEST.csv` ganha as colunas `estagio` e `origem`
+(`inep` / `orientador`); `arquivo` passa a ser relativo a `dados/`. Registra
+também o sha256 dos zips — antes só havia o dos CSVs extraídos, o que impedia
+validar um zip antes de extraí-lo — e dos `.xlsx`/`md5_*.txt` de
+`bruto/indicadores/` (mesmo estágio, mesmo tratamento).
+
+**Evidência:** 271 linhas após a migração (91 origem, 174 bruto, 6 externo);
+334 após incluir HAD/IED (112, 216, 6).
+
+**Alternativa descartada:** manifesto enxuto só com zips e CSVs — deixaria as
+planilhas de indicadores, que são o insumo da fase 1, sem hash de referência.
+
+---
+
+## 2026-09-30 — Base longitudinal v1.0 como dependência externa documentada
+
+**Decisão:** a v1.0 do orientador fica em `dados/externo/base_longitudinal_v1/`
+com hash no manifesto (`estagio=externo`, `origem=orientador`); o bootstrap
+verifica e avisa se faltar, sem falhar. Quando `src/base_longitudinal.py`
+estiver pronto e a comparação do critério 2 (§8 do CLAUDE.md) registrada,
+reavalia-se se ela continua necessária.
+
+**Evidência:** a base não é obtenível do INEP e o script que a gerou não veio
+junto; `manifesto_fontes_longitudinal.csv` do orientador não traz hash das
+fontes.
+
+**Alternativa descartada:** versionar a v1.0 no git (viola a regra 2) ou
+depositá-la com DOI — as duas exigem consentimento do orientador, e a
+pesquisadora prefere não abrir o assunto antes da comparação.
+
+---
+
+## 2026-09-30 — Regra 1: pastas imutáveis só recebem arquivo novo e conferido
+
+**Decisão:** `origem/`, `bruto/` e `externo/` são somente leitura; a exceção
+é descrita por comportamento, não por nome de módulo: criar o que não existe,
+via temporário, com hash conferido. Arquivo presente que confere não é tocado
+(nem o mtime); divergente é erro; o que não confere vai para
+`cache_download/divergente/`. Regravar exige `--sobrescrever` (mesma flag em
+`aquisicao`, `extrair_brutos_inep` e `indicadores_rr`). Implementado em
+`src/integridade.py`. Referência de hash: sha256 do manifesto; para arquivo
+fora dele, md5 do INEP; sem nenhum dos dois, CRC do zip.
+
+**Evidência:** o extrator de indicadores regravava a cada execução todos os
+arquivos de `bruto/indicadores/` (proposta de linha P021). Seis planilhas
+nunca conferem com o md5 publicado pelo INEP (P007, P020) — com o md5 do INEP
+como única referência, o extrator falharia para sempre em
+`ATU_ESCOLAS_2022.xlsx`, que entra no painel. Teste: rodar o extrator duas
+vezes não altera mtime em `bruto/indicadores/` (tests/test_extrair_brutos_inep.py).
+
+**Alternativa descartada:** listar na regra os módulos autorizados — a regra
+teria de ser emendada a cada módulo novo e não seria testável; e usar o md5 do
+INEP como referência única.
