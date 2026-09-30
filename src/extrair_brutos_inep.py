@@ -1,6 +1,6 @@
-"""Extrai as planilhas de indicadores do INEP dos .zip em dados/bruto/brutos-inep/
-para dados/interim/brutos_inep_extraido/{tipo}/{ano}/, sem tocar nos originais
-(CLAUDE.md §3, regra 1: dados/bruto/ é somente leitura — aqui só lemos).
+"""Extrai as planilhas de indicadores do INEP dos .zip em dados/origem/indicadores/
+para dados/bruto/indicadores/{tipo}/{ano}/, sem tocar nos originais
+(CLAUDE.md §3, regra 1: dados/origem/ é somente leitura — aqui só lemos).
 
 Cada .zip do INEP contém uma pasta com a mesma tabela em dois formatos
 (.xlsx e .ods), um arquivo md5_*.txt no formato do `md5sum` cobrindo os dois,
@@ -22,7 +22,7 @@ import re
 import zipfile
 from dataclasses import dataclass
 
-from src.config import BRUTOS_INEP, INDICADORES
+from src.config import INDICADORES, ORIGEM_INDICADORES
 
 logger = logging.getLogger(__name__)
 
@@ -89,7 +89,7 @@ def _ler_md5_txt(conteudo: bytes) -> dict[str, str]:
 
 
 def extrair(
-    origem: pathlib.Path = BRUTOS_INEP, destino: pathlib.Path = INDICADORES
+    origem: pathlib.Path = ORIGEM_INDICADORES, destino: pathlib.Path = INDICADORES
 ) -> list[MembroZip]:
     """Extrai .xlsx e md5_*.txt de cada .zip de `origem` para `destino/tipo/ano/`.
 
@@ -100,7 +100,7 @@ def extrair(
     if not origem.is_dir():
         raise FileNotFoundError(
             f"Pasta de origem não encontrada: {origem}\n"
-            f"Esperava dados/bruto/brutos-inep/ com os .zip de indicadores do INEP."
+            f"Esperava dados/origem/indicadores/ com os .zip de indicadores do INEP."
         )
 
     zips = sorted(

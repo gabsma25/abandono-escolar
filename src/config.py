@@ -2,10 +2,20 @@
 import pathlib
 
 RAIZ = pathlib.Path(__file__).parent.parent
-BRUTO = RAIZ / "dados" / "bruto"
-INTERIM = RAIZ / "dados" / "interim"
-PROCESSADO = RAIZ / "dados" / "processado"
+DADOS = RAIZ / "dados"
 DOCS = RAIZ / "docs"
+
+# O estágio do dado define a pasta (CLAUDE.md §4). origem/, bruto/ e externo/
+# são somente leitura; só src/aquisicao.py cria arquivo nelas, e só o que falta.
+ORIGEM = DADOS / "origem"            # compactados como vieram da fonte
+BRUTO = DADOS / "bruto"              # extraído dos zips, nome original do INEP
+INTERIM = DADOS / "interim"          # transformado por este projeto
+PROCESSADO = DADOS / "processado"    # saída final deste projeto
+EXTERNO = DADOS / "externo"          # dados de terceiros, não obteníveis do INEP
+MANIFEST = DADOS / "MANIFEST.csv"
+
+ORIGEM_CENSO = ORIGEM / "censo"
+BRUTO_CENSO = BRUTO / "censo"
 
 ENCODING = "cp1252"
 SEP = ";"
@@ -17,27 +27,30 @@ SEP = ";"
 #   2025      : "escola", "turma", "matricula", "docente"
 # Nunca monte o caminho por concatenação com o ano: use caminho(ano, tabela).
 ARQUIVOS: dict[tuple[int, str], pathlib.Path] = {
-    (2019, "escola"):    BRUTO / "microdados_ed_basica_2019.csv",
-    (2020, "escola"):    BRUTO / "microdados_ed_basica_2020.CSV",
-    (2021, "escola"):    BRUTO / "microdados_ed_basica_2021.csv",
-    (2022, "escola"):    BRUTO / "microdados_ed_basica_2022.csv",
-    (2023, "escola"):    BRUTO / "microdados_ed_basica_2023.csv",
-    (2024, "escola"):    BRUTO / "microdados_ed_basica_2024.csv",
-    (2025, "escola"):    BRUTO / "Tabela_Escola_2025_V2.csv",
-    (2025, "turma"):     BRUTO / "Tabela_Turma_2025_V2.csv",
-    (2025, "matricula"): BRUTO / "Tabela_Matricula_2025_V2.csv",
-    (2025, "docente"):   BRUTO / "Tabela_Docente_2025_V2.csv",
+    (2019, "escola"):    BRUTO_CENSO / "microdados_ed_basica_2019.csv",
+    (2020, "escola"):    BRUTO_CENSO / "microdados_ed_basica_2020.CSV",
+    (2021, "escola"):    BRUTO_CENSO / "microdados_ed_basica_2021.csv",
+    (2022, "escola"):    BRUTO_CENSO / "microdados_ed_basica_2022.csv",
+    (2023, "escola"):    BRUTO_CENSO / "microdados_ed_basica_2023.csv",
+    (2024, "escola"):    BRUTO_CENSO / "microdados_ed_basica_2024.csv",
+    (2025, "escola"):    BRUTO_CENSO / "Tabela_Escola_2025_V2.csv",
+    (2025, "turma"):     BRUTO_CENSO / "Tabela_Turma_2025_V2.csv",
+    (2025, "matricula"): BRUTO_CENSO / "Tabela_Matricula_2025_V2.csv",
+    (2025, "docente"):   BRUTO_CENSO / "Tabela_Docente_2025_V2.csv",
 }
 
-# Indicadores educacionais do INEP (desfechos e contexto), baixados como .zip
-# em dados/bruto/brutos-inep/ e extraídos por src/extrair_brutos_inep.py para
+# Indicadores educacionais do INEP (desfechos e contexto): os .zip ficam em
+# ORIGEM_INDICADORES e são extraídos por src/extrair_brutos_inep.py para
 # INDICADORES/{tipo}/{ano}/. Ver src/indicadores_inep.py para localizar um
 # arquivo por (tipo, ano, nivel).
-BRUTOS_INEP = BRUTO / "brutos-inep"
-INDICADORES = INTERIM / "brutos_inep_extraido"
+ORIGEM_INDICADORES = ORIGEM / "indicadores"
+INDICADORES = BRUTO / "indicadores"
 
 # Documentação oficial que acompanha os microdados (não é dado).
-DOC_CENSO = BRUTO / "doc-censo"
+ORIGEM_DOC = ORIGEM / "doc"
+
+# Base longitudinal v1.0 entregue pelo orientador em 17/09/2026 (CLAUDE.md §2.3).
+BASE_LONGITUDINAL_V1 = EXTERNO / "base_longitudinal_v1"
 
 _ANOS_DISPONIVEIS = sorted({ano for ano, _ in ARQUIVOS})
 _TABELAS_POR_ANO: dict[int, list[str]] = {}
@@ -53,7 +66,7 @@ def caminho(ano: int, tabela: str) -> pathlib.Path:
         if not p.exists():
             raise FileNotFoundError(
                 f"Arquivo mapeado para ({ano!r}, {tabela!r}) não foi encontrado: {p}\n"
-                f"Baixe o arquivo e coloque em dados/bruto/ sem renomear."
+                f"Rode `python -m src.aquisicao` para extraí-lo do zip em dados/origem/censo/."
             )
         return p
 
