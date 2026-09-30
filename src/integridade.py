@@ -7,13 +7,13 @@ mtime muda); arquivo presente que diverge é erro; arquivo novo é escrito em
 dados/cache_download/divergente/ e nunca entra nas pastas imutáveis.
 Regravação só com `sobrescrever=True` (flag --sobrescrever na linha de comando).
 
-Referência de hash, na ordem:
-  1. sha256 de dados/MANIFEST.csv — o gabarito do projeto;
-  2. md5 do md5_*.txt do INEP — para arquivo que ainda não está no manifesto;
-  3. CRC32 do membro no zip — quando não há nenhum dos dois.
-Se o manifesto confere e o md5 do INEP não, é aviso, não erro: o INEP publica
-md5 desatualizado em alguns zips (P007, P020) e o manifesto já registra o
-arquivo que o projeto validou.
+Cada arquivo tem UMA referência de hash, escolhida por disponibilidade: o
+sha256 de dados/MANIFEST.csv quando o arquivo está nele; senão o md5 do .txt
+do INEP; senão o CRC32 do membro no zip. Falha na referência escolhida é erro
+final — nenhum outro hash resgata o arquivo. Quando o manifesto confere e o md5
+do INEP não, é aviso: o manifesto registra o que a pesquisa usou, o md5 do INEP
+o que o INEP alega ter publicado. Os casos conhecidos estão em
+MD5_INEP_DESATUALIZADO; qualquer outro é problema novo e aparece como tal.
 """
 from __future__ import annotations
 
@@ -33,6 +33,18 @@ from src.config import DIVERGENTE, MANIFEST
 logger = logging.getLogger(__name__)
 
 SUFIXO_PARCIAL = ".parcial"
+
+# Planilhas cujo md5 publicado no .txt do INEP não corresponde ao arquivo do
+# próprio zip, verificadas em 2026-09-30 (o sha256 do manifesto confere).
+# Um sétimo caso é problema novo: `resumir_md5_desatualizado` o destaca.
+MD5_INEP_DESATUALIZADO: dict[str, str] = {
+    "ATU_BRASIL_REGIOES_UFS_2022.xlsx": "P007",
+    "ATU_ESCOLAS_2022.xlsx": "P007",          # entra no painel (ATU escola 2022)
+    "ATU_MUNICIPIOS_2022.xlsx": "P007",
+    "TDI_MUNICIPIOS_2021.xlsx": "P007",
+    "HAD_ESCOLAS_2020.xlsx": "P020",
+    "HAD_ESCOLAS_2021.xlsx": "P020",          # também o .ods diverge
+}
 _LINHA_MD5 = re.compile(r"^(?P<md5>[0-9a-f]{32})\s+\*?(?P<nome>.+?)\s*$", re.IGNORECASE)
 
 
@@ -122,8 +134,10 @@ def hashes_manifesto(caminho: pathlib.Path = MANIFEST) -> dict[str, str]:
     return hashes
 
 
-def _divergencias(d: Digestos, ref: Referencia) -> tuple[list[str], list[str]]:
-    """(erros, avisos) de `d` contra `ref`, pela ordem de autoridade."""
+def _divergencias(d: Digestos, ref: Referencia, nome: str) -> tuple[list[str], list[str]]:
+    """(erros, avisos) de `d` contra a referência escolhida de `ref`.
+    md5 do INEP desatualizado em caso conhecido não gera aviso por arquivo —
+    entra no resumo de `resumir_md5_desatualizado`."""
     erros: list[str] = []
     avisos: list[str] = []
     md5_diverge = ref.md5_inep is not None and d.md5 != ref.md5_inep
@@ -131,9 +145,10 @@ def _divergencias(d: Digestos, ref: Referencia) -> tuple[list[str], list[str]]:
         if d.sha256 != ref.sha256_manifesto:
             erros.append(f"sha256 esperado (manifesto): {ref.sha256_manifesto}\n"
                          f"sha256 obtido:               {d.sha256}")
-        elif md5_diverge:
-            avisos.append(f"md5 do INEP ({ref.md5_inep}) não confere, mas o sha256 do "
-                          f"manifesto confere (md5 publicado desatualizado, cf. P007/P020)")
+        elif md5_diverge and nome not in MD5_INEP_DESATUALIZADO:
+            avisos.append(f"NOVA divergência: md5 do INEP ({ref.md5_inep}) não confere, mas o "
+                          f"sha256 do manifesto confere. Não está em MD5_INEP_DESATUALIZADO — "
+                          f"registrar em docs/problemas.csv")
     elif md5_diverge:
         erros.append(f"md5 esperado (INEP): {ref.md5_inep}\nmd5 obtido:          {d.md5}")
     elif ref.md5_inep is None and ref.crc32_zip is not None and d.crc32 != ref.crc32_zip:
@@ -147,7 +162,7 @@ def confere_existente(destino: pathlib.Path, ref: Referencia) -> Digestos | None
     if not destino.exists():
         return None
     d = digestos(destino)
-    erros, avisos = _divergencias(d, ref)
+    erros, avisos = _divergencias(d, ref, destino.name)
     if erros:
         raise ErroIntegridade(
             f"{destino} já existe e não confere — não será regravado "
@@ -179,7 +194,7 @@ def gravar_conferido(
     existe = destino.exists()
     if existe and not sobrescrever:
         d = confere_existente(destino, ref)
-        logger.info("Já presente e íntegro, não tocado: %s", destino.name)
+        logger.debug("Já presente e íntegro, não tocado: %s", destino.name)
         return Resultado("ja_presente", d)  # type: ignore[arg-type]
 
     destino.parent.mkdir(parents=True, exist_ok=True)
@@ -188,7 +203,7 @@ def gravar_conferido(
         for bloco in iter(lambda: fonte.read(1 << 20), b""):
             dst.write(bloco)
     d = digestos(parcial)
-    erros, avisos = _divergencias(d, ref)
+    erros, avisos = _divergencias(d, ref, destino.name)
     if erros:
         alvo = _para_divergente(parcial, destino.name, d)
         raise ErroIntegridade(
@@ -201,3 +216,28 @@ def gravar_conferido(
         logger.warning("%s sem nenhum hash de referência; gravado sem conferência.", destino.name)
     os.replace(parcial, destino)
     return Resultado("sobrescrito" if existe else "extraido", d)
+
+
+def resumir_md5_desatualizado(divergentes: set[str], conferidos: set[str]) -> set[str]:
+    """Compara as planilhas com md5 do INEP divergente com MD5_INEP_DESATUALIZADO.
+
+    `divergentes`: nomes cujo md5 não conferiu; `conferidos`: todos os nomes
+    que tinham md5 do INEP para comparar. Registra uma linha INFO para os
+    casos esperados, WARNING para cada caso novo e para caso conhecido que
+    deixou de divergir (o INEP pode ter corrigido). Retorna os novos.
+    """
+    conhecidos = divergentes & MD5_INEP_DESATUALIZADO.keys()
+    novos = divergentes - MD5_INEP_DESATUALIZADO.keys()
+    sanados = (MD5_INEP_DESATUALIZADO.keys() & conferidos) - divergentes
+    if conhecidos:
+        logger.info(
+            "md5 do INEP desatualizado nos %d caso(s) conhecido(s) de %d esperado(s) (%s).",
+            len(conhecidos), len(MD5_INEP_DESATUALIZADO),
+            ", ".join(sorted({MD5_INEP_DESATUALIZADO[n] for n in conhecidos})),
+        )
+    for n in sorted(novos):
+        logger.warning("NOVA divergência de md5 do INEP: %s — não está em MD5_INEP_DESATUALIZADO.", n)
+    for n in sorted(sanados):
+        logger.warning("%s (%s) deixou de divergir do md5 do INEP — atualizar MD5_INEP_DESATUALIZADO.",
+                       n, MD5_INEP_DESATUALIZADO[n])
+    return novos

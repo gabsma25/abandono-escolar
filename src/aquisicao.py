@@ -84,7 +84,7 @@ def extrair_membro(
     `gravar_conferido`: "ja_presente", "extraido" ou "sobrescrito"."""
     # Confere o existente sem abrir o zip: o zip pode nem estar mais no disco.
     if not sobrescrever and confere_existente(destino, Referencia(sha_esperado)) is not None:
-        logger.info("Já presente e íntegro, não tocado: %s", destino.name)
+        logger.debug("Já presente e íntegro, não tocado: %s", destino.name)
         return "ja_presente"
     if not zip_path.exists():
         existentes = sorted(p.name for p in zip_path.parent.glob("*.zip")) if zip_path.parent.is_dir() else []
