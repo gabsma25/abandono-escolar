@@ -179,7 +179,7 @@ valores iguais à planilha). Regra: mapear por posição/rótulo, nunca pelo nom
 
 ### 2.2 Microdados do Censo Escolar (fase 2 — enriquecimento; fase 1 só para D8)
 
-`dados/bruto/microdados_ed_basica_{2019..2024}.csv` e `Tabela_*_2025_V2.csv`,
+`dados/bruto/censo/microdados_ed_basica_{2019..2024}.csv` e `Tabela_*_2025_V2.csv`,
 uma linha por escola, 290–426 colunas, `cp1252`, `;`. Catálogo completo (980
 variáveis, presença por ano, preenchimento BR/RR) em `docs/catalogo_variaveis.csv`
 e `docs/catalogo_variaveis.html`. Quatro gerações de esquema (CLAUDE.md §2.1).
@@ -189,13 +189,47 @@ Só entram na fase 1 as quatro colunas de D8 — todas existem nos sete anos
 
 ### 2.3 Base longitudinal v1.0 do orientador
 
-`dados/Processados/base_longitudinal_abandono_rr_2019_2025.csv` — 6.054 × 59,
+`dados/externo/base_longitudinal_v1/base_longitudinal_abandono_rr_2019_2025.csv` — 6.054 × 59,
 união das quatro fontes filtradas a `SG_UF == 'RR'`, chave `ANO + CO_ENTIDADE`.
 Conferi contra as planilhas originais de 2019 (tx_rend e ATU): todas as colunas
 comparadas são cópias exatas (§2.1 e P016). O script que a gerou **não está no
 repositório**; para reprodutibilidade (regra 9, e §19 da proposta) ela deve ser
 regerada por `src/` — `src/indicadores_rr.py` (extração RR para Parquet) já
 existe; a montagem/harmonização é o próximo módulo.
+
+### 2.4 Versionamento e reprodutibilidade das fontes do INEP
+
+**Fato observado.** O INEP substitui arquivos de microdados já publicados, no
+mesmo endereço e com o mesmo nome de arquivo, e a página de download nem
+sempre registra a substituição. Em 30/09/2026 identificamos duas edições do
+Censo Escolar distribuídas em versão posterior à publicação original:
+
+| Edição | Zip (sha256, `dados/MANIFEST.csv`) | Evidência dentro do zip | Nota na página de download |
+|--------|-------------------------------------|-------------------------|----------------------------|
+| 2024 | `microdados_censo_escolar_2024.zip` (`ae29d81d…2d640db`) | pasta interna `microdados_censo_escolar_2024_defeso/`; todos os membros datados de 08/07/2026 | nenhuma |
+| 2025 | `microdados_censo_escolar_2025_.zip` (`ad2c3891…fecd2fc90a`) | pasta interna `microdados_censo_escolar_2025_v2/`; arquivos com sufixo `_V2`, `Leia-me_v2.pdf`; membros datados de 31/07/2026 | "(Documento atualizado em julho/2026)" |
+
+Os arquivos extraídos que a pesquisa usa são `microdados_ed_basica_2024.csv`
+(sha256 `3fb4d93c…53bc9`; md5 publicado no zip `04D691FE…068AD6`) e
+`Tabela_Escola_2025_V2.csv` (sha256 `f737d25d…51f5b523`; md5 publicado
+`7B0D5882…ABEA9B0`), mais Turma, Matrícula e Docente 2025 (hashes completos
+no manifesto). Os zips foram baixados em 02/09/2026.
+
+**O que não observamos.** Não temos as versões anteriores desses dois zips.
+Não sabemos, portanto, o que mudou no conteúdo, nem se alguma revisão
+alterou colunas ou contagens que a pesquisa usa. A evidência de revisão é o
+nome da pasta interna, o sufixo dos arquivos e as datas dos membros.
+
+**Consequência metodológica.** Neste projeto, o nome do arquivo, o endereço
+de download e a página do INEP não identificam a versão dos dados: em 2024 a
+revisão não deixou registro na página. O md5 que o INEP publica dentro de cada
+zip é gerado junto com a versão distribuída e, por isso, não distingue uma
+versão da outra. Para que o estudo possa ser reproduzido, a versão usada é
+fixada pelo sha256 de cada arquivo em `dados/MANIFEST.csv`; um arquivo
+rebaixado com outro hash é tratado como versão diferente e não entra na base
+sem decisão registrada (CLAUDE.md §3, regra 1). Essas duas observações não
+permitem estimar com que frequência o INEP revisa arquivos, nem se o mesmo
+ocorre com os indicadores educacionais.
 
 ---
 
