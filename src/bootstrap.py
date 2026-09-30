@@ -27,6 +27,7 @@ from collections.abc import Callable
 from src import (
     analise_base_longitudinal,
     aquisicao,
+    base_longitudinal,
     catalogo_microdados,
     extrair_brutos_inep,
     indicadores_inep,
@@ -55,6 +56,7 @@ MINUTOS = {
     "catalogo_microdados": 1,
     "inventario_indicadores": 23,
     "recorte_rr": 13,
+    "base_longitudinal": 1,
     "analise_base_v1": 1,
     "catalogo_html": 1,
 }
@@ -105,6 +107,13 @@ def _analise_base_v1() -> None:
     analise_base_longitudinal.gerar()
 
 
+def _conferir_processado() -> None:
+    """A base regerada tem o mesmo sha256 registrado no manifesto?"""
+    avisos = [a for a in aquisicao.verificar_manifesto()[1] if "processado/" in a]
+    if not avisos:
+        logger.info("dados/processado/: mesmo sha256 do manifesto — base reproduzida.")
+
+
 def conferir_docs_no_git(raiz: pathlib.Path = RAIZ) -> list[str]:
     """Arquivos de docs/ que diferem do versionado (vazio = estado reproduzido)."""
     try:
@@ -146,9 +155,11 @@ def main() -> None:
     _etapa("catalogo_microdados", catalogo_microdados.catalogar)
     _etapa("inventario_indicadores", indicadores_inep.inventariar)
     _etapa("recorte_rr", indicadores_rr.gravar_todos)
+    _etapa("base_longitudinal", base_longitudinal.main)
     _etapa("analise_base_v1", _analise_base_v1)
     _etapa("catalogo_html", relatorio_catalogo.gerar)
     conferir_docs_no_git()
+    _conferir_processado()
 
 
 if __name__ == "__main__":
