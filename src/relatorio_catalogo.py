@@ -9,7 +9,7 @@ import json
 import logging
 import pathlib
 
-from src.config import DOCS, INDICADORES
+from src.config import DADOS, DOCS, EXTRACAO_INDICADORES
 
 logger = logging.getLogger(__name__)
 
@@ -25,10 +25,10 @@ def _ler(nome: str) -> list[dict]:
         return list(csv.DictReader(f))
 
 
-def relacao_extraidos(destino: pathlib.Path = DOCS / "relacao_indicadores_extraidos.csv") -> list[dict]:
-    """Relação das planilhas de indicadores extraídas em INDICADORES (só as
-    linhas 'extraido' do _manifesto.csv que são .xlsx), com tamanho no disco."""
-    manifesto = INDICADORES / "_manifesto.csv"
+def relacao_extraidos() -> list[dict]:
+    """Planilhas de indicadores extraídas (linhas 'extraido' de
+    docs/extracao_indicadores.csv que são .xlsx), com tamanho no disco."""
+    manifesto = EXTRACAO_INDICADORES
     if not manifesto.exists():
         logger.warning("%s não existe; relação de extraídos ficará vazia", manifesto)
         return []
@@ -37,18 +37,14 @@ def relacao_extraidos(destino: pathlib.Path = DOCS / "relacao_indicadores_extrai
         for r in csv.DictReader(f):
             if r["acao"] != "extraido" or not r["arquivo_extraido"].lower().endswith(".xlsx"):
                 continue
-            arq = INDICADORES / r["arquivo_extraido"]
+            arq = DADOS / r["arquivo_extraido"]
             linhas.append({
                 "tipo": r["tipo"], "ano": r["ano"], "nivel": r["nivel"],
-                "arquivo": (INDICADORES.relative_to(DOCS.parent) / r["arquivo_extraido"]).as_posix(),
+                "arquivo": (DADOS.relative_to(DOCS.parent) / r["arquivo_extraido"]).as_posix(),
                 "tamanho_mb": round(arq.stat().st_size / 1e6, 1) if arq.exists() else "",
                 "md5_confere": r["md5_confere"], "zip_original": r["zip_original"],
             })
     linhas.sort(key=lambda r: (r["tipo"], r["nivel"], r["ano"]))
-    with destino.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=list(linhas[0].keys()) if linhas else ["tipo"])
-        w.writeheader()
-        w.writerows(linhas)
     return linhas
 
 

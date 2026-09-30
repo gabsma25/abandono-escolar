@@ -49,6 +49,9 @@ ARQUIVOS: dict[tuple[int, str], pathlib.Path] = {
 # arquivo por (tipo, ano, nivel).
 ORIGEM_INDICADORES = ORIGEM / "indicadores"
 INDICADORES = BRUTO / "indicadores"
+# Um registro por membro de cada zip de indicadores (tipo, ano, nível, ação,
+# md5 conferido). Gerado pelo extrator; fica em docs/, fora da pasta imutável.
+EXTRACAO_INDICADORES = DOCS / "extracao_indicadores.csv"
 
 # Documentação oficial que acompanha os microdados (não é dado).
 ORIGEM_DOC = ORIGEM / "doc"

@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 
 import openpyxl
 
-from src.config import DOCS, INDICADORES
+from src.config import DADOS, DOCS, EXTRACAO_INDICADORES, INDICADORES
 
 logger = logging.getLogger(__name__)
 
@@ -64,18 +64,19 @@ def caminho_indicador(tipo: str, ano: int, nivel: str) -> pathlib.Path:
 
 
 def listar_extraidos() -> list[tuple[str, int, str, pathlib.Path]]:
-    """[(tipo, ano, nivel, path)] de todo .xlsx sob INDICADORES, via manifesto."""
-    manifesto = INDICADORES / "_manifesto.csv"
+    """[(tipo, ano, nivel, path)] de todo .xlsx sob INDICADORES, via
+    docs/extracao_indicadores.csv."""
+    manifesto = EXTRACAO_INDICADORES
     if not manifesto.exists():
         raise FileNotFoundError(
-            f"Manifesto não encontrado: {manifesto}\n"
+            f"Relação de extração não encontrada: {manifesto}\n"
             f"Rode `python -m src.extrair_brutos_inep` primeiro."
         )
     itens = []
     with manifesto.open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
             if r["acao"] == "extraido" and r["arquivo_extraido"].lower().endswith(".xlsx"):
-                itens.append((r["tipo"], int(r["ano"]), r["nivel"], INDICADORES / r["arquivo_extraido"]))
+                itens.append((r["tipo"], int(r["ano"]), r["nivel"], DADOS / r["arquivo_extraido"]))
     return sorted(itens)
 
 

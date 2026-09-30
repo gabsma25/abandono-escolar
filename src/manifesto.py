@@ -24,7 +24,7 @@ from src.config import (
     ARQUIVOS,
     BASE_LONGITUDINAL_V1,
     DADOS,
-    INDICADORES,
+    EXTRACAO_INDICADORES,
     MANIFEST,
     ORIGEM_CENSO,
     ORIGEM_DOC,
@@ -42,9 +42,9 @@ Item = tuple[str, str, str, str, pathlib.Path]
 
 
 def _itens_indicadores_extraidos() -> list[Item]:
-    """.xlsx e md5_*.txt de bruto/indicadores/, rotulados pelo _manifesto.csv
-    que src/extrair_brutos_inep.py grava junto (tipo, ano e nível do zip)."""
-    rotulos = INDICADORES / "_manifesto.csv"
+    """.xlsx e .txt de md5 de bruto/indicadores/, rotulados por
+    docs/extracao_indicadores.csv (tipo, ano e nível do zip de origem)."""
+    rotulos = EXTRACAO_INDICADORES
     if not rotulos.exists():
         raise FileNotFoundError(
             f"{rotulos} não existe. Rode `python -m src.extrair_brutos_inep` antes."
@@ -55,7 +55,7 @@ def _itens_indicadores_extraidos() -> list[Item]:
             if r["acao"] == "extraido":
                 itens.append((
                     "bruto", "inep", r["ano"], f"indicador_{r['tipo']}_{r['nivel']}",
-                    INDICADORES / r["arquivo_extraido"],
+                    DADOS / r["arquivo_extraido"],
                 ))
     return sorted(itens, key=lambda i: i[4])
 

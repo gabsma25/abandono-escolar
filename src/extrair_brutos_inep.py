@@ -15,6 +15,9 @@ e às vezes lixo de sistema (Thumbs.db, .~lock.*#). Extraímos só o .xlsx e o
 O md5 do .xlsx extraído é comparado com o .txt do próprio INEP, ignorando a
 caixa do nome (o INEP grafa '.xlsX' em HAD municípios 2019–2021, P020).
 
+A relação de tudo o que foi extraído, ignorado ou tratado como duplicata vai
+para docs/extracao_indicadores.csv (fora de bruto/, que é imutável).
+
 Duas gerações de nomenclatura dos .zip:
   Padrão A (ATU, HAD, IED, TDI): "{TIPO}_{ANO}_{NIVEL}.zip"
   Padrão B (tx_rend):            "tx_rend_{nivel}_{ano}.zip"
@@ -31,13 +34,14 @@ import re
 import zipfile
 from dataclasses import dataclass
 
-from src.config import INDICADORES, ORIGEM_INDICADORES
+from src.config import DADOS, EXTRACAO_INDICADORES, INDICADORES, ORIGEM_INDICADORES
 from src.integridade import (
     SUFIXO_PARCIAL,
     Referencia,
     gravar_conferido,
     hashes_manifesto,
     md5_do_zip,
+    resumir_md5_desatualizado,
     sha256_arquivo,
 )
 
@@ -57,7 +61,7 @@ _ACAO_POR_EXTENSAO = {
     ".ods": "ignorado_ods",
 }
 
-_CAMPOS_MANIFESTO = [
+_CAMPOS_EXTRACAO = [
     "tipo", "ano", "nivel", "zip_original", "zip_sha256", "membro", "acao",
     "arquivo_extraido", "tamanho_bytes", "md5_esperado", "md5_confere",
     "duplicata_de",
@@ -78,6 +82,7 @@ class MembroZip:
     md5_esperado: str | None
     md5_confere: bool | None
     duplicata_de: str | None
+    status: str = ""   # de gravar_conferido; não vai para a relação em docs/
 
 
 def parse_nome_zip(nome_sem_ext: str) -> tuple[str, int, str] | None:
@@ -153,6 +158,11 @@ def extrair(
         logger.warning(
             "%d zip(s) não reconhecido(s): %s", len(nao_reconhecidos), nao_reconhecidos
         )
+    planilhas = [i for i in resultado if i.acao == "extraido" and i.membro.lower().endswith(".xlsx")]
+    resumir_md5_desatualizado(
+        {pathlib.PurePosixPath(i.membro).name for i in planilhas if i.md5_confere is False},
+        {pathlib.PurePosixPath(i.membro).name for i in planilhas if i.md5_confere is not None},
+    )
     return resultado
 
 
@@ -173,6 +183,7 @@ def _extrair_membros(
 
             extraido: pathlib.Path | None = None
             md5_ok: bool | None = None
+            status = ""
             md5_esp = md5_esperados.get(nome.lower())
             if acao == "extraido":
                 extraido = pasta / nome   # achatado: a pasta interna do zip repete tipo/ano
@@ -180,34 +191,36 @@ def _extrair_membros(
                 with zf.open(info) as src:
                     r = gravar_conferido(src, extraido, ref, sobrescrever=sobrescrever,
                                          descricao=f"de {arquivo_zip.name}")
-                if r.status != "ja_presente":
-                    logger.info("%s: %s ← %s", r.status, nome, arquivo_zip.name)
+                status = r.status
+                if status != "ja_presente":
+                    logger.info("%s: %s ← %s", status, nome, arquivo_zip.name)
                 if md5_esp is not None:
                     md5_ok = r.digestos.md5 == md5_esp
 
             itens.append(MembroZip(
                 tipo, ano, nivel, arquivo_zip.name, sha, info.filename, acao,
-                extraido, info.file_size, md5_esp, md5_ok, None,
+                extraido, info.file_size, md5_esp, md5_ok, None, status,
             ))
     return itens
 
 
-def escrever_manifesto(
-    itens: list[MembroZip], destino: pathlib.Path = INDICADORES
+def escrever_extracao(
+    itens: list[MembroZip], caminho: pathlib.Path = EXTRACAO_INDICADORES,
+    raiz: pathlib.Path = DADOS,
 ) -> pathlib.Path:
-    """Grava destino/_manifesto.csv: um registro por membro de cada zip.
-    Não substitui dados/MANIFEST.csv, que é o hash dos arquivos originais.
-    Só regrava se o conteúdo mudou — rodar de novo não toca o arquivo."""
-    destino.mkdir(parents=True, exist_ok=True)
-    caminho = destino / "_manifesto.csv"
+    """Grava docs/extracao_indicadores.csv: um registro por membro de cada zip,
+    com `arquivo_extraido` relativo a `raiz` (dados/). Não substitui
+    dados/MANIFEST.csv, que é o hash dos arquivos. Só regrava se o conteúdo
+    mudou — rodar de novo não toca o arquivo."""
+    caminho.parent.mkdir(parents=True, exist_ok=True)
     buf = io.StringIO(newline="")
     w = csv.writer(buf)
-    w.writerow(_CAMPOS_MANIFESTO)
+    w.writerow(_CAMPOS_EXTRACAO)
     for i in sorted(itens, key=lambda i: (i.tipo, i.ano, i.nivel, i.membro)):
         w.writerow([
             i.tipo, i.ano, i.nivel, i.zip_original, i.zip_sha256, i.membro,
             i.acao,
-            i.arquivo_extraido.relative_to(destino).as_posix() if i.arquivo_extraido else "",
+            i.arquivo_extraido.relative_to(raiz).as_posix() if i.arquivo_extraido else "",
             i.tamanho_bytes, i.md5_esperado or "",
             "" if i.md5_confere is None else i.md5_confere,
             i.duplicata_de or "",
@@ -228,13 +241,16 @@ if __name__ == "__main__":
     ap.add_argument("--sobrescrever", action="store_true",
                     help="regrava arquivos já presentes em bruto/indicadores/ (CLAUDE.md §3, regra 1)")
     itens = extrair(sobrescrever=ap.parse_args().sobrescrever)
-    manifesto = escrever_manifesto(itens)
+    relacao = escrever_extracao(itens)
     n_xlsx = sum(1 for i in itens if i.acao == "extraido" and i.membro.lower().endswith(".xlsx"))
     n_md5_ok = sum(1 for i in itens if i.md5_confere is True)
     n_md5_falha = sum(1 for i in itens if i.md5_confere is False)
     n_dup = sum(1 for i in itens if i.acao == "duplicata_zip")
+    por_status = {st: sum(1 for i in itens if i.status == st) for st in ("ja_presente", "extraido", "sobrescrito")}
+    logger.info("Arquivos em bruto/indicadores/: %d já presentes e íntegros (não tocados), "
+                "%d extraídos agora, %d sobrescritos.", *por_status.values())
     logger.info(
         "%d planilha(s) .xlsx em bruto/; md5 do INEP confere em %d, diverge em %d; "
-        "%d zip(s) duplicado(s). Manifesto: %s",
-        n_xlsx, n_md5_ok, n_md5_falha, n_dup, manifesto,
+        "%d zip(s) duplicado(s). Relação: %s",
+        n_xlsx, n_md5_ok, n_md5_falha, n_dup, relacao,
     )

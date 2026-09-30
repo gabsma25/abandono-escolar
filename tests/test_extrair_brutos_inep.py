@@ -1,12 +1,13 @@
 """Regra 1 (CLAUDE.md §3) aplicada ao extrator de indicadores."""
 from __future__ import annotations
 
+import logging
 import os
 import pathlib
 
 import pytest
 
-from src.extrair_brutos_inep import escrever_manifesto, extrair
+from src.extrair_brutos_inep import escrever_extracao, extrair
 from src.integridade import ErroIntegridade
 from tests.conftest import criar_zip, md5, sha256
 
@@ -17,7 +18,7 @@ def _mtimes(pasta: pathlib.Path) -> dict[pathlib.Path, int]:
 
 def _rodar(z: dict, **kw) -> list:
     itens = extrair(z["origem"], z["destino"], hashes=kw.pop("hashes", {}), **kw)
-    escrever_manifesto(itens, z["destino"])
+    escrever_extracao(itens, z["destino"].parent / "extracao.csv", raiz=z["destino"].parent)
     return itens
 
 
@@ -84,11 +85,39 @@ def test_manifesto_confere_e_md5_do_inep_desatualizado_e_so_aviso(tmp_path, capl
         "ATU_2022_ESCOLAS/ATU_ESCOLAS_2022.xlsx": xlsx,
         "ATU_2022_ESCOLAS/md5_ATU_ESCOLAS_2022.txt": f"{'f' * 32} *ATU_ESCOLAS_2022.xlsx\n".encode(),
     })
+    caplog.set_level(logging.INFO)
     itens = extrair(tmp_path / "origem", tmp_path / "bruto",
                     hashes={"ATU_ESCOLAS_2022.xlsx": sha256(xlsx)})
     assert (tmp_path / "bruto" / "ATU" / "2022" / "ATU_ESCOLAS_2022.xlsx").read_bytes() == xlsx
     assert [i.md5_confere for i in itens if i.membro.endswith(".xlsx")] == [False]
-    assert "desatualizado" in caplog.text
+    # Caso conhecido (P007): entra no resumo, sem WARNING por arquivo.
+    assert "caso(s) conhecido(s)" in caplog.text
+    assert not [r for r in caplog.records if r.levelno >= logging.WARNING]
+
+
+def test_setima_divergencia_de_md5_aparece_como_nova(tmp_path, caplog):
+    """Divergência fora de MD5_INEP_DESATUALIZADO não se dilui no resumo."""
+    xlsx = b"planilha"
+    criar_zip(tmp_path / "origem" / "TDI_2023_ESCOLAS.zip", {
+        "TDI_2023_ESCOLAS/TDI_ESCOLAS_2023.xlsx": xlsx,
+        "TDI_2023_ESCOLAS/md5_TDI_ESCOLAS_2023.txt": f"{'e' * 32} *TDI_ESCOLAS_2023.xlsx\n".encode(),
+    })
+    extrair(tmp_path / "origem", tmp_path / "bruto", hashes={"TDI_ESCOLAS_2023.xlsx": sha256(xlsx)})
+    novas = [r.getMessage() for r in caplog.records
+             if r.levelno == logging.WARNING and "NOVA divergência" in r.getMessage()]
+    assert len(novas) == 2   # um aviso na gravação e um no resumo final
+    assert all("TDI_ESCOLAS_2023.xlsx" in m or "md5 do INEP" in m for m in novas)
+
+
+def test_caso_conhecido_que_deixa_de_divergir_e_avisado(tmp_path, caplog):
+    """Se o INEP corrigir o md5, o registro de casos conhecidos fica velho."""
+    xlsx = b"planilha corrigida"
+    criar_zip(tmp_path / "origem" / "HAD_2020_ESCOLAS.zip", {
+        "HAD_2020_ESCOLAS/HAD_ESCOLAS_2020.xlsx": xlsx,
+        "HAD_2020_ESCOLAS/md5_HAD_ESCOLAS_2020.txt": f"{md5(xlsx)} *HAD_ESCOLAS_2020.xlsx\n".encode(),
+    })
+    extrair(tmp_path / "origem", tmp_path / "bruto", hashes={})
+    assert "deixou de divergir" in caplog.text
 
 
 def test_manifesto_divergente_e_erro(tmp_path):
