@@ -1,0 +1,7 @@
+desfecho,formula,etapa,anos_com_alvo,tipo,uso,a_decidir,na_base_regerada
+ABANDONO_FUN_AF_T1,"$\text{ABANDONO\_FUN\_AF}_{i,t+1}$",anos finais EF,t = 2019–2024,contínuo (0–100),regressão — principal,não,sim
+ABANDONO_MED_T1,"$\text{ABANDONO\_MED}_{i,t+1}$",ensino médio,t = 2019–2024,contínuo (0–100),regressão — principal,não,sim
+OCORRE_AF_T1,$1[\text{ABANDONO}_{t+1} > 0]$,anos finais EF,t = 2019–2024,binário,triagem (a),não,não
+OCORRE_EM_T1,$1[\text{ABANDONO}_{t+1} > 0]$,ensino médio,t = 2019–2024,binário,triagem (a),não,não
+ALTO_AF_T1,"$1[\text{ABANDONO}_{t+1} \ge q_{p}(\text{etapa},t+1)]$",anos finais EF,t = 2019–2024,binário,triagem (b) — [DECIDIR] $p$ (ex.: quantil 75 ou 80) ou limite operacional,sim,não
+ALTO_EM_T1,"$1[\text{ABANDONO}_{t+1} \ge q_{p}(\text{etapa},t+1)]$",ensino médio,t = 2019–2024,binário,triagem (b) — [DECIDIR] $p$ (ex.: quantil 75 ou 80) ou limite operacional,sim,não
