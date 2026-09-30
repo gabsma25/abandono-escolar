@@ -87,7 +87,7 @@ por `python -m src.manifesto`.
 | `origem/indicadores/` | zips de indicadores do INEP (ATU, HAD, IED, TDI, tx_rend) | 103 |
 | `origem/doc/` | PDFs de documentação (`Leia-me-2021.pdf`, `Nota-2021.pdf`) | 2 |
 | `bruto/censo/` | CSVs extraídos dos zips de microdados, nome original | 10 |
-| `bruto/indicadores/{tipo}/{ano}/` | `.xlsx` + `md5_*.txt` extraídos dos zips | 206 (+ `_manifesto.csv`) |
+| `bruto/indicadores/{tipo}/{ano}/` | `.xlsx` + `.txt` de md5 extraídos dos zips | 206 |
 | `externo/base_longitudinal_v1/` | base longitudinal v1.0 do orientador | 6 |
 | `interim/indicadores_rr/` | recorte RR em Parquet, `{tipo}_{ano}.parquet` | 26 |
 | `processado/` | saída final deste projeto | **vazia** |
@@ -96,9 +96,13 @@ por `python -m src.manifesto`.
 `src/base_longitudinal.py`, `src/bootstrap.py`, `src/filtros.py`,
 `src/agregacao.py`, o notebook 01, `docs/dicionario_anotado.csv`,
 `docs/desfechos.csv` e `docs/funil_contagem.csv` não existem. `src/aquisicao.py`
-tem só a camada de extração — descoberta e download estão por fazer. Dois
-arquivos que o INEP publica não estão no projeto:
-`ATU_2025_MUNICIPIOS.zip` e `tx_rend_brasil_regioes_ufs_2025.zip` (P019).
+tem só a camada de extração — descoberta e download estão por fazer.
+
+**Ausência deliberada, não erro:** dois arquivos que o INEP publica não estão
+no projeto — `ATU_2025_MUNICIPIOS.zip` (nível municípios) e
+`tx_rend_brasil_regioes_ufs_2025.zip` (nível Brasil/UF). Não estão no
+manifesto, não foram baixados e **não estão autorizados** (arquivo novo, §6).
+Não afetam o painel, que é por escola (P019).
 
 ### 2.1 Microdados do Censo Escolar (fase 2 — enriquecimento)
 
@@ -126,10 +130,12 @@ Fatos dos zips, verificados em 2026-09-29/30:
   `microdados_censo_escolar_2024_defeso/`, `microdados_censo_escolar_2025_v2/`)
   e até 2023 o nome vem em cp437 com acento corrompido — o membro é localizado
   pelo nome-base.
-- **O INEP revisa arquivos depois da publicação.** O zip de 2024 é a versão
-  `_defeso` com membros datados de 08/07/2026; o de 2025 é a `_v2`, de
-  31/07/2026. Rebaixar pode trazer outra versão — por isso o sha256 do
-  manifesto é conferido em toda extração.
+- **O INEP revisa arquivos depois da publicação, nem sempre avisando.** O
+  zip de 2024 é a versão `_defeso` com membros datados de 08/07/2026, e a
+  página de microdados não traz nota de atualização para 2024 (em 2026-09-30);
+  o de 2025 é a `_v2`, de 31/07/2026, com nota "Documento atualizado em
+  julho/2026". Rebaixar pode trazer outra versão — só o sha256 do manifesto
+  detecta, e ele é conferido em toda extração.
 - O `md5_*.txt` do INEP dentro do zip grafa o nome com outra caixa (`.csv`
   para `.CSV` em 2020, `_v2` para `_V2` em 2025); a comparação ignora caixa.
 - 2023 e 2024 trazem também `suplemento_cursos_tecnicos_*.csv`; 2025 traz
@@ -170,17 +176,43 @@ sete anos: `IN_EDUCACAO_INDIGENA`, `TP_LOCALIZACAO_DIFERENCIADA`,
 ### 2.2 Indicadores educacionais do INEP (fonte da fase 1)
 
 `origem/indicadores/` tem 103 `.zip`. Cada zip traz a mesma tabela em `.xlsx`
-e `.ods` mais o arquivo de md5 do INEP. `python -m src.extrair_brutos_inep`
-extrai **só o `.xlsx` e o md5** para `bruto/indicadores/{tipo}/{ano}/` e grava
-`_manifesto.csv` ali (tipo, ano, nível, md5 conferido). Nunca leia o zip
-direto nas análises.
+e `.ods` mais um `.txt` de md5 do INEP. `python -m src.extrair_brutos_inep`
+extrai **só o `.xlsx` e o `.txt`** para `bruto/indicadores/{tipo}/{ano}/` e
+grava a relação de cada membro de cada zip (extraído, ignorado, duplicata, md5
+conferido) em `docs/extracao_indicadores.csv`. Nunca leia o zip direto nas
+análises.
 
-O arquivo de md5 do INEP nem sempre confere e nem sempre se chama `md5_*`:
-`tx_rend_escolas_2023.zip` o chama `tx_rend_escolas_2023.txt`; HAD municípios
-2019–2021 grafa `.xlsX`; em seis planilhas o md5 publicado não corresponde ao
-arquivo (ATU 2022 nos três níveis e TDI municípios 2021 — P007; HAD escolas
-2020 e 2021 — P020); `tx_rend_municipios_2020` não tem md5 do `.xlsx` (P008).
-Nesses casos a referência é o sha256 do manifesto (regra 1).
+**Arquivo de hash do INEP nos 103 zips** (levantamento de 2026-09-30): todo
+zip tem exatamente um `.txt`, sempre no formato `md5sum` (`<hash> *<nome>`,
+CRLF, uma linha para o `.xlsx` e outra para o `.ods`). O nome varia:
+
+| Nome do `.txt` | Zips | Onde |
+|----------------|------|------|
+| `md5_<planilha>.txt` | 52 | ATU, HAD, IED, TDI 2019–2021; tx_rend 2020–2025 |
+| `MD5_<planilha>.txt` | 47 | ATU, HAD, IED, TDI 2022–2025 |
+| `md5_<planilha>.txt.txt` | 3 | tx_rend 2019 |
+| `<planilha>.txt` (sem prefixo) | 1 | `tx_rend_escolas_2023` |
+
+Dentro do `.txt`: hex minúsculo, exceto `tx_rend_{escolas,municipios}_2025`
+(maiúsculo); o nome do `.xlsx` bate exatamente, exceto HAD municípios
+2019–2021 (grafa `.xlsX`) e `tx_rend_municipios_2020`, que lista o `.ods`
+duas vezes e não lista o `.xlsx` (P008). O parser lê qualquer `.txt` do zip
+e compara nome sem caixa. Hoje **nenhuma planilha está sem referência de
+hash**: as 103 estão no manifesto; sem ele, 102 teriam md5 do INEP e uma
+(`tx_rend_municipios_2020.xlsx`) só o CRC do zip.
+
+**md5 do INEP que não confere com o próprio zip** — seis planilhas, todas com
+sha256 do manifesto conferindo (registradas em `MD5_INEP_DESATUALIZADO`,
+`src/integridade.py`; um sétimo caso aparece no log como NOVA divergência):
+
+| Planilha | Problema |
+|----------|----------|
+| `ATU_BRASIL_REGIOES_UFS_2022.xlsx` | P007 |
+| `ATU_ESCOLAS_2022.xlsx` | P007 — **entra no painel** |
+| `ATU_MUNICIPIOS_2022.xlsx` | P007 |
+| `TDI_MUNICIPIOS_2021.xlsx` | P007 |
+| `HAD_ESCOLAS_2020.xlsx` | P020 |
+| `HAD_ESCOLAS_2021.xlsx` | P020 (o `.ods` também diverge) |
 
 Cobertura por nível (U = Brasil/Regiões/UFs, M = municípios, E = escolas). O
 INEP publica os três níveis dos cinco indicadores em 2019–2025; a tabela
@@ -284,8 +316,12 @@ da fase atual (§8).
    para o destino. Divergência de hash é erro: o arquivo divergente vai para
    `dados/cache_download/divergente/` e nunca entra nessas pastas. Regravação
    só com `--sobrescrever` explícito na linha de comando.
-   (Implementação: `src/integridade.py`. Referência de hash, nesta ordem:
-   sha256 do manifesto, md5 do INEP, CRC do zip.)
+   (Implementação: `src/integridade.py`. Cada arquivo tem UMA referência de
+   hash, escolhida por disponibilidade: o sha256 do manifesto quando o arquivo
+   está nele; senão o md5 do INEP; senão o CRC do zip. Falha na referência
+   escolhida é erro final — nenhum outro hash resgata o arquivo. Quando o
+   manifesto confere e o md5 do INEP não, é aviso: seis planilhas estão nessa
+   condição (P007, P020) e uma delas entra no painel.)
 2. **Nenhum dado versionado.** `dados/` inteiro fora do git, exceto
    `dados/MANIFEST.csv`.
 3. **Nunca selecione variável pela correlação com o desfecho.** Seleção é por
@@ -331,13 +367,14 @@ abandono-escolar/
 │   │   └── doc/                    # PDFs de documentação do INEP
 │   ├── bruto/                      # extraído dos zips, nome original do INEP — imutável
 │   │   ├── censo/                  # 10 CSVs: escola 2019–2025 + turma/matrícula/docente 2025
-│   │   └── indicadores/            # {tipo}/{ano}/*.xlsx + md5 + _manifesto.csv
+│   │   └── indicadores/            # {tipo}/{ano}/*.xlsx + .txt de md5
 │   ├── interim/
 │   │   └── indicadores_rr/         # {tipo}_{ano}.parquet, recorte RR, nomes originais
 │   ├── processado/                 # saída final deste projeto (vazia)
 │   ├── externo/                    # dados de terceiros, não obteníveis do INEP — imutável
 │   │   └── base_longitudinal_v1/   # entrega do orientador, 17/09/2026
-│   ├── cache_download/             # downloads não conferidos; divergente/ (não existe ainda)
+│   ├── cache_download/             # não imutável: downloads a conferir, divergente/,
+│   │   └── html/{AAAA-MM-DD}/      # páginas do INEP capturadas nessa data (42 em 2026-09-30)
 │   ├── migracao_estrutura_log.csv  # log da migração de 2026-09-30
 │   └── MANIFEST.csv                # estagio, origem, ano, tabela, arquivo, sha256, data
 ├── docs/
@@ -348,7 +385,7 @@ abandono-escolar/
 │   ├── presenca_colunas_escola.csv       # coluna × ano/tabela, valor = posição (gerado)
 │   ├── inventario_indicadores.csv        # uma linha por planilha de indicador (gerado)
 │   ├── presenca_colunas_indicadores.csv  # coluna × tipo/nível × ano + descrição (gerado)
-│   ├── relacao_indicadores_extraidos.csv # planilhas extraídas, md5 conferido (gerado)
+│   ├── extracao_indicadores.csv          # membro × zip de indicador: ação, md5 conferido (gerado)
 │   ├── catalogo_variaveis_microdados.csv # coluna × arquivo: bloco, preenchimento, exemplos (gerado)
 │   ├── catalogo_variaveis.csv            # coluna consolidada × 10 arquivos (gerado)
 │   ├── catalogo_variaveis.html           # página navegável do catálogo (gerada, fora do git)
@@ -359,7 +396,7 @@ abandono-escolar/
 │   ├── estrato_nome_indigena.csv         # proxy fraco de estrato indígena (gerado)
 │   ├── dicionario_anotado.csv            # Tabela B: variável × papel (a fazer)
 │   ├── desfechos.csv                     # Tabela C (a fazer; = §5 da metodologia)
-│   ├── problemas.csv                     # Tabela D (P001–P018; P019–P020 a colar)
+│   ├── problemas.csv                     # Tabela D (P001–P018; P019–P021 a colar)
 │   ├── funil_contagem.csv                # (a fazer)
 │   └── DECISOES.md                       # log de decisões (ver seção 6)
 ├── notebooks/
@@ -382,6 +419,7 @@ abandono-escolar/
 │   ├── filtros.py              # funil de recorte com contagem (fase 2, a fazer)
 │   └── agregacao.py            # Turma/Matrícula/Docente → escola (fase 2, a fazer)
 ├── tests/                      # pytest; zips sintéticos, sem rede, sem tocar em dados/
+│   └── fixtures/html/{AAAA-MM-DD}/ # 6 páginas do INEP (caminho = URL) + capturas.csv
 ├── pytest.ini
 ├── requirements.txt            # UTF-8
 ├── README.md                   # (a fazer)
@@ -392,13 +430,13 @@ Comandos que regeneram o que está em `docs/` e `dados/`, na ordem:
 
 ```
 python -m src.aquisicao                  # origem/censo → bruto/censo (+ origem/doc)
-python -m src.extrair_brutos_inep        # origem/indicadores → bruto/indicadores
+python -m src.extrair_brutos_inep        # origem/indicadores → bruto/indicadores, docs/extracao_indicadores.csv
 python -m src.manifesto                  # dados/MANIFEST.csv
 python -m src.indicadores_inep           # docs/inventario_indicadores.csv, presenca_colunas_indicadores.csv
 python -m src.indicadores_rr             # dados/interim/indicadores_rr/{tipo}_{ano}.parquet
 python -m src.leitura                    # docs/inventario.csv, presenca_colunas_escola.csv
 python -m src.catalogo_microdados        # docs/catalogo_variaveis_microdados.csv, catalogo_variaveis.csv
-python -m src.relatorio_catalogo         # docs/catalogo_variaveis.html, relacao_indicadores_extraidos.csv
+python -m src.relatorio_catalogo         # docs/catalogo_variaveis.html
 python -m src.analise_base_longitudinal  # docs/desfechos_*.csv, ausencia_*, estrato_nome_indigena.csv
 python -m pytest                         # testes
 ```
@@ -429,8 +467,8 @@ história; o módulo faz o trabalho e é testável.
 - **Exceções registradas:** `origem/doc/Leia-me-2021.pdf` e
   `origem/doc/Nota-2021.pdf` têm nomes dados à mão (no zip são `Leia-me.pdf`
   e `Nota.pdf`); o mapeamento está em `DOCUMENTACAO`, em `src/aquisicao.py`.
-- Arquivo que o projeto gera ao lado de dado bruto começa com `_`
-  (`bruto/indicadores/_manifesto.csv`).
+- Arquivo gerado pelo projeto nunca fica dentro de pasta imutável: vai para
+  `docs/`, `interim/` ou `processado/`, conforme o estágio.
 
 ---
 
@@ -626,7 +664,7 @@ interim / processado / externo) com conferência de sha256 em cada movimento;
 microdados 2019–2025 extraídos dos zips e conferidos contra o manifesto;
 manifesto por estágio, cobrindo também os zips; HAD 2019–2024 e IED
 2019–2020 incluídos (P019); `src/integridade.py` e extrator sem regravação;
-primeiros testes pytest.
+primeiros testes pytest; relação de extração movida de `bruto/` para `docs/extracao_indicadores.csv`; divergências de md5 do INEP conhecidas nomeadas; levantamento dos arquivos de hash dos 103 zips; 42 páginas do INEP capturadas.
 
 A fase atual se considera pronta quando:
 

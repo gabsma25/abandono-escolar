@@ -316,3 +316,22 @@ vezes não altera mtime em `bruto/indicadores/` (tests/test_extrair_brutos_inep.
 **Alternativa descartada:** listar na regra os módulos autorizados — a regra
 teria de ser emendada a cada módulo novo e não seria testável; e usar o md5 do
 INEP como referência única.
+
+---
+
+## 2026-09-30 — Relação de extração sai de bruto/ para docs/
+
+**Decisão:** o `_manifesto.csv` que o extrator gravava em
+`bruto/indicadores/` passa a `docs/extracao_indicadores.csv` (caminhos
+relativos a `dados/`). `docs/relacao_indicadores_extraidos.csv` foi removido:
+era subconjunto dele (só `.xlsx`, mais tamanho) e estava desatualizado
+(apontava para `interim/brutos_inep_extraido/`); o catálogo HTML monta essa
+relação em memória.
+
+**Evidência:** o arquivo era regravado a cada execução dentro de pasta
+imutável, e o critério 8 do §8 ficava autocontraditório. Conteúdo conferido
+antes da remoção: 319 linhas idênticas, exceto o prefixo `bruto/indicadores/`.
+
+**Alternativa descartada:** manter em `bruto/` com prefixo `_` — exceção
+nominal para o caso que incomoda; arquivo gerado em pasta imutável se move,
+não se renomeia.
