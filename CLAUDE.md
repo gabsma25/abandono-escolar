@@ -698,7 +698,8 @@ primeiros testes pytest; relação de extração movida de `bruto/` para `docs/e
 
 Feito em 2026-09-30 (critérios 1–4): `src/base_longitudinal.py` regera a
 base (6.054 × 59) e ela bate com a v1.0 do orientador (sha256 `32181194…` em
-`docs/comparacao_base_v1.csv`): 50 colunas idênticas e 8 idênticas na
+`docs/comparacao_base_v1.csv`): as 2 colunas de chave dão as mesmas 6.054
+linhas; das 57 colunas de conteúdo, 49 idênticas e 8 idênticas na
 tolerância absoluta de 1e-9 — `IED_*_ALTO` e os seis `*_DELTA1`, com diferença
 máxima de 1,4e-14 (ponto flutuante). Nenhuma divergência de ausência nem de
 valor; nenhuma linha a propor em `docs/problemas.csv`. Validações do JSON por

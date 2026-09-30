@@ -398,8 +398,10 @@ rígida perto de 0. Diferença dentro da tolerância é contada e reportada
 (`max_diferenca_abs`), não omitida. A mesma tolerância vale no limite
 [0, 100] das colunas calculadas: 76,9 + 15,4 + 7,7 = 100.00000000000001.
 
-**Evidência:** 50 colunas idênticas e 8 idênticas na tolerância (máx.
-1,4e-14); nenhuma divergência de ausência, de valor ou de universo. A
+**Evidência:** as 2 colunas de chave dão as mesmas 6.054 linhas; das 57
+colunas de conteúdo, 49 idênticas e 8 idênticas na tolerância (máx.
+1,4e-14). (Corrigido em 2026-09-30: a primeira versão dizia "50 colunas
+idênticas", somando a linha de chave do CSV como coluna.); nenhuma divergência de ausência, de valor ou de universo. A
 comparação acusou todas as diferenças plantadas num teste manual (linha a
 menos, ausência trocada, +0,1 em taxa copiada, +1e-12 e +1e-6 em colunas
 calculadas, nome trocado). Duas execuções geram os mesmos bytes.
