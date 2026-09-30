@@ -277,22 +277,28 @@ regularizados, não redes profundas.
 ## 4. Variáveis: origem, definição, fórmula
 
 Convenção de nomes: a da base do orientador (`ABANDONO_MED`, `TDI_FUN_AF`…).
-"Origem" cita a planilha e a coluna técnica **por geração**. "Papel" segue o
-CLAUDE.md §5: chave, filtro, estrato, preditor, derivada, desfecho.
+"Origem" cita a planilha e a coluna técnica **por geração**. Toda variável tem
+**exatamente um papel** (decidido em 2026-09-30): `chave`, `descrição`,
+`filtro`, `estrato`, `controle de ausência`, `preditor`, `desfecho` ou `peso`.
+"Derivada" não é papel — é como a variável é calculada e fica na origem.
+"Restrição" registra limite de uso (cenário, janela, condição); vazio = sem
+restrição. Linhas marcadas **[PROPOSTA]** (ou em seção [PROPOSTA]) não estão na
+base. Estas tabelas são a fonte de `docs/dicionario_anotado.csv`
+(`python -m src.tabelas_metodologia`).
 
 ### 4.1 Identificação e contexto
 
-| Variável | Origem | Significado | Papel |
-|---|---|---|---|
-| `ANO` | `NU_ANO_CENSO` (2021+) / `Ano` (tx_rend 2019–20) | ano do Censo = ano dos preditores (t) | chave |
-| `ANO_ALVO` | derivada: `ANO + 1` se a escola existe em t+1, senão nulo | ano do desfecho | chave |
-| `CO_ENTIDADE` | `CO_ENTIDADE` (todas) | código INEP da escola, texto | chave |
-| `NO_ENTIDADE` | `NO_ENTIDADE` | nome (varia em 105 escolas; não é chave) | descrição |
-| `CO_MUNICIPIO`, `NO_MUNICIPIO` | idem | 15 municípios de RR | estrato |
-| `LOCALIZACAO` | `NO_CATEGORIA` (2021+) / `TIPOLOCA` (tx_rend 2019–20) | Urbana / Rural (6 escolas mudam na série) | estrato |
-| `DEPENDENCIA` | `NO_DEPENDENCIA` / `Dependad` | Federal, Estadual, Municipal, Privada | filtro + estrato |
-| `REDE_PUBLICA` | derivada: `DEPENDENCIA != 'Privada'` | 1/0 | filtro |
-| `DISP_ATU`, `DISP_TDI`, `DISP_IED`, `DISP_REND` | derivadas: 1 se a escola tem ≥1 valor daquela fonte no ano | disponibilidade da fonte | controle de ausência |
+| Variável | Origem | Significado | Papel | Restrição |
+|---|---|---|---|---|
+| `ANO` | `NU_ANO_CENSO` (2021+) / `Ano` (tx_rend 2019–20) | ano do Censo = ano dos preditores (t) | chave | |
+| `ANO_ALVO` | derivada: `ANO + 1` se a escola existe em t+1, senão nulo | ano do desfecho | chave | |
+| `CO_ENTIDADE` | `CO_ENTIDADE` (todas) | código INEP da escola, texto | chave | |
+| `NO_ENTIDADE` | `NO_ENTIDADE` | nome (varia em 105 escolas; não é chave) | descrição | |
+| `CO_MUNICIPIO`, `NO_MUNICIPIO` | `CO_MUNICIPIO`, `NO_MUNICIPIO` (todas) | 15 municípios de RR | estrato | |
+| `LOCALIZACAO` | `NO_CATEGORIA` (2021+) / `TIPOLOCA` (tx_rend 2019–20) | Urbana / Rural (6 escolas mudam na série) | estrato | |
+| `DEPENDENCIA` | `NO_DEPENDENCIA` / `Dependad` | Federal, Estadual, Municipal, Privada; o filtro do universo é `REDE_PUBLICA`, e a dependência compara as redes públicas | estrato | |
+| `REDE_PUBLICA` | derivada: `DEPENDENCIA != 'Privada'` | 1/0 | filtro | |
+| `DISP_ATU`, `DISP_TDI`, `DISP_IED`, `DISP_REND` | derivadas: 1 se a escola tem ≥1 valor daquela fonte no ano | disponibilidade da fonte | controle de ausência | |
 
 Fórmula das `DISP_*`: para a fonte $F$ com colunas $c_1..c_k$,
 $\text{DISP}_F = 1[\exists j: c_j \ne \text{nulo}]$.
@@ -302,17 +308,17 @@ $\text{DISP}_F = 1[\exists j: c_j \ne \text{nulo}]$.
 Todas em **pontos percentuais (0–100)**, uma casa decimal. Nulo (`'--'`) quando
 a escola não tem matrícula na etapa/série (ausente estrutural).
 
-| Variável | 2019–2020 | 2021+ | Significado |
-|---|---|---|---|
-| `APROVACAO_FUN` | `tap_FUN` | `1_CAT_FUN` | aprovação, EF total |
-| `APROVACAO_FUN_AI` | `tap_F14` | `1_CAT_FUN_AI` | aprovação, anos iniciais (1º–5º) |
-| `APROVACAO_FUN_AF` | `tap_F04` (rótulo "Anos Finais") | `1_CAT_FUN_AF` | aprovação, anos finais (6º–9º) |
-| `APROVACAO_MED` | `tap_MED` | `1_CAT_MED` | aprovação, EM total |
-| `REPROVACAO_*` | `tre_*` (mesmos sufixos) | `2_CAT_*` | reprovação |
-| `ABANDONO_FUN` | `tab_FUN` | `3_CAT_FUN` | abandono, EF total |
-| `ABANDONO_FUN_AI` | `tab_F14` | `3_CAT_FUN_AI` | abandono, anos iniciais |
-| **`ABANDONO_FUN_AF`** | `tab_F04` | `3_CAT_FUN_AF` | **abandono, anos finais — base do desfecho AF** |
-| **`ABANDONO_MED`** | `tab_MED` | `3_CAT_MED` | **abandono, EM total — base do desfecho EM** |
+| Variável | 2019–2020 | 2021+ | Significado | Papel | Restrição |
+|---|---|---|---|---|---|
+| `APROVACAO_FUN` | `tap_FUN` | `1_CAT_FUN` | aprovação, EF total | descrição | |
+| `APROVACAO_FUN_AI` | `tap_F14` | `1_CAT_FUN_AI` | aprovação, anos iniciais (1º–5º) | descrição | |
+| `APROVACAO_FUN_AF` | `tap_F04` (rótulo "Anos Finais") | `1_CAT_FUN_AF` | aprovação, anos finais (6º–9º) | descrição | |
+| `APROVACAO_MED` | `tap_MED` | `1_CAT_MED` | aprovação, EM total | descrição | |
+| `REPROVACAO_*` | `tre_*` (mesmos sufixos) | `2_CAT_*` | reprovação | preditor | só cenário A |
+| `ABANDONO_FUN` | `tab_FUN` | `3_CAT_FUN` | abandono, EF total | preditor | só cenário A |
+| `ABANDONO_FUN_AI` | `tab_F14` | `3_CAT_FUN_AI` | abandono, anos iniciais | preditor | só cenário A |
+| **`ABANDONO_FUN_AF`** | `tab_F04` | `3_CAT_FUN_AF` | **abandono, anos finais — base do desfecho AF** | preditor | só cenário A |
+| **`ABANDONO_MED`** | `tab_MED` | `3_CAT_MED` | **abandono, EM total — base do desfecho EM** | preditor | só cenário A |
 
 Fórmulas: §1 ("Taxas de rendimento"). Identidade de checagem por linha:
 $\text{APROVACAO} + \text{REPROVACAO} + \text{ABANDONO} = 100 \pm 0{,}2$.
@@ -332,12 +338,12 @@ preditores; aprovação fica para descrição.
 
 Percentual (0–100). Coluna técnica idêntica nos 7 anos.
 
-| Variável | Coluna | Significado |
-|---|---|---|
-| `TDI_FUN_TOTAL` | `FUN_CAT_0` | TDI no EF total |
-| `TDI_FUN_AI` | `FUN_AI_CAT_0` | TDI anos iniciais |
-| `TDI_FUN_AF` | `FUN_AF_CAT_0` | TDI anos finais |
-| `TDI_MED_TOTAL` | `MED_CAT_0` | TDI no EM |
+| Variável | Coluna | Significado | Papel | Restrição |
+|---|---|---|---|---|
+| `TDI_FUN_TOTAL` | `FUN_CAT_0` | TDI no EF total | preditor | |
+| `TDI_FUN_AI` | `FUN_AI_CAT_0` | TDI anos iniciais | preditor | |
+| `TDI_FUN_AF` | `FUN_AF_CAT_0` | TDI anos finais | preditor | |
+| `TDI_MED_TOTAL` | `MED_CAT_0` | TDI no EM | preditor | |
 
 Papel: **preditor** (era desfecho no desenho anterior — D5). Hipótese H2 do
 orientador: TDI alta em t associa-se a abandono maior em t+1. Fórmula: §1.
@@ -346,14 +352,14 @@ orientador: TDI alta em t associa-se a abandono maior em t+1. Fórmula: §1.
 
 Número de alunos (razão), coluna técnica idêntica nos 7 anos.
 
-| Variável | Coluna | Significado |
-|---|---|---|
-| `ATU_FUN_TOTAL` | `FUN_CAT_0` | alunos por turma, EF total |
-| `ATU_FUN_AI` | `FUN_AI_CAT_0` | anos iniciais |
-| `ATU_FUN_AF` | `FUN_AF_CAT_0` | anos finais |
-| `ATU_MED_TOTAL` | `MED_CAT_0` | EM |
-| **[PROPOSTA] `ATU_MULTI`** | `MULT_ETA_CAT_0` | alunos por turma nas turmas multietapa/multisseriadas/correção de fluxo |
-| **[PROPOSTA] `IN_MULTISSERIADA`** | derivada: `MULT_ETA_CAT_0` não nulo | escola tem turmas multisseriadas (1/0) |
+| Variável | Coluna | Significado | Papel | Restrição |
+|---|---|---|---|---|
+| `ATU_FUN_TOTAL` | `FUN_CAT_0` | alunos por turma, EF total | preditor | |
+| `ATU_FUN_AI` | `FUN_AI_CAT_0` | anos iniciais | preditor | só com indicador de ausência (D9) |
+| `ATU_FUN_AF` | `FUN_AF_CAT_0` | anos finais | preditor | só com indicador de ausência (D9) |
+| `ATU_MED_TOTAL` | `MED_CAT_0` | EM | preditor | |
+| **[PROPOSTA] `ATU_MULTI`** | `MULT_ETA_CAT_0` | alunos por turma nas turmas multietapa/multisseriadas/correção de fluxo | preditor | |
+| **[PROPOSTA] `IN_MULTISSERIADA`** | derivada: `MULT_ETA_CAT_0` não nulo | escola tem turmas multisseriadas (1/0) | preditor | |
 
 **Problema P016.** Em RR 2019, `FUN_AI_CAT_0` só existe para 251 escolas
 enquanto `FUN_CAT_0` existe para 643 e `MULT_ETA_CAT_0` para **375**. Nas escolas
@@ -370,12 +376,12 @@ indicador de ausência.
 Percentuais (0–100) que somam 100 por etapa. Ausente em 2019–2020 por falta do
 arquivo (não é zero; H6 do orientador).
 
-| Variável | Coluna | Significado |
-|---|---|---|
-| `IED_FUN_N1`…`N6` | `FUN_CAT_1`…`FUN_CAT_6` | % docentes do EF no nível 1…6 |
-| `IED_MED_N1`…`N6` | `MED_CAT_1`…`MED_CAT_6` | % docentes do EM no nível 1…6 |
-| `IED_FUN_ALTO` | derivada | $\text{N4}+\text{N5}+\text{N6}$ (EF) |
-| `IED_MED_ALTO` | derivada | $\text{N4}+\text{N5}+\text{N6}$ (EM) |
+| Variável | Coluna | Significado | Papel | Restrição |
+|---|---|---|---|---|
+| `IED_FUN_N1`…`N6` | `FUN_CAT_1`…`FUN_CAT_6` | % docentes do EF no nível 1…6 | preditor | só 2021+ (E5) |
+| `IED_MED_N1`…`N6` | `MED_CAT_1`…`MED_CAT_6` | % docentes do EM no nível 1…6 | preditor | só 2021+ (E5) |
+| `IED_FUN_ALTO` | derivada | $\text{N4}+\text{N5}+\text{N6}$ (EF) | preditor | só 2021+ (E5) |
+| `IED_MED_ALTO` | derivada | $\text{N4}+\text{N5}+\text{N6}$ (EM) | preditor | só 2021+ (E5) |
 
 Uso: conjunto **Core+IED** (janela 2021–2024) para medir o ganho incremental;
 nunca imputar 2019–2020. As planilhas também trazem `FUN_AI_CAT_*` e
@@ -390,6 +396,21 @@ $$X^{\text{LAG1}}_{i,t} = X_{i,t-1}\qquad
 X^{\text{DELTA1}}_{i,t} = X_{i,t} - X_{i,t-1}\qquad
 X^{\text{T1}}_{i,t} = X_{i,t+1}$$
 
+| Variável | Origem | Significado | Papel | Restrição |
+|---|---|---|---|---|
+| `ABANDONO_FUN_LAG1` | derivada: `ABANDONO_FUN` em t−1 | abandono do EF total no ano anterior | preditor | |
+| `ABANDONO_FUN_AF_LAG1` | derivada: `ABANDONO_FUN_AF` em t−1 | abandono dos anos finais no ano anterior | preditor | |
+| `ABANDONO_MED_LAG1` | derivada: `ABANDONO_MED` em t−1 | abandono do EM no ano anterior | preditor | |
+| `TDI_FUN_AF_DELTA1` | derivada: `TDI_FUN_AF` em t menos em t−1 | variação anual da TDI dos anos finais | preditor | |
+| `TDI_MED_TOTAL_DELTA1` | derivada: `TDI_MED_TOTAL` em t menos em t−1 | variação anual da TDI do EM | preditor | |
+| `ATU_FUN_AF_DELTA1` | derivada: `ATU_FUN_AF` em t menos em t−1 | variação anual de alunos por turma nos anos finais | preditor | só com indicador de ausência (D9) |
+| `ATU_MED_TOTAL_DELTA1` | derivada: `ATU_MED_TOTAL` em t menos em t−1 | variação anual de alunos por turma no EM | preditor | |
+| `ABANDONO_FUN_AF_DELTA1` | derivada: `ABANDONO_FUN_AF` em t menos em t−1 | variação anual do abandono dos anos finais | preditor | só cenário A |
+| `ABANDONO_MED_DELTA1` | derivada: `ABANDONO_MED` em t menos em t−1 | variação anual do abandono do EM | preditor | só cenário A |
+| `ABANDONO_FUN_T1` | derivada: `ABANDONO_FUN` em t+1 | abandono do EF total no ano seguinte | desfecho | auxiliar — não é alvo do §5 |
+| `ABANDONO_FUN_AF_T1` | derivada: `ABANDONO_FUN_AF` em t+1 | abandono dos anos finais no ano seguinte | desfecho | |
+| `ABANDONO_MED_T1` | derivada: `ABANDONO_MED` em t+1 | abandono do EM no ano seguinte | desfecho | |
+
 Nulo quando a escola não tem a variável no ano de referência (primeiro ano da
 série, escola nova, etapa não ofertada). Na v1.0: `ABANDONO_{FUN,FUN_AF,MED}_LAG1`;
 `{TDI,ATU,ABANDONO}_{FUN_AF,MED_TOTAL/MED}_DELTA1`; `ABANDONO_{FUN,FUN_AF,MED}_T1`.
@@ -402,13 +423,13 @@ estatística de grupo, ajustadas só no treino.
 
 ### 4.7 [PROPOSTA D8] Quatro colunas do Censo já na fase 1
 
-| Variável | Origem (Censo, coluna presente nos 7 anos) | Significado | Papel |
-|---|---|---|---|
-| `IN_EDUCACAO_INDIGENA` | tabela Escola, `IN_EDUCACAO_INDIGENA` | escola oferta educação escolar indígena (1/0); em RR 2025: 436 escolas = 1 | estrato |
-| `TP_LOCALIZACAO_DIFERENCIADA` | tabela Escola | 0 = não diferenciada (417 em RR 2025), 1 = assentamento (48), 2 = terra indígena (436), 8 = ? (7 — código a confirmar no dicionário oficial antes de usar) | estrato |
-| `QT_MAT_FUND_AF` | Escola 2019–24 / `Tabela_Matricula_2025` | matrículas nos anos finais | porte / **peso** |
-| `QT_MAT_MED` | idem | matrículas no EM | porte / **peso** |
-| `ESTRATO_RR` | derivada | capital (Boa Vista) / interior urbano / interior rural não indígena / indígena — estratificação de Almeida & Mussato (2023), já prevista no CLAUDE.md | estrato |
+| Variável | Origem (Censo, coluna presente nos 7 anos) | Significado | Papel | Restrição |
+|---|---|---|---|---|
+| `IN_EDUCACAO_INDIGENA` | tabela Escola, `IN_EDUCACAO_INDIGENA` | escola oferta educação escolar indígena (1/0); em RR 2025: 436 escolas = 1 | estrato | |
+| `TP_LOCALIZACAO_DIFERENCIADA` | tabela Escola | 0 = não diferenciada (417 em RR 2025), 1 = assentamento (48), 2 = terra indígena (436), 8 = ? (7 — código a confirmar no dicionário oficial antes de usar) | estrato | |
+| `QT_MAT_FUND_AF` | Escola 2019–24 / `Tabela_Matricula_2025` | matrículas nos anos finais (porte) | peso | |
+| `QT_MAT_MED` | Escola 2019–24 / `Tabela_Matricula_2025` | matrículas no EM (porte) | peso | |
+| `ESTRATO_RR` | derivada | capital (Boa Vista) / interior urbano / interior rural não indígena / indígena — estratificação de Almeida & Mussato (2023), já prevista no CLAUDE.md | estrato | |
 
 Por que já na fase 1:
 
@@ -481,7 +502,8 @@ exige efeito de ano.
 | EM | 2023→2024 | 165 | 0,37 | 5,78 | 4,94 |
 | EM | 2024→2025 | 166 | 0,43 | 4,87 | 4,85 |
 
-Em 4 das 6 transições, **prever a média erra menos que repetir o ano anterior**.
+Em 9 das 12 transições (3 de 6 no AF, 6 de 6 no EM), **prever a média erra
+menos que repetir o ano anterior**.
 A hipótese H1 (persistência relevante) é, no máximo, moderada (ρ ≈ 0,4 fora da
 pandemia). Consequências: o problema é difícil; o ganho dos modelos deve ser
 medido contra B0 *e* B1; e a variância entre anos (efeito de período) é grande —
