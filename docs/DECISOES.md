@@ -335,3 +335,42 @@ antes da remoção: 319 linhas idênticas, exceto o prefixo `bruto/indicadores/`
 **Alternativa descartada:** manter em `bruto/` com prefixo `_` — exceção
 nominal para o caso que incomoda; arquivo gerado em pasta imutável se move,
 não se renomeia.
+
+---
+
+## 2026-09-30 — O que se obtém do INEP é exatamente o manifesto
+
+**Decisão:** a aquisição (cópia local ou `--baixar`) só obtém arquivos
+listados em `dados/MANIFEST.csv`; o que as páginas do INEP publicam além disso
+fica fora por decisão, não por omissão. Um clone com `--baixar` chega, portanto,
+aos mesmos 110 zips (7 de microdados + 103 de indicadores) que a máquina de
+referência. Fora do projeto:
+
+- microdados do Censo 1995–2018 (24 zips) — fora da janela 2019–2025 (D11,
+  extensão para 2007–2018, em aberto);
+- `ATU_2025_MUNICIPIOS.zip` e `tx_rend_brasil_regioes_ufs_2025.zip` — níveis
+  município e Brasil/UF, não usados no painel por escola; não autorizados
+  (P019);
+- abas de indicadores anteriores a 2019 e os demais indicadores do índice
+  (Adequação da Formação Docente, Complexidade de Gestão da Escola,
+  Regularidade do Corpo Docente, Nível Socioeconômico, Taxas de Transição,
+  entre outros) — fora do desenho da fase 1.
+
+**Evidência:** descoberta sobre a captura de 2026-09-30 (`python -m
+src.aquisicao --descobrir-do-cache 2026-09-30`, restrita a 2019–2025 nos cinco
+indicadores): 136 links, 110 no manifesto, 26 fora (24 + 2 acima).
+`src/fontes_inep.csv`, manifesto e disco têm os mesmos 110 nomes.
+
+**Alternativa descartada:** baixar tudo o que a raspagem acha — o conjunto de
+dados passaria a depender do dia da raspagem, e o manifesto deixaria de ser a
+especificação.
+
+---
+
+## 2026-09-30 — Infraestrutura encerrada até a fase 1 entregar resultado
+
+**Decisão:** nenhum módulo de apoio, teste ou refinamento de tooling novo até
+`src/base_longitudinal.py` e a comparação com a v1.0 estarem prontos.
+Melhorias identificadas entram aqui como "adiado deliberadamente".
+
+**Adiado deliberadamente:** (nenhuma até esta data)
