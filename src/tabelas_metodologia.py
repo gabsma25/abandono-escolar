@@ -45,6 +45,11 @@ def secoes(texto: str) -> dict[str, list[str]]:
     return blocos
 
 
+def titulos(texto: str) -> dict[str, str]:
+    """{número da seção: título}."""
+    return {m.group(2): m.group(3) for m in map(_TITULO.match, texto.splitlines()) if m}
+
+
 def tabelas(linhas: list[str]) -> list[list[dict[str, str]]]:
     """Tabelas Markdown de um bloco, cada uma como lista de {cabeçalho: célula}."""
     resultado, atual = [], []
@@ -103,6 +108,57 @@ def gerar_desfechos(texto: str, destino: pathlib.Path = DESFECHOS) -> list[dict]
     return linhas
 
 
+# Vocabulário de papéis da fase 1 (decidido em 2026-09-30, metodologia §4).
+# Serve só para validar a tabela: o papel de cada variável vem do documento.
+PAPEIS = {"chave", "descrição", "filtro", "estrato", "controle de ausência", "preditor", "desfecho", "peso"}
+SECOES_VARIAVEIS = ("4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7")
+
+
+def _origem(r: dict[str, str]) -> str:
+    """A origem vem numa coluna só ou, em tx_rend, uma por geração."""
+    if "2019–2020" in r:
+        return f"2019–2020: {r['2019–2020']}; 2021+: {r['2021+']}"
+    chave = next(c for c in r if c.startswith(("Origem", "Coluna")))
+    return r[chave]
+
+
+def gerar_dicionario(texto: str, destino: pathlib.Path = DICIONARIO) -> list[dict]:
+    """Tabela B = as tabelas do §4, uma linha por variável.
+
+    Erro se: alguma linha não tem papel do vocabulário; uma variável aparece
+    duas vezes; uma variável vigente não está na base regerada; ou uma coluna
+    da base não tem linha no §4."""
+    blocos, tit = secoes(texto), titulos(texto)
+    linhas, vistas = [], set()
+    for sec in SECOES_VARIAVEIS:
+        proposta_secao = "[PROPOSTA" in tit[sec]
+        for tabela in tabelas(blocos[sec]):
+            for r in tabela:
+                papel = _limpar(r.get("Papel", ""))
+                if papel not in PAPEIS:
+                    raise ValueError(f"§{sec}, {r['Variável']}: papel {papel!r} fora do vocabulário {sorted(PAPEIS)}")
+                status = "proposta" if proposta_secao or "[PROPOSTA" in r["Variável"] else "vigente"
+                for nome in nomes_da_celula(r["Variável"]):
+                    if nome in vistas:
+                        raise ValueError(f"{nome} aparece mais de uma vez no §4")
+                    vistas.add(nome)
+                    linhas.append({
+                        "variavel": nome, "secao": sec, "origem": _limpar(_origem(r)),
+                        "significado": _limpar(r["Significado"]), "papel": papel,
+                        "restricao": _limpar(r.get("Restrição", "")), "status": status,
+                        "na_base_regerada": "sim" if nome in COLUNAS else "não",
+                    })
+    vigentes_fora = sorted(r["variavel"] for r in linhas if r["status"] == "vigente" and r["variavel"] not in COLUNAS)
+    sem_linha = sorted(set(COLUNAS) - vistas)
+    if vigentes_fora or sem_linha:
+        raise ValueError(f"§4 e base regerada não casam. Vigentes fora da base: {vigentes_fora}; "
+                         f"colunas da base sem linha no §4: {sem_linha}")
+    ordem = {c: i for i, c in enumerate(COLUNAS)}
+    linhas.sort(key=lambda r: (r["status"] != "vigente", ordem.get(r["variavel"], len(ordem)), r["variavel"]))
+    _gravar(linhas, destino)
+    return linhas
+
+
 def _gravar(linhas: list[dict], destino: pathlib.Path) -> None:
     with destino.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(linhas[0]), lineterminator="\n")
@@ -114,6 +170,7 @@ def _gravar(linhas: list[dict], destino: pathlib.Path) -> None:
 def main() -> None:
     texto = METODOLOGIA.read_text(encoding="utf-8")
     gerar_desfechos(texto)
+    gerar_dicionario(texto)
 
 
 if __name__ == "__main__":

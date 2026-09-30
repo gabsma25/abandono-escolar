@@ -1,0 +1,67 @@
+variavel,secao,origem,significado,papel,restricao,status,na_base_regerada
+ANO,4.1,`NU_ANO_CENSO` (2021+) / `Ano` (tx_rend 2019–20),ano do Censo = ano dos preditores (t),chave,,vigente,sim
+ANO_ALVO,4.1,"derivada: `ANO + 1` se a escola existe em t+1, senão nulo",ano do desfecho,chave,,vigente,sim
+CO_ENTIDADE,4.1,`CO_ENTIDADE` (todas),"código INEP da escola, texto",chave,,vigente,sim
+NO_ENTIDADE,4.1,`NO_ENTIDADE`,nome (varia em 105 escolas; não é chave),descrição,,vigente,sim
+CO_MUNICIPIO,4.1,"`CO_MUNICIPIO`, `NO_MUNICIPIO` (todas)",15 municípios de RR,estrato,,vigente,sim
+NO_MUNICIPIO,4.1,"`CO_MUNICIPIO`, `NO_MUNICIPIO` (todas)",15 municípios de RR,estrato,,vigente,sim
+LOCALIZACAO,4.1,`NO_CATEGORIA` (2021+) / `TIPOLOCA` (tx_rend 2019–20),Urbana / Rural (6 escolas mudam na série),estrato,,vigente,sim
+DEPENDENCIA,4.1,`NO_DEPENDENCIA` / `Dependad`,"Federal, Estadual, Municipal, Privada; o filtro do universo é `REDE_PUBLICA`, e a dependência compara as redes públicas",estrato,,vigente,sim
+REDE_PUBLICA,4.1,derivada: `DEPENDENCIA != 'Privada'`,1/0,filtro,,vigente,sim
+DISP_ATU,4.1,derivadas: 1 se a escola tem ≥1 valor daquela fonte no ano,disponibilidade da fonte,controle de ausência,,vigente,sim
+DISP_TDI,4.1,derivadas: 1 se a escola tem ≥1 valor daquela fonte no ano,disponibilidade da fonte,controle de ausência,,vigente,sim
+DISP_IED,4.1,derivadas: 1 se a escola tem ≥1 valor daquela fonte no ano,disponibilidade da fonte,controle de ausência,,vigente,sim
+DISP_REND,4.1,derivadas: 1 se a escola tem ≥1 valor daquela fonte no ano,disponibilidade da fonte,controle de ausência,,vigente,sim
+ATU_FUN_TOTAL,4.4,`FUN_CAT_0`,"alunos por turma, EF total",preditor,,vigente,sim
+ATU_FUN_AI,4.4,`FUN_AI_CAT_0`,anos iniciais,preditor,só com indicador de ausência (D9),vigente,sim
+ATU_FUN_AF,4.4,`FUN_AF_CAT_0`,anos finais,preditor,só com indicador de ausência (D9),vigente,sim
+ATU_MED_TOTAL,4.4,`MED_CAT_0`,EM,preditor,,vigente,sim
+TDI_FUN_TOTAL,4.3,`FUN_CAT_0`,TDI no EF total,preditor,,vigente,sim
+TDI_FUN_AI,4.3,`FUN_AI_CAT_0`,TDI anos iniciais,preditor,,vigente,sim
+TDI_FUN_AF,4.3,`FUN_AF_CAT_0`,TDI anos finais,preditor,,vigente,sim
+TDI_MED_TOTAL,4.3,`MED_CAT_0`,TDI no EM,preditor,,vigente,sim
+IED_FUN_N1,4.5,`FUN_CAT_1`…`FUN_CAT_6`,% docentes do EF no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_FUN_N2,4.5,`FUN_CAT_1`…`FUN_CAT_6`,% docentes do EF no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_FUN_N3,4.5,`FUN_CAT_1`…`FUN_CAT_6`,% docentes do EF no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_FUN_N4,4.5,`FUN_CAT_1`…`FUN_CAT_6`,% docentes do EF no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_FUN_N5,4.5,`FUN_CAT_1`…`FUN_CAT_6`,% docentes do EF no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_FUN_N6,4.5,`FUN_CAT_1`…`FUN_CAT_6`,% docentes do EF no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_FUN_ALTO,4.5,derivada,$\text{N4}+\text{N5}+\text{N6}$ (EF),preditor,só 2021+ (E5),vigente,sim
+IED_MED_N1,4.5,`MED_CAT_1`…`MED_CAT_6`,% docentes do EM no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_MED_N2,4.5,`MED_CAT_1`…`MED_CAT_6`,% docentes do EM no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_MED_N3,4.5,`MED_CAT_1`…`MED_CAT_6`,% docentes do EM no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_MED_N4,4.5,`MED_CAT_1`…`MED_CAT_6`,% docentes do EM no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_MED_N5,4.5,`MED_CAT_1`…`MED_CAT_6`,% docentes do EM no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_MED_N6,4.5,`MED_CAT_1`…`MED_CAT_6`,% docentes do EM no nível 1…6,preditor,só 2021+ (E5),vigente,sim
+IED_MED_ALTO,4.5,derivada,$\text{N4}+\text{N5}+\text{N6}$ (EM),preditor,só 2021+ (E5),vigente,sim
+APROVACAO_FUN,4.2,2019–2020: `tap_FUN`; 2021+: `1_CAT_FUN`,"aprovação, EF total",descrição,,vigente,sim
+APROVACAO_FUN_AI,4.2,2019–2020: `tap_F14`; 2021+: `1_CAT_FUN_AI`,"aprovação, anos iniciais (1º–5º)",descrição,,vigente,sim
+APROVACAO_FUN_AF,4.2,"2019–2020: `tap_F04` (rótulo ""Anos Finais""); 2021+: `1_CAT_FUN_AF`","aprovação, anos finais (6º–9º)",descrição,,vigente,sim
+APROVACAO_MED,4.2,2019–2020: `tap_MED`; 2021+: `1_CAT_MED`,"aprovação, EM total",descrição,,vigente,sim
+REPROVACAO_FUN,4.2,2019–2020: `tre_*` (mesmos sufixos); 2021+: `2_CAT_*`,reprovação,preditor,só cenário A,vigente,sim
+REPROVACAO_FUN_AI,4.2,2019–2020: `tre_*` (mesmos sufixos); 2021+: `2_CAT_*`,reprovação,preditor,só cenário A,vigente,sim
+REPROVACAO_FUN_AF,4.2,2019–2020: `tre_*` (mesmos sufixos); 2021+: `2_CAT_*`,reprovação,preditor,só cenário A,vigente,sim
+REPROVACAO_MED,4.2,2019–2020: `tre_*` (mesmos sufixos); 2021+: `2_CAT_*`,reprovação,preditor,só cenário A,vigente,sim
+ABANDONO_FUN,4.2,2019–2020: `tab_FUN`; 2021+: `3_CAT_FUN`,"abandono, EF total",preditor,só cenário A,vigente,sim
+ABANDONO_FUN_AI,4.2,2019–2020: `tab_F14`; 2021+: `3_CAT_FUN_AI`,"abandono, anos iniciais",preditor,só cenário A,vigente,sim
+ABANDONO_FUN_AF,4.2,2019–2020: `tab_F04`; 2021+: `3_CAT_FUN_AF`,"abandono, anos finais — base do desfecho AF",preditor,só cenário A,vigente,sim
+ABANDONO_MED,4.2,2019–2020: `tab_MED`; 2021+: `3_CAT_MED`,"abandono, EM total — base do desfecho EM",preditor,só cenário A,vigente,sim
+ABANDONO_FUN_LAG1,4.6,derivada: `ABANDONO_FUN` em t−1,abandono do EF total no ano anterior,preditor,,vigente,sim
+ABANDONO_FUN_AF_LAG1,4.6,derivada: `ABANDONO_FUN_AF` em t−1,abandono dos anos finais no ano anterior,preditor,,vigente,sim
+ABANDONO_MED_LAG1,4.6,derivada: `ABANDONO_MED` em t−1,abandono do EM no ano anterior,preditor,,vigente,sim
+TDI_FUN_AF_DELTA1,4.6,derivada: `TDI_FUN_AF` em t menos em t−1,variação anual da TDI dos anos finais,preditor,,vigente,sim
+TDI_MED_TOTAL_DELTA1,4.6,derivada: `TDI_MED_TOTAL` em t menos em t−1,variação anual da TDI do EM,preditor,,vigente,sim
+ATU_FUN_AF_DELTA1,4.6,derivada: `ATU_FUN_AF` em t menos em t−1,variação anual de alunos por turma nos anos finais,preditor,só com indicador de ausência (D9),vigente,sim
+ATU_MED_TOTAL_DELTA1,4.6,derivada: `ATU_MED_TOTAL` em t menos em t−1,variação anual de alunos por turma no EM,preditor,,vigente,sim
+ABANDONO_FUN_AF_DELTA1,4.6,derivada: `ABANDONO_FUN_AF` em t menos em t−1,variação anual do abandono dos anos finais,preditor,só cenário A,vigente,sim
+ABANDONO_MED_DELTA1,4.6,derivada: `ABANDONO_MED` em t menos em t−1,variação anual do abandono do EM,preditor,só cenário A,vigente,sim
+ABANDONO_FUN_T1,4.6,derivada: `ABANDONO_FUN` em t+1,abandono do EF total no ano seguinte,desfecho,auxiliar — não é alvo do §5,vigente,sim
+ABANDONO_FUN_AF_T1,4.6,derivada: `ABANDONO_FUN_AF` em t+1,abandono dos anos finais no ano seguinte,desfecho,,vigente,sim
+ABANDONO_MED_T1,4.6,derivada: `ABANDONO_MED` em t+1,abandono do EM no ano seguinte,desfecho,,vigente,sim
+ATU_MULTI,4.4,`MULT_ETA_CAT_0`,alunos por turma nas turmas multietapa/multisseriadas/correção de fluxo,preditor,,proposta,não
+ESTRATO_RR,4.7,derivada,"capital (Boa Vista) / interior urbano / interior rural não indígena / indígena — estratificação de Almeida & Mussato (2023), já prevista no CLAUDE.md",estrato,,proposta,não
+IN_EDUCACAO_INDIGENA,4.7,"tabela Escola, `IN_EDUCACAO_INDIGENA`",escola oferta educação escolar indígena (1/0); em RR 2025: 436 escolas = 1,estrato,,proposta,não
+IN_MULTISSERIADA,4.4,derivada: `MULT_ETA_CAT_0` não nulo,escola tem turmas multisseriadas (1/0),preditor,,proposta,não
+QT_MAT_FUND_AF,4.7,Escola 2019–24 / `Tabela_Matricula_2025`,matrículas nos anos finais (porte),peso,,proposta,não
+QT_MAT_MED,4.7,Escola 2019–24 / `Tabela_Matricula_2025`,matrículas no EM (porte),peso,,proposta,não
+TP_LOCALIZACAO_DIFERENCIADA,4.7,tabela Escola,"0 = não diferenciada (417 em RR 2025), 1 = assentamento (48), 2 = terra indígena (436), 8 = ? (7 — código a confirmar no dicionário oficial antes de usar)",estrato,,proposta,não
