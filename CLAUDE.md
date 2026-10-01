@@ -107,7 +107,13 @@ metadados do Parquet sem mudar valor nenhum). Em `processado/`,
 `src/agregacao.py`, o notebook 01 e `docs/funil_contagem.csv` não existem. O caminho de
 download de `src/aquisicao.py` está implementado e testado contra servidor
 falso, mas **nunca foi exercitado contra o INEP** (nesta máquina os zips vêm
-de `--origem-local`; decisão da pesquisadora, 2026-09-30).
+de `--origem-local`; decisão da pesquisadora, 2026-09-30). **Hoje `--baixar`
+falha:** `download.inep.gov.br` não envia o certificado intermediário ("RNP
+ICPEdu GR46 OV TLS CA 2025") e o `requests` recusa a conexão
+(`CERTIFICATE_VERIFY_FAILED`); navegador e `curl` do Windows funcionam porque
+buscam o intermediário sozinhos. Verificado em 2026-09-30 só com HEAD (sem
+baixar arquivo): `200`, `application/zip`, tamanhos iguais aos do manifesto,
+`Accept-Ranges: bytes`. Correção aguarda decisão (P022).
 
 **Ausência deliberada, não erro:** dois arquivos que o INEP publica não estão
 no projeto — `ATU_2025_MUNICIPIOS.zip` (nível municípios) e
@@ -641,7 +647,7 @@ Bloqueiam a fase 2 (`filtros.py`):
 
 ## 7. Convenções de código
 
-- Python 3.11+, ambiente virtual em `.venv`, dependências em
+- Python 3.12+ (o `numpy` fixado exige 3.12), ambiente virtual em `.venv`, dependências em
   `requirements.txt` (UTF-8 — não gere com `pip freeze >` no PowerShell, que
   grava UTF-16). Não instale pacote fora da lista sem avisar (não há leitor de
   PDF na lista — os PDFs de `origem/doc/` são lidos à mão).

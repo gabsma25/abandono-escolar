@@ -18,7 +18,7 @@ as regras de trabalho, em [`CLAUDE.md`](CLAUDE.md).
 
 ## Pré-requisitos
 
-- **Python 3.11 ou mais recente** (desenvolvido com 3.12).
+- **Python 3.12 ou mais recente** (o `numpy` fixado no `requirements.txt` exige 3.12; desenvolvido com 3.12.8).
 - **~6 GB livres** para `dados/` (2,9 GB de zips do INEP e 3,0 GB extraídos).
 - **Tempo:** ~40 min num notebook com SSD (36 min medidos num clone limpo em
   30/09/2026), a maior parte no inventário e no recorte das planilhas de
@@ -32,6 +32,7 @@ git clone <url-deste-repositorio> abandono-escolar
 cd abandono-escolar
 python -m venv .venv
 .venv\Scripts\activate            # Windows (no Linux/macOS: source .venv/bin/activate)
+# No PowerShell, se a ativação for bloqueada: Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 pip install -r requirements.txt
 ```
 
@@ -116,6 +117,14 @@ A base longitudinal v1.0 (`dados/externo/base_longitudinal_v1/`) foi montada
 e entregue pelo orientador em 17/09/2026 a partir desses indicadores.
 
 ## Limitações conhecidas
+
+- **`--baixar` não funciona por enquanto.** O servidor de download do INEP
+  (`download.inep.gov.br`) não envia toda a cadeia do seu certificado de
+  segurança; o navegador completa sozinho, o Python não, e recusa a conexão.
+  Até a correção, baixe os zips pelo navegador (os endereços estão em
+  `src/fontes_inep.csv`), ponha-os numa pasta e use
+  `python -m src.bootstrap --origem-local <pasta>` — o hash de cada um é
+  conferido do mesmo jeito.
 
 - **Defasagem do desfecho.** A taxa de abandono de um ano depende da situação
   final de cada aluno, informada na segunda etapa do Censo Escolar, coletada
