@@ -432,3 +432,28 @@ propostas (`ATU_MULTI`, `IN_MULTISSERIADA` e as cinco da D8).
 
 **Alternativa descartada:** lista de papéis no código — o papel é decisão de
 método e mora no documento de método.
+
+---
+
+## 2026-09-30 — Certificado intermediário do INEP versionado (P022)
+
+**Decisão:** `src/certificados/rnp_icpedu_gr46_ov_tls_ca_2025.pem` é
+versionado e somado à lista padrão do `certifi` num arquivo gerado em
+`dados/cache_download/tls/`, usado só pela sessão HTTP do INEP. Antes de cada
+uso, o fingerprint SHA-256 do certificado é conferido
+(`E10747D4…D2FF59DD`); diferente → `ErroTLS`. Erro de TLS em tempo de execução
+interrompe a aquisição (não é falha de um arquivo), sem novas tentativas.
+
+**Evidência:** `openssl s_client` no servidor: "Verify return code: 21"
+(intermediário ausente). Certificado obtido em
+`http://secure.globalsign.com/cacert/rnpicpedugr46ovtlsca2025.crt`, endereço
+"CA Issuers" do próprio certificado do INEP; emitido por GlobalSign Root R46,
+que está no `certifi` (`openssl verify`: OK). O certificado do INEP não valida
+sem ele e valida com ele. Fingerprint calculado aqui igual ao informado pela
+pesquisadora. Teste real, sem baixar zip: página do gov.br `200`; HEAD em
+`download.inep.gov.br` `200 application/zip`; pedido de 4 bytes `206`,
+`PK\x03\x04`, tamanhos totais iguais aos do manifesto.
+
+**Alternativas descartadas:** `verify=False` (o sha256 protege o arquivo,
+não a conexão); `truststore` (depende do sistema operacional e provavelmente
+não resolve no Linux).

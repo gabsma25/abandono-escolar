@@ -107,13 +107,18 @@ metadados do Parquet sem mudar valor nenhum). Em `processado/`,
 `src/agregacao.py`, o notebook 01 e `docs/funil_contagem.csv` não existem. O caminho de
 download de `src/aquisicao.py` está implementado e testado contra servidor
 falso, mas **nunca foi exercitado contra o INEP** (nesta máquina os zips vêm
-de `--origem-local`; decisão da pesquisadora, 2026-09-30). **Hoje `--baixar`
-falha:** `download.inep.gov.br` não envia o certificado intermediário ("RNP
-ICPEdu GR46 OV TLS CA 2025") e o `requests` recusa a conexão
-(`CERTIFICATE_VERIFY_FAILED`); navegador e `curl` do Windows funcionam porque
-buscam o intermediário sozinhos. Verificado em 2026-09-30 só com HEAD (sem
-baixar arquivo): `200`, `application/zip`, tamanhos iguais aos do manifesto,
-`Accept-Ranges: bytes`. Correção aguarda decisão (P022).
+de `--origem-local`; decisão da pesquisadora, 2026-09-30).
+**Certificado do INEP (P022, resolvido em 2026-09-30):** `download.inep.gov.br`
+não envia o certificado intermediário ("RNP ICPEdu GR46 OV TLS CA 2025") e o
+Python recusava a conexão. O intermediário está versionado em
+`src/certificados/`, conferido pelo fingerprint SHA-256 antes de cada uso e
+somado à lista do `certifi` só na sessão do INEP — a verificação TLS segue
+ativa. Validado contra o servidor real só com HEAD e um pedido de 4 bytes
+(`206`, `PK\x03\x04`, tamanhos iguais aos do manifesto); nenhum zip foi
+baixado. O servidor às vezes derruba a conexão (`ConnectionResetError`); as
+novas tentativas do `ClienteInep` cobrem isso. O intermediário vence em
+2030-11-19; se o INEP trocar de cadeia, a aquisição para com `ErroTLS`
+apontando o arquivo a atualizar.
 
 **Ausência deliberada, não erro:** dois arquivos que o INEP publica não estão
 no projeto — `ATU_2025_MUNICIPIOS.zip` (nível municípios) e
@@ -424,6 +429,7 @@ abandono-escolar/
 │   ├── integridade.py          # conferência de hash e escrita segura (regra 1)
 │   ├── aquisicao.py            # descoberta, download/cópia local → origem/; extração → bruto/censo
 │   ├── fontes_inep.csv         # fallback estático: arquivo → URL (captura de 2026-09-30)
+│   ├── certificados/           # intermediário TLS do download.inep.gov.br (P022), conferido por SHA-256
 │   ├── bootstrap.py            # clone limpo → estado atual, na ordem certa
 │   ├── migracao_estrutura.py   # migração única de 2026-09-30 (histórico, não roda de novo)
 │   ├── manifesto.py            # gera dados/MANIFEST.csv

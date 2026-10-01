@@ -118,13 +118,14 @@ e entregue pelo orientador em 17/09/2026 a partir desses indicadores.
 
 ## Limitações conhecidas
 
-- **`--baixar` não funciona por enquanto.** O servidor de download do INEP
-  (`download.inep.gov.br`) não envia toda a cadeia do seu certificado de
-  segurança; o navegador completa sozinho, o Python não, e recusa a conexão.
-  Até a correção, baixe os zips pelo navegador (os endereços estão em
-  `src/fontes_inep.csv`), ponha-os numa pasta e use
-  `python -m src.bootstrap --origem-local <pasta>` — o hash de cada um é
-  conferido do mesmo jeito.
+- **Certificado do servidor de download do INEP.** `download.inep.gov.br`
+  não envia toda a cadeia do seu certificado de segurança; o navegador
+  completa sozinho, o Python não. O projeto traz o certificado que falta
+  (`src/certificados/`, conferido por impressão digital) e o soma à lista
+  padrão, sem desligar a verificação. Se o INEP trocar de certificado, o
+  download para com uma mensagem dizendo o que atualizar; enquanto isso,
+  baixe os zips pelo navegador (endereços em `src/fontes_inep.csv`) e use
+  `--origem-local`.
 
 - **Defasagem do desfecho.** A taxa de abandono de um ano depende da situação
   final de cada aluno, informada na segunda etapa do Censo Escolar, coletada
