@@ -82,7 +82,8 @@ dados/                       fora do git, exceto MANIFEST.csv
   interim/indicadores_rr/    recorte de Roraima das planilhas de escolas (Parquet)
   processado/                saída final deste projeto
   externo/                   dados de terceiros, não obteníveis do INEP — somente leitura
-  cache_download/            downloads em andamento, divergentes, páginas capturadas
+  cache_download/            downloads em andamento, divergentes e as páginas do site do INEP
+                             lidas para achar os links dos zips (não são dados)
   MANIFEST.csv               estágio, origem, arquivo, sha256 e data de cada arquivo
 docs/                        tabelas geradas por código, método, decisões e problemas
 src/                         módulos Python (python -m src.<modulo>)

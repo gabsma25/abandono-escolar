@@ -385,7 +385,7 @@ abandono-escolar/
 │   ├── externo/                    # dados de terceiros, não obteníveis do INEP — imutável
 │   │   └── base_longitudinal_v1/   # entrega do orientador, 17/09/2026
 │   ├── cache_download/             # não imutável: downloads a conferir, divergente/,
-│   │   └── html/{AAAA-MM-DD}/      # páginas do INEP capturadas nessa data (42 em 2026-09-30)
+│   │   └── html/{AAAA-MM-DD}/      # páginas do INEP lidas só para achar os links dos zips — não são dados
 │   ├── migracao_estrutura_log.csv  # log da migração de 2026-09-30
 │   └── MANIFEST.csv                # estagio, origem, ano, tabela, arquivo, sha256, data
 ├── docs/
@@ -659,6 +659,11 @@ Bloqueiam a fase 2 (`filtros.py`):
   existem; hash divergente diz o arquivo, o esperado e o obtido — nunca
   `FileNotFoundError` cru.
 - Escrita em pasta imutável só por `src/integridade.py` (regra 1).
+- **Dado do INEP chega sempre como zip** baixado do site e extraído pelo
+  projeto. As páginas HTML só são lidas para descobrir o link de cada zip;
+  nenhum dado é lido de HTML. Arquivo que deveria ser zip e não é (página de
+  bloqueio, redirecionamento, zip truncado) é recusado com mensagem própria
+  e vai para `cache_download/divergente/` (`aquisicao.exigir_zip`).
 - **Comparação de nome de arquivo do INEP é sensível a caixa por padrão.**
   Ignorar caixa é decisão explícita, justificada e comentada no ponto onde
   acontece (hoje só a busca do md5 no `.txt` do INEP, que grafa `.csv`/`.CSV`,
