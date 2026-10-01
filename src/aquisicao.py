@@ -36,16 +36,19 @@ import argparse
 import csv
 import dataclasses
 import datetime as dt
+import hashlib
 import json
 import logging
 import pathlib
 import re
 import shutil
+import ssl
 import time
 import urllib.parse
 import zipfile
 from typing import Protocol
 
+import certifi
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
@@ -110,12 +113,52 @@ PAGINAS_INDICADOR: dict[str, str] = {
 
 USER_AGENT = "abandono-escolar-rr/0.1 (pesquisa academica PIBIC/UERR; reproducao de dados abertos)"
 FONTES_ESTATICAS = pathlib.Path(__file__).with_name("fontes_inep.csv")
+
+# ── TLS do download.inep.gov.br ─────────────────────────────────────────────
+# O servidor envia só o próprio certificado, sem o intermediário que o emitiu
+# (verificado em 2026-09-30: openssl "Verify return code: 21"). Navegadores e
+# o curl do Windows buscam o intermediário sozinhos; Python/requests não, e
+# recusa a conexão. O intermediário é versionado em src/certificados/ e
+# somado à lista padrão do certifi — nunca a substitui, e a verificação TLS
+# continua ativa (verify=False está fora de questão).
+# Procedência: http://secure.globalsign.com/cacert/rnpicpedugr46ovtlsca2025.crt
+# (endereço "CA Issuers" do próprio certificado do INEP), obtido em 2026-09-30;
+# emissor GlobalSign Root R46 (presente no certifi); válido até 2030-11-19.
+CERT_INTERMEDIARIO = pathlib.Path(__file__).with_name("certificados") / "rnp_icpedu_gr46_ov_tls_ca_2025.pem"
+SHA256_INTERMEDIARIO = "E10747D4DA7BAB09CBA9952F019D3534CB9FBA070BF13D8791B1699CD2FF59DD"  # do DER
+BUNDLE_INEP = CACHE_DOWNLOAD / "tls" / "ca_inep.pem"
 DESCOBERTA_JSON = DADOS / "descoberta_inep.json"
 HTML_CACHE = CACHE_DOWNLOAD / "html"
 
 _ANO_ABA = re.compile(r"(\d{4})\.?")
 _ATUALIZADO_ABA = re.compile(r"Atualizado em\s*(\d{1,2}/\d{1,2}/\d{4}(?:\s+\d{1,2}h\d{2})?)")
 _ATUALIZADO_ITEM = re.compile(r"\(([^()]*atualizad[oa] em[^()]*)\)", re.IGNORECASE)
+
+
+class ErroTLS(RuntimeError):
+    """Conexão HTTPS com o INEP recusada. Não é falha de um arquivo: afeta
+    todos, então interrompe a aquisição em vez de virar 110 erros."""
+
+
+def bundle_ca_inep(destino: pathlib.Path = BUNDLE_INEP,
+                   intermediario: pathlib.Path = CERT_INTERMEDIARIO) -> pathlib.Path:
+    """Lista de certificados confiáveis para o INEP = certifi + intermediário.
+
+    Antes de usar, confere o fingerprint SHA-256 do intermediário versionado:
+    um .pem trocado (por engano ou não) é recusado."""
+    pem = intermediario.read_text(encoding="ascii")
+    obtido = hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem)).hexdigest().upper()
+    if obtido != SHA256_INTERMEDIARIO:
+        raise ErroTLS(
+            f"Certificado intermediário do INEP em {intermediario} não corresponde ao fingerprint "
+            f"esperado.\nesperado: {SHA256_INTERMEDIARIO}\nobtido:   {obtido}\n"
+            f"Atualize o certificado (e SHA256_INTERMEDIARIO, em src/aquisicao.py) antes de continuar."
+        )
+    conteudo = pathlib.Path(certifi.where()).read_text(encoding="utf-8").rstrip("\n") + "\n" + pem
+    if not destino.exists() or destino.read_text(encoding="utf-8") != conteudo:
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        destino.write_text(conteudo, encoding="utf-8")
+    return destino
 
 
 class ErroAquisicao(RuntimeError):
@@ -226,6 +269,7 @@ class ClienteInep:
         if sessao is None:
             sessao = requests.Session()
             sessao.headers["User-Agent"] = USER_AGENT
+            sessao.verify = str(bundle_ca_inep())
         self.sessao, self.pausa = sessao, pausa
         self.tentativas, self.espera_base = tentativas, espera_base
         self._ultima = 0.0
@@ -239,6 +283,12 @@ class ClienteInep:
             self._ultima = time.monotonic()
             try:
                 r = self.sessao.get(url, headers=headers or {}, stream=stream, timeout=60)
+            except requests.exceptions.SSLError as e:
+                # Tentar de novo não resolve certificado: para tudo com o motivo.
+                raise ErroTLS(
+                    f"Conexão HTTPS recusada em {url}: {e}\nSe o INEP trocou de certificado, o "
+                    f"intermediário em {CERT_INTERMEDIARIO} pode estar desatualizado (ver CLAUDE.md §2.0, P022)."
+                ) from e
             except requests.RequestException as e:
                 erro = e
                 logger.warning("Tentativa %d/%d falhou para %s: %s", t + 1, self.tentativas, url, e)

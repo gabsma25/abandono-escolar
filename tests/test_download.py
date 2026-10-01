@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import io
 import os
+import pathlib
 import random
 import zipfile
 
@@ -14,10 +15,13 @@ import pytest
 import requests
 
 from src.aquisicao import (
+    CERT_INTERMEDIARIO,
     ClienteInep,
+    ErroTLS,
     Link,
     adquirir,
     baixar,
+    bundle_ca_inep,
     copiar_local,
     verificar_manifesto,
 )
@@ -255,3 +259,37 @@ def test_uma_falha_nao_impede_os_demais_downloads(tmp_path):
     r = adquirir([], baixar_da_rede=True, cliente=_cliente(servidor), manifesto=m, raiz=raiz,
                  cache=tmp_path / "cache", fontes_estaticas=fontes, descoberta=tmp_path / "desc.json")
     assert r["faltando"] == ["X.zip"] and r["baixado"] == ["Y.zip"]
+
+
+# ── TLS: intermediário versionado (P022) ───────────────────────────────────
+
+def test_bundle_soma_intermediario_ao_certifi(tmp_path):
+    import certifi
+    bundle = bundle_ca_inep(tmp_path / "ca.pem").read_text(encoding="utf-8")
+    assert bundle.startswith(pathlib.Path(certifi.where()).read_text(encoding="utf-8").rstrip("\n"))
+    assert bundle.endswith(CERT_INTERMEDIARIO.read_text(encoding="ascii"))
+
+
+def test_intermediario_trocado_e_recusado(tmp_path):
+    import certifi
+    # Um certificado válido qualquer, mas não o do INEP: o primeiro do certifi.
+    outro = pathlib.Path(certifi.where()).read_text(encoding="utf-8")
+    inicio = outro.index("-----BEGIN CERTIFICATE-----")
+    fim = outro.index("-----END CERTIFICATE-----") + len("-----END CERTIFICATE-----")
+    falso = tmp_path / "falso.pem"
+    falso.write_text(outro[inicio:fim] + "\n", encoding="ascii")
+    with pytest.raises(ErroTLS, match="não corresponde ao fingerprint"):
+        bundle_ca_inep(tmp_path / "ca.pem", falso)
+
+
+def test_erro_de_certificado_interrompe_sem_novas_tentativas():
+    class SessaoSSL:
+        chamadas = 0
+
+        def get(self, url, **_kw):
+            SessaoSSL.chamadas += 1
+            raise requests.exceptions.SSLError("certificate verify failed")
+
+    with pytest.raises(ErroTLS, match="intermediário"):
+        ClienteInep(SessaoSSL(), pausa=0, espera_base=0).get(URL)
+    assert SessaoSSL.chamadas == 1
