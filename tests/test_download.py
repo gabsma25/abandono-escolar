@@ -5,7 +5,10 @@ Range/If-Range, ETag e queda de conexão no meio da transferência.
 """
 from __future__ import annotations
 
+import io
 import os
+import random
+import zipfile
 
 import pytest
 import requests
@@ -22,7 +25,19 @@ from src.integridade import ErroIntegridade, Referencia
 from tests.conftest import sha256
 
 URL = "https://download.inep.gov.br/informacoes_estatisticas/indicadores_educacionais/2023/X.zip"
-CONTEUDO = bytes(range(256)) * 4096   # 1 MiB
+
+
+def _zip(membro: bytes) -> bytes:
+    """Zip válido (sem compressão, para o tamanho ser previsível)."""
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_STORED) as zf:
+        zf.writestr("X/X.xlsx", membro)
+    return buf.getvalue()
+
+
+CONTEUDO = _zip(random.Random(0).randbytes(1 << 20))   # ~1 MiB
+REVISADO = _zip(b"versao revisada pelo INEP")
+PAGINA_HTML = b"<!DOCTYPE html><html><head><title>Acesso negado</title></head><body></body></html>"
 
 
 class RespostaFalsa:
@@ -113,14 +128,35 @@ def test_arquivo_mudou_no_servidor_recomeca_do_zero(tmp_path):
 
 
 def test_hash_divergente_nao_entra_em_origem(tmp_path, divergente_temporario):
-    servidor = ServidorFalso({URL: b"versao revisada pelo INEP"})
+    servidor = ServidorFalso({URL: REVISADO})
     destino = tmp_path / "origem" / "X.zip"
     with pytest.raises(ErroIntegridade) as erro:
         baixar(_cliente(servidor), URL, destino, Referencia(sha256(CONTEUDO)), tmp_path / "cache",
                progresso=False)
     assert "X.zip" in str(erro.value) and sha256(CONTEUDO) in str(erro.value)
     assert not destino.exists()
-    assert [p.read_bytes() for p in divergente_temporario.iterdir()] == [b"versao revisada pelo INEP"]
+    assert [p.read_bytes() for p in divergente_temporario.iterdir()] == [REVISADO]
+
+
+def test_pagina_html_no_lugar_do_zip_e_recusada(tmp_path, divergente_temporario):
+    """O INEP pode responder com uma página (bloqueio, redirecionamento):
+    ela não entra em origem/ e a mensagem diz que não é um zip."""
+    servidor = ServidorFalso({URL: PAGINA_HTML})
+    destino = tmp_path / "origem" / "X.zip"
+    with pytest.raises(ErroIntegridade, match="não é um zip válido.*DOCTYPE html"):
+        baixar(_cliente(servidor), URL, destino, Referencia(sha256(CONTEUDO)), tmp_path / "cache",
+               progresso=False)
+    assert not destino.exists()
+    assert [p.read_bytes() for p in divergente_temporario.iterdir()] == [PAGINA_HTML]
+
+
+def test_zip_truncado_e_recusado(tmp_path, divergente_temporario):
+    servidor = ServidorFalso({URL: CONTEUDO[: len(CONTEUDO) // 2]})
+    destino = tmp_path / "origem" / "X.zip"
+    with pytest.raises(ErroIntegridade, match="não é um zip válido"):
+        baixar(_cliente(servidor), URL, destino, Referencia(sha256(CONTEUDO)), tmp_path / "cache",
+               progresso=False)
+    assert not destino.exists()
 
 
 def test_copia_local_nao_altera_a_fonte(tmp_path):

@@ -61,7 +61,9 @@ from src.config import (
 from src.integridade import (
     ErroIntegridade,
     Referencia,
+    _para_divergente,
     confere_existente,
+    digestos,
     gravar_conferido,
     hashes_manifesto,
     md5_do_zip,
@@ -480,9 +482,38 @@ def copiar_local(fonte: pathlib.Path, destino: pathlib.Path, ref: Referencia,
     cache.mkdir(parents=True, exist_ok=True)
     temporario = cache / (destino.name + ".parcial")
     shutil.copyfile(fonte, temporario)
+    exigir_zip(temporario, destino, f"copiado de {fonte}")
     promover(temporario, destino, ref, descricao=f"copiado de {fonte}")
     logger.info("copiado: %s <- %s", destino.name, fonte)
     return "copiado"
+
+
+_ASSINATURA_ZIP = b"PK\x03\x04"
+
+
+def exigir_zip(temporario: pathlib.Path, destino: pathlib.Path, origem: str,
+               content_type: str | None = None) -> None:
+    """O que chega para virar um .zip de origem/ precisa SER um zip.
+
+    O site do INEP pode devolver uma página HTML no lugar do arquivo
+    (bloqueio anti-robô, redirecionamento, link quebrado). O sha256 do
+    manifesto já rejeitaria, mas com uma mensagem que não diz o que houve;
+    aqui a recusa é explícita e o arquivo recebido vai para divergente/.
+    Confere a assinatura do zip e o diretório central (zip truncado)."""
+    if destino.suffix != ".zip":
+        return
+    with temporario.open("rb") as f:
+        inicio = f.read(200)
+    if inicio.startswith(_ASSINATURA_ZIP) and zipfile.is_zipfile(temporario):
+        return
+    alvo = _para_divergente(temporario, destino.name, digestos(temporario))
+    trecho = inicio[:80].decode("utf-8", errors="replace").replace("\n", " ").strip()
+    raise ErroIntegridade(
+        f"{destino.name} ({origem}) não é um zip válido"
+        f"{f' (Content-Type: {content_type})' if content_type else ''}; "
+        f"começa com {trecho!r}. Provável página HTML no lugar do arquivo. "
+        f"Guardado em {alvo}, fora de dados/origem/."
+    )
 
 
 class DownloadIncompleto(RuntimeError):
@@ -510,6 +541,7 @@ def baixar(cliente: ClienteInep, url: str, destino: pathlib.Path, ref: Referenci
                 modo, inicio = "ab", feito
             else:
                 modo, inicio = "wb", 0
+            content_type = r.headers.get("Content-Type")
             novo_validador = r.headers.get("ETag") or r.headers.get("Last-Modified")
             meta.write_text(json.dumps({"url": url, "validador": novo_validador}), encoding="utf-8")
             tamanho = r.headers.get("Content-Length")
@@ -533,6 +565,7 @@ def baixar(cliente: ClienteInep, url: str, destino: pathlib.Path, ref: Referenci
             time.sleep(cliente.espera_base * 2 ** tentativa)
     else:
         raise ErroAquisicao(f"Download de {url} não completou após {cliente.tentativas} tentativas.")
+    exigir_zip(parcial, destino, f"baixado de {url}", content_type)
     promover(parcial, destino, ref, descricao=f"baixado de {url}")
     meta.unlink(missing_ok=True)
     logger.info("baixado: %s <- %s", destino.name, url)
