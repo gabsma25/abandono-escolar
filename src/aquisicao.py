@@ -593,9 +593,13 @@ def adquirir(
             continue
         fonte = next((d / destino.name for d in origens_locais if (d / destino.name).exists()), None)
         if fonte is not None:
-            resultado[copiar_local(fonte, destino, ref, cache)].append(destino.name)
-        else:
-            faltam.append(lin)
+            try:
+                resultado[copiar_local(fonte, destino, ref, cache)].append(destino.name)
+                continue
+            except ErroIntegridade as e:
+                # A cópia local não confere: tenta a rede (se permitida) em vez de parar tudo.
+                logger.error("Cópia local recusada, %s: %s", destino.name, e)
+        faltam.append(lin)
 
     if faltam and baixar_da_rede:
         cliente = cliente or ClienteInep()
@@ -612,9 +616,15 @@ def adquirir(
         comparar_com_manifesto(links, faltam)
         for lin in faltam:
             destino, ref = raiz / lin["arquivo"], Referencia(lin["sha256"])
-            if destino.name in links:
+            if destino.name not in links:
+                resultado["faltando"].append(destino.name)
+                continue
+            # Uma falha (revisão do INEP, página no lugar do zip, rede) não
+            # impede os demais downloads: registra e segue; o resumo final lista.
+            try:
                 resultado[baixar(cliente, links[destino.name].url, destino, ref, cache)].append(destino.name)
-            else:
+            except (ErroIntegridade, ErroAquisicao) as e:
+                logger.error("Download falhou, %s: %s", destino.name, e)
                 resultado["faltando"].append(destino.name)
     else:
         resultado["faltando"] += [pathlib.PurePosixPath(lin["arquivo"]).name for lin in faltam]

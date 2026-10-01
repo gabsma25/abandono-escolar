@@ -241,3 +241,17 @@ def test_link_e_imutavel():
     lk = Link("a.zip", "u", "p", None)
     with pytest.raises(AttributeError):
         lk.url = "outra"  # type: ignore[misc]
+
+
+def test_uma_falha_nao_impede_os_demais_downloads(tmp_path):
+    """Se o INEP revisou um arquivo (hash diverge), os outros ainda são baixados."""
+    url_y = URL.replace("X.zip", "Y.zip")
+    m, raiz = _manifesto(tmp_path, [("origem", "origem/indicadores/X.zip", CONTEUDO),
+                                    ("origem", "origem/indicadores/Y.zip", REVISADO)])
+    fontes = tmp_path / "fontes.csv"
+    fontes.write_text("arquivo,url,pagina,atualizado_em,capturado_em\n"
+                      f"X.zip,{URL},p,,2026-09-30\nY.zip,{url_y},p,,2026-09-30\n", encoding="utf-8")
+    servidor = ServidorFalso({URL: _zip(b"outra versao de X"), url_y: REVISADO})
+    r = adquirir([], baixar_da_rede=True, cliente=_cliente(servidor), manifesto=m, raiz=raiz,
+                 cache=tmp_path / "cache", fontes_estaticas=fontes, descoberta=tmp_path / "desc.json")
+    assert r["faltando"] == ["X.zip"] and r["baixado"] == ["Y.zip"]
